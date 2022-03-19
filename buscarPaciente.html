@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Buscar Paciente</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/pacientes.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+	<h3 style="text-align: center; margin-top: 20px; color: #31572C">DATOS PERSONALES DEL PACIENTE</h3>
+	
+	<hr />
+	
+	<div style="margin:10px;">
+
+		<div style="width: 50%; margin-left: 25%;">
+
+			<h5 style="color: #31572C">Por favor ingrese el DNI del paciente para verificar los datos, Si es su primera vez solicitaremos sus datos por unica vez</h5>
+		</div>
+
+		<div style="width: 50%; margin-left: 25%;">
+
+		  <div class="form-group row">
+		    <!-- <label for="dni" class="col-sm-2 col-form-label">DNI</label> -->
+		    <div class="col-sm-7">
+		      <input id="dni" class="form-control" type="text" placeholder="Ingresar DNI">
+		    </div>
+		    <div class="col-sm-4">
+		      <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Validar" style="width: 200px; background-color: #31572C;" onclick="buscarPaciente()">
+		    </div>
+		  </div>
+
+		  <!-- <div class="form-group row">
+		    <div class="col-sm-4" style="display: inline-block;">
+		      <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Siguiente" style="margin: 5px; margin-right: 10%; width: 200px;" onclick="buscarPaciente()">
+		    </div>
+		  </div> -->
+		</div>
+
+
+	 	<div id="datosPersonales" style="display: none; width: 50%; margin-left: 25%;">
+
+		 	  <div>
+		 	  	<h3 style="margin-bottom: 20px; text-align: start; color: #31572C">Verifique si los datos del paciente son correctos</h3>
+		 	  </div>
+
+		 	  <div class="form-group row" style="margin-bottom: 5px; display: none">
+			    <label for="idPaciente" class="col-sm-3 col-form-label">idPaciente</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="idPaciente" placeholder="idPaciente">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="fechaNac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="fechaNac" placeholder="Fecha Nac">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="dniBD" class="col-sm-3 col-form-label">DNI</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="dniBD" placeholder="DNI">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="direccion" class="col-sm-3 col-form-label">Direccion</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="direccion" placeholder="Direccion">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="mail" placeholder="Mail">
+			    </div>
+			  </div>
+
+
+			  <div style="margin-top: 2%;">
+				<input name="confirmarDatosPersonales" id="btnconfirmarDatosPersonales" type="button" class="btn btn-secondary" value="Siguiente" onclick="confirmarDatosPersonales()" style="width: 200px; background-color: #4F772D;">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: #90A955;">
+			  </div>
+		
+		</div>
+
+	    	
+
+	</div>
+
+</body>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+
+      	var paramstr = window.location.search.substr(1);
+        var paramarr = paramstr.split ("&");
+        var params = {};
+
+        for ( var i = 0; i < paramarr.length; i++) {
+            var tmparr = paramarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+
+        debugger;
+         if (params["dni"] == "undefined" || params["dni"] == ""){
+        	$("#dni").val("");
+        	debugger;
+
+        }else{	
+        	debugger;
+           	$("#dni").val(params["dni"]);
+           	buscarPaciente();
+        }
+
+         
+
+      });
+    </script>
+
+</html>

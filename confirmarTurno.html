@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Confirmar turno</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/buscarTurno.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="turnoAsignado" align="center" style="display:none;">
+    	<h4 class="alert-heading">Gracias!</h4>
+     	<p>El turno fue confirmado, te enviamos un mail con los datos del turno</p>
+    </div>
+
+	<div class="alert alert-danger" role="alert" id="errorAltaTurno" align="center" style="display:none;">
+	  	<h4 class="alert-heading">Error!</h4>
+	   	<p>Hubo un error al asignar el tutno vuelva a intentar en un momento</p>
+	</div>
+
+  
+	<div style="text-align: center; width: 40%; margin-top: 5%; margin-left: 30%;">
+		<h3 style="text-align: center; margin-top: 20px">CONFIRMAR TURNO</h3>
+
+		<p id="parrafoConfirmacion"></p>
+
+
+		<div style="margin-top: 2%;">
+			<input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()" style="width: 200px; background-color: #31572C;">
+
+			<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: #4F772D;">
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			var especialidad = sessionStorage.getItem("sessionStorage_especialidad");
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+
+			debugger;
+			
+			$.ajax({
+				type: "GET",
+				url: host + "profesionales/id/"+idProfesional,
+				headers: {
+					"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
+					
+					var nombreProfesional = response.nombre;
+					var apellidoProfesional = response.apellido;
+
+					var idPaciente = sessionStorage.getItem("sessionStorage_IdPaciente");
+
+					debugger;
+					
+					$.ajax({
+						type: "GET",
+						url: host + "pacientes/id/"+idPaciente,
+						headers: {
+							"Authorization": token,
+							"Content-Type":"application/json"
+						},
+						success: function(response)
+						{
+							debugger;
+							
+							var nombrePaciente = response.nombre;
+							var apellidoPaciente = response.apellido;
+							var dniPaciente = response.dni;
+
+							debugger;
+							var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
+
+							var partsArray = idHorarioYFecha.split('-');
+							var idHorario = partsArray[0];
+							var fecha = partsArray[1]+"-"+partsArray[2]+"-"+partsArray[3];
+
+
+					        var idConfiguracionTurno = sessionStorage.getItem("sessionStorage_idConfiguracionTurno");
+
+							debugger;
+							
+							$.ajax({
+								type: "GET",
+								url: host + "horarios/configuracionTurno/"+idConfiguracionTurno,
+								headers: {
+									"Authorization": token,
+									"Content-Type":"application/json"
+								},
+								success: function(response)
+								{
+									debugger;
+									
+									var hora = response.hora;
+
+									debugger;
+									$("#parrafoConfirmacion").text("Por favor, confirme el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el paciente " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs");
+
+
+								}
+							});
+
+						}
+					});
+
+					
+				}
+			});
+
+			
+
+		});
+
+	</script>
+
+	<!-- <script type="text/javascript">
+		$(document).ready(function () {
+			
+			var idPaciente = sessionStorage.getItem("sessionStorage_IdPaciente");
+
+			debugger;
+			
+			$.ajax({
+				type: "GET",
+				url: host + "pacientes/id/"+idPaciente,
+				headers: {
+					"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
+					
+					var nombrePaciente = response.nombre;
+					var apellidoPaciente = response.apellido;
+					var dniPaciente = response.dni;
+
+				}
+			});
+
+		});
+
+	</script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			
+			var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
+
+			var partsArray = idHorarioYFecha.split('-');
+			var idHorario = partsArray[0];
+			var fecha = partsArray[1];
+
+
+	        var idConfiguracionTurno = sessionStorage.getItem("sessionStorage_idConfiguracionTurno");
+
+			debugger;
+			
+			$.ajax({
+				type: "GET",
+				url: host + "horarios/configuracionTurno/"+idConfiguracionTurno,
+				headers: {
+					"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
+					
+					var hora = response.hora;
+
+				}
+			});
+
+		});
+
+	</script> -->
+	
+
+</body>
+
+</html>

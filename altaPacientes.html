@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html style="width:100%;">
+<head>
+	<meta charset="utf-8">
+	<title>Carga de Pacientes</title>
+	<<script src="js/variablesGlobales.js"></script>
+	<script src="js/pacientes.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="pacienteOk" align="center" style="display:none;">
+    	<h4 class="alert-heading">Bien!</h4>
+     	<p>Paciente registrado</p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="errorPaciente" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Debe ingresar todos los datos del paciente</p>
+    </div>
+
+    <div class="alert alert-warning" role="alert" id="yaExiste" align="center" style="display:none;">
+    	<h4 class="alert-heading">Ya Existe!</h4>
+     	<p>El dni ya existe en la base de datos</p>
+    </div>
+	
+	<h1 style="text-align: center; margin-top: 20px; color: #31572C">DATOS PERSONALES DEL PACIENTE</h1>
+	
+	<hr />
+
+	<div style="width: 50%; margin-left: 25%;">
+
+		 	  <div>
+		 	  	<h3 style="margin-bottom: 20px; text-align: start; color: #31572C">Por favor ingrese los siguientes datos del paciente</h3>
+		 	  </div>
+
+		 	  <div>
+			  	<h5 style="margin-bottom: 20px; text-align: start; color: #31572C">Solicitamos los datos por unica vez</h5>
+		 	  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="fechaNac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
+			    <div class="col-sm-9">
+			      <input type="date" class="form-control" id="fechaNac" placeholder="Fecha Nac">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="dni" class="col-sm-3 col-form-label">DNI</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="dni" placeholder="DNI">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="direccion" class="col-sm-3 col-form-label">Direccion</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="direccion" placeholder="Direccion">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="mail" placeholder="Mail">
+			    </div>
+			  </div>
+
+
+
+			   <div style="margin-top: 2%;">
+				<input name="guardarPaciente" id="btnGuardarPaciente" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarPaciente()" style="width: 200px; background-color: #4F772D;">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: #90A955;">
+			  </div>
+
+	</div>
+	
+</body>
+
+</html>
