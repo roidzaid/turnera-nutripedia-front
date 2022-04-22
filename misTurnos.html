@@ -10,6 +10,9 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 <body>
 
@@ -42,7 +45,7 @@
 		<div id="sinTurnos" style="display: none; width: 50%; margin-left: 25%;">
 			<p>No tiene turnos pendientes</p>
 			<div id="btnOk" style="margin-top: 2%;">
-				<input name="Ok" id="btnOk" type="button" class="btn btn-secondary" value="Ok" onclick="Cancelar()" style="width: 200px; background-color: #90A955;">
+				<input name="Ok" id="btnOk" type="button" class="btn btn-secondary" value="Ok" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
 			</div>
 		</div>
 
@@ -52,10 +55,12 @@
 			   <table id="tabMisTurnos" class="table">
 					<thead>
 						<tr>
+							<th style="display: none;">idTurnoAsignado</th>
 							<th>Especialidad</th>
 							<th>Profesional</th>
 							<th>Fecha</th>
 							<th>Hora</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody id="tbodyMisTurnos"></tbody>
@@ -63,9 +68,34 @@
 			</div>
 
 			<div id="btnOk" style="margin-top: 2%;">
-				<input name="Ok" id="btnOk" type="button" class="btn btn-secondary" value="Ok" onclick="Cancelar()" style="width: 200px; background-color: #90A955;">
+				<input name="Ok" id="btnOk" type="button" class="btn btn-secondary" value="Ok" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
 			</div>
 
+		</div>
+
+		<div id="myModal1" class="modal" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Confirmar cancelacion de turno</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <p id="parrafoConfirmacion"></p>
+		      </div>
+		      <div class="modal-footer">
+		        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-primary">Confirmar</button> -->
+
+		        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="PacienteConfirmaCacelacionTurno()" style="width: 200px; background-color: #31572C;">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="PacienteCancelaConfirmacionDeCancelacion()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+
+
+
+		      </div>
+		    </div>
+		  </div>
 		</div>
 
 		

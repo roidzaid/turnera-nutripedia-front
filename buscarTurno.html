@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<div class="alert alert-danger" role="alert" id="AlertaEspecialidades" align="center" style="display:none;">
+  <div class="alert alert-danger" role="alert" id="AlertaEspecialidades" align="center" style="display:none;">
   	<h4 class="alert-heading">Error!</h4>
    	<p>Debe seleccionar una especialidad</p>
   </div>
@@ -38,15 +38,21 @@
    	<p>Debe seleccionar la hora del turno</p>
   </div>
 
+  <div class="alert alert-danger" role="alert" id="AlertaControlEnfermedad" align="center" style="display:none;">
+  	<h4 class="alert-heading">Error!</h4>
+   	<p>Debe ingresar el motivo de la consulta</p>
+  </div>
+
 
 	<h3 style="text-align: center; margin-top: 20px; color: #31572C">SOLICITAR TURNO</h3>
 	
 	<hr />
 
-	<div style="width: 50%; margin-left: 25%;">
+	<div style="text-align: center;">
+	<div id="combosTurnos" style="width: 40%; margin-left: 8%; display: inline-block; min-width: 300px;">
 
-			<div id="idComboEspecialidades" class="form-group row" style="width: 100%">
-			    <label for="comboEspecialidades" class="col-sm-10 col-form-label">Seleccione especialidad</label>
+			<div id="idComboEspecialidades" class="form-group row" style="width: 100%; ">
+			    <label for="comboEspecialidades" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione especialidad</label>
 				    <div class="col-sm-12">
 				    	<select id="comboEspecialidades" class="form-control" onchange="buscarProfecionalesEspecialidad();">
 	                		<option selected></option>
@@ -54,10 +60,8 @@
 				    </div>
 			</div>
 
-			
-
-			<div id="idComboProfesionales" class="form-group row" style="width: 100%">
-			    <label for="comboProfesionales" class="col-sm-10 col-form-label">Seleccione profesional</label>
+			<div id="idComboProfesionales" class="form-group row" style="width: 100%;">
+			    <label for="comboProfesionales" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione profesional</label>
 				    <div class="col-sm-12">
 				    	<select id="comboProfesionales" class="form-control" onchange="buscarTipoTurno();">
 	                		<option selected></option>
@@ -65,19 +69,25 @@
 				    </div>
 			</div>
 
-
-			<div id="idComboTipoTurno" class="form-group row" style="width: 100%">
-			    <label for="comboTipoTurno" class="col-sm-10 col-form-label">Seleccione tipo de turno</label>
+			<div id="idComboTipoTurno" class="form-group row" style="width: 100%;">
+			    <label for="comboTipoTurno" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione tipo de turno</label>
 				    <div class="col-sm-12">
 				    	<select id="comboTipoTurno" class="form-control" onchange="buscarDiasdeAtencion();">
 	                		<option selected></option>
 						</select>
 				    </div>
 			</div>
-			
+
+
+			<div id="idMotivoConsulta" class="form-group row" style="width: 100%; display: none; text-align: left;">
+			    <label for="motivoConsulta" class="col-sm-10 col-form-label" style="text-align: left;">Ingrese el motivo de la consulta</label>
+				    <div class="col-sm-12">
+				    	<textarea id="motivoConsulta" class="form-control" aria-label="With textarea"></textarea>
+				    </div>
+			</div>
 		
-			<div id="idComboFecha" class="form-group row" style="width: 100%">
-			    <label for="comboFecha" class="col-sm-10 col-form-label">Seleccione fecha</label>
+			<div id="idComboFecha" class="form-group row" style="width: 100%;">
+			    <label for="comboFecha" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione fecha</label>
 				    <div class="col-sm-12">
 				    	<select id="comboFecha" class="form-control" onchange="buscarHorariosDisponibles();">
 						</select>
@@ -86,8 +96,8 @@
 
 			
 
-			<div id="idComboHora" class="form-group row" style="width: 100%">
-			    <label for="comboHora" class="col-sm-10 col-form-label">Seleccione horario</label>
+			<div id="idComboHora" class="form-group row" style="width: 100%;">
+			    <label for="comboHora" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione horario</label>
 				    <div class="col-sm-12">
 				    	<select id="comboHora" class="form-control" onchange="ConfirmarTurno();">
 	                		<option selected></option>
@@ -96,14 +106,28 @@
 			</div>
 
 			<div style="margin-top: 2%;">
-				<input name="solicitarTurno" id="btnSolicitarTurno" type="button" class="btn btn-secondary" value="Siguiente" onclick="PedirTurno()" style="width: 200px; background-color: #4F772D;">
+				<input name="solicitarTurno" id="btnSolicitarTurno" type="button" class="btn btn-secondary" value="Siguiente" onclick="PedirTurno()" style="width: 200px; background-color: #31572C;">
 
-				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: #90A955;">
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
 			</div>
+	</div>
 
-			
+	<div id=tarjeta1 class="card" style="width: 18rem; display: none; vertical-align: top; background-color: #132A13; margin-top: 20px">
+	  <img id="fotoPerfil" src="" class="card-img-top" alt="..." style="width: 50%; margin-top: 10px; height: 250px; width: 200px;">
+	  <div class="card-body">
+	    <h5 class="card-title" id="tarjetaProfesional" style="color: white;"></h5>
+	    <h6 class="card-subtitle mb-2 text-muted" id="subtituloProfecional"></h6>
+	    <p class="card-text" id="parrafoDiasAtencion" style="color: white;">Dias y horarios de atencion:</p>
+	  </div>
+	  <ul id="listaHorarios" class="list-group list-group-flush">
+	  </ul>
+	  <div class="card-body">
+	    <p class="card-text" id="parrafoValorConsulta" style="color: white;"></p>
+	  </div>
+	</div>
 
 	</div>
+
 
 
 
@@ -115,7 +139,7 @@
 				type: "GET",
 				url: host + "especialidades/all",
 				headers: {
-					"Authorization": token,
+					//"Authorization": token,
 					"Content-Type":"application/json"
 				},
 				success: function(response)

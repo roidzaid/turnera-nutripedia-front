@@ -10,11 +10,25 @@ function Cancelar(){
 
 }
 
+function login(){
+
+	window.location = "login.html";
+
+}
+
 function buscarMisTurnos(){
 
 	window.location = "misTurnos.html";
 
 }
+
+function registrarse(){
+
+	window.location = "AltaProfesional.html";
+
+}
+
+
 
 
 function buscarProfecionalesEspecialidad() {
@@ -27,7 +41,7 @@ function buscarProfecionalesEspecialidad() {
 		type: "GET",
 		url: host + "profesionales/especialidad/"+$("#comboEspecialidades").val(),
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -72,7 +86,7 @@ function buscarTipoTurno(){
 
 	$("#comboTipoTurno").empty();
 
-	$("#idComboTipoTurno").css("display", "inline-block");
+	
 
 	debugger;
 
@@ -80,7 +94,7 @@ function buscarTipoTurno(){
 		type: "GET",
 		url: host + "horarios/tiposDeTurnos/"+idProfesional,
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -92,23 +106,129 @@ function buscarTipoTurno(){
 				debugger;
 				var tipoTurno = response[i];
 
-
 				$("#comboTipoTurno").append('<option>'+tipoTurno+'</option>');
+
 			}
+			debugger;
+			tarjetaProfesional();
 		}
 	});
 }
 
 	
+function tarjetaProfesional() {
+
+	$("#tarjeta1").css("display", "inline-block");	
+
+	debugger;
+	var idProfesional = $("#comboProfesionales").val()
+	var especialidad = $("#comboEspecialidades").val()
+
+
+	$.ajax({
+		type: "GET",
+		url: host + "profesionales/id/"+idProfesional,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+
+			buscarFotoPerfil();
+
+			$("#tarjetaProfesional").text(response.apellido + ", " + response.nombre);
+			$("#subtituloProfecional").text(especialidad);
+
+			$("#parrafoValorConsulta").text("El valor de la consulta: " + new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'ARS' }).format(response.valorConsulta));
+
+            debugger;
+            buscarDias()
+			
+		}
+	});
+	
+}
+
+function buscarFotoPerfil(){
+
+	debugger;
+
+	var idProfesional = $("#comboProfesionales").val()
+
+	debugger;
+
+	$.ajax({
+		type: "GET",
+		url: host + "fotos/"+idProfesional,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+
+			var foto="imagenes/"+response;
+			
+			$("#fotoPerfil").attr("src", foto);
+
+		}
+	});
+
+}
+
+
+function buscarDias(){
+	debugger;
+
+	var idProfesional = $("#comboProfesionales").val()
+
+	debugger;
+
+	$.ajax({
+		type: "GET",
+		url: host + "horarios/diasDeAtencion/"+idProfesional,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+			
+			$('#listaHorarios').empty();
+			for (var i = 0; i < response.length; i++) {
+
+				var diayHora = response[i].diaDeSemana + " de " + response[i].horaDesde+ " a " + response[i].horaHasta;
+				debugger;
+            	
+            	$('#listaHorarios').append("<li class=\"list-group-item\">"+diayHora+"</li>"); 
+			}
+		}
+	});
+
+}
+
+
+
 function buscarDiasdeAtencion(){
 	debugger;
+
 
 	var idProfesional = $("#comboProfesionales").val()
 	var tipoTurno = $("#comboTipoTurno").val()
 
+	if (tipoTurno == "CONTROL DE ENFERMEDAD"){
+		$("#idMotivoConsulta").css("display", "block");
+	}else{
+		$("#idMotivoConsulta").css("display", "none");
+	} 
+
+
 	$("#comboFecha").empty();
 
-	$("#idComboFecha").css("display", "inline-block");
 
 	debugger;
 
@@ -116,7 +236,7 @@ function buscarDiasdeAtencion(){
 		type: "GET",
 		url: host + "horarios/fechas/"+idProfesional+"/"+tipoTurno,
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -147,7 +267,6 @@ function buscarHorariosDisponibles() {
 
 	$("#comboHora").empty();
 
-	$("#idComboHora").css("display", "inline-block");
 
 	debugger;
 
@@ -155,7 +274,7 @@ function buscarHorariosDisponibles() {
 		type: "GET",
 		url: host + "turnos/disponibles/"+fecha+"/"+idHorario,
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -235,6 +354,16 @@ function PedirTurno(){
 	    }
 	}
 
+	if($("#comboTipoTurno").val() == "CONTROL DE ENFERMEDAD" & $("#motivoConsulta").val() == ""){
+
+		datosOk = false;
+        $('#AlertaControlEnfermedad').css('display', 'block');
+       	$("#AlertaControlEnfermedad").fadeTo(2000, 500).slideUp(500, function(){
+       	$("#AlertaControlEnfermedad").slideUp(500);
+      	});
+
+	}
+
     
     if(datosOk){
 
@@ -242,6 +371,8 @@ function PedirTurno(){
 		sessionStorage.setItem("sessionStorage_idProfesional", $("#comboProfesionales").val());
 		sessionStorage.setItem("sessionStorage_idHorarioYFecha", $("#comboFecha").val());
 		sessionStorage.setItem("sessionStorage_idConfiguracionTurno", $("#comboHora").val());
+		sessionStorage.setItem("sessionStorage_tipoConsulta", $("#comboTipoTurno").val());
+		sessionStorage.setItem("sessionStorage_motivoConsulta", $("#motivoConsulta").val());
 
 		debugger;
 		window.location = "buscarPaciente.html?dni="+$("#dni").val();
@@ -265,6 +396,8 @@ function PedirTurno(){
 
 function confirmarTurno(){
 
+	$("#btnConfirmarTurno").prop('disabled', true);
+
 	var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
 
 	var partsArray = idHorarioYFecha.split('-');
@@ -279,7 +412,8 @@ function confirmarTurno(){
 		idProfesional:sessionStorage.getItem("sessionStorage_idProfesional"),
 		especialidad:sessionStorage.getItem("sessionStorage_especialidad"),
 		idPaciente:sessionStorage.getItem("sessionStorage_IdPaciente"),
-		
+		tipoConsulta:sessionStorage.getItem("sessionStorage_tipoConsulta"),
+		motivoConsulta:sessionStorage.getItem("sessionStorage_motivoConsulta")
 	}
 
 	JSON.stringify(guardarTurno);
@@ -289,19 +423,22 @@ function confirmarTurno(){
 		type: "POST",
 		url: host + "turnos/asignar",
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
 		{
 			debugger;
 
-			$('#turnoAsignado').css('display', 'block');
-	       		$("#turnoAsignado").fadeTo(4000, 500).slideUp(500, function(){
-	       		$("#turnoAsignado").slideUp(500);
-	       		window.location = "inicioTurnera.html";
-	       		});
+			$('#idProgressBar').css('display', 'none');
 
+            $('#turnoAsignado').css('display', 'block');
+       		$("#turnoAsignado").fadeTo(4000, 500).slideUp(500, function(){
+       		$("#turnoAsignado").slideUp(500);
+       		window.location = "inicioTurnera.html";
+       		});
+
+	            
 		},
 
 		dataType: "json",
@@ -309,6 +446,9 @@ function confirmarTurno(){
 
 		error: function(jqXHR, textStatus, errorThrown) {
 			debugger;
+
+			$('#idProgressBar').css('display', 'none');
+			
 			$('#errorAltaTurno').css('display', 'block');
 	       		$("#errorAltaTurno").fadeTo(2000, 500).slideUp(500, function(){
 	       		$("#errorAltaTurno").slideUp(500);
@@ -317,7 +457,9 @@ function confirmarTurno(){
 
 
 		}
-	})	
+	})
+	$('#idProgressBar').css('display', 'block');
+	           
 }
 
 
@@ -329,7 +471,7 @@ function misTurnos(){
 		type: "GET",
 		url: host + "turnos/misTurnos/"+$("#dni").val(),
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -353,13 +495,14 @@ function misTurnos(){
 				for (var i = 0; i < list.length; i++) {
 
 					debugger;
+					var idTurnoAsignado = list[i].idTurnoAsignado;
 					var Especialidad = list[i].especialidad;
 					var Profesional = list[i].apellidoProfesional + ', ' + list[i].nombreProfesional;
 					var Fecha = list[i].fecha;
 					var Hora = list[i].hora;
 					debugger;
 
-					$("#tbodyMisTurnos").append('<tr><td>'+Especialidad+'</td><td>'+Profesional+'</td><td>'+Fecha+'</td><td>'+Hora+'</td></tr>');
+					$("#tbodyMisTurnos").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td>'+Especialidad+'</td><td>'+Profesional+'</td><td>'+Fecha+'</td><td>'+Hora+'</td><<td colspan="2"><div align="center"><i onclick="PacienteCancelaTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
 
 				}
 			}else{
@@ -368,3 +511,138 @@ function misTurnos(){
 		}
 	});
 }
+
+function cancelarTurno(idTurnoAsignado){
+
+	debugger;
+
+	$.ajax({
+		type: "GET",
+		url: host + "turnos/buscarTurno/"+idTurnoAsignado,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+	
+			var paciente=response.apellidoPaciente+", "+response.nombrePaciente; 
+			var dia=response.fecha;
+			var hora=response.hora;
+
+			sessionStorage.setItem("sessionStorage_idTurnoAsignado", response.idTurnoAsignado);
+
+			$("#parrafoConfirmacion").text("Usted esta cancelando el turno de " + paciente + " para el dia " + dia + " a las " + hora + "hs");
+			
+			$('#myModal').modal('show');		
+				
+		}
+	});
+
+}
+
+function PacienteCancelaTurno(idTurnoAsignado){
+
+	debugger;
+
+	$.ajax({
+		type: "GET",
+		url: host + "turnos/buscarTurno/"+idTurnoAsignado,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+	
+			var profesional=response.apellidoProfesional+", "+response.nombreProfesional; 
+			var dia=response.fecha;
+			var hora=response.hora;
+
+			sessionStorage.setItem("sessionStorage_idTurnoAsignado", response.idTurnoAsignado);
+
+			$("#parrafoConfirmacion").text("Usted esta cancelando el turno de " + profesional + " para el dia " + dia + " a las " + hora + "hs");
+			
+			$('#myModal1').modal('show');		
+				
+		}
+	});
+
+}
+
+function confirmarCacelacionTurno(){
+
+
+	debugger;
+
+	var idTurnoAsignado = sessionStorage.getItem("sessionStorage_idTurnoAsignado");
+	
+	$.ajax({
+		type: "DELETE",
+		url: host + "turnos/"+idTurnoAsignado,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+			
+			location.reload();
+		}
+	});
+
+}
+
+
+
+function PacienteConfirmaCacelacionTurno(){
+
+
+	debugger;
+
+	var idTurnoAsignado = sessionStorage.getItem("sessionStorage_idTurnoAsignado");
+	
+	$.ajax({
+		type: "DELETE",
+		url: host + "turnos/"+idTurnoAsignado,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+
+			$('#myModal1').modal('hide');	
+			
+			misTurnos();
+		}
+	});
+
+}
+
+
+function CancelarConfirmacion(){
+
+
+	debugger;
+			
+	location.reload();
+
+}
+
+
+function PacienteCancelaConfirmacionDeCancelacion(){
+
+
+	debugger;
+
+	$('#myModal1').modal('hide');
+			
+	misTurnos();
+
+}
+

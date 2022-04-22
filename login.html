@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/buscarTurno.js"></script>
+	<script src="js/profesionales.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body background="imagenes/logo NUTRIPEDIA.jpeg" style="background-repeat: no-repeat; background-position-x: center";>
+
+	<div class="alert alert-danger" role="alert" id="usuYPassNoExiste" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Usuario y clave no existen, Por favor vuelva a intentarlo</p>
+    </div>
+
+
+	<div style="text-align: right; margin: 10px">
+		<input name="salir" id="btnIngresar" type="button" class="btn btn-secondary" value="Salir" onclick="inicio()" style="width: 200px; background-color: #31572C;">
+	</div>
+
+
+	<div style="text-align: center; margin-top: 350px; margin-left: 40%;">
+	   	<div class="col-sm-4">
+	      <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+	    </div>
+	</div>
+
+	<div style="text-align: center; margin-top: 10px; margin-left: 40%;">
+	    <div class="col-sm-4">
+	      <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
+	    </div>
+	</div>
+
+
+	<div style="text-align: center; margin-top: 30px;">
+	
+			<input name="ingresar" id="btnIngresar" type="button" class="btn btn-secondary" value="Ingresar" onclick="ingresar()" style="width: 20%; background-color: #31572C;">
+		
+	</div>
+
+	<div style="text-align: center; margin-top: 10px;">
+
+			<input name="registrarse" id="btnRegistrarse" type="button" class="btn btn-secondary" value="Registrarse" onclick="registrarse()" style="width: 20%; background-color: white; border-color: #90A955; color: black;">
+		
+	</div>
+
+
+</body>
+
+</html>

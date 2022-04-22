@@ -13,6 +13,7 @@
 </head>
 <body>
 
+
 	<div class="alert alert-success" role="alert" id="turnoAsignado" align="center" style="display:none;">
     	<h4 class="alert-heading">Gracias!</h4>
      	<p>El turno fue confirmado, te enviamos un mail con los datos del turno</p>
@@ -27,16 +28,22 @@
 	<div style="text-align: center; width: 40%; margin-top: 5%; margin-left: 30%;">
 		<h3 style="text-align: center; margin-top: 20px">CONFIRMAR TURNO</h3>
 
-		<p id="parrafoConfirmacion"></p>
+		<p id="parrafoConfirmacion" style="margin-top: 20px;"></p>
 
 
 		<div style="margin-top: 2%;">
-			<input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()" style="width: 200px; background-color: #31572C;">
+			<input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()" style="width: 200px; background-color: #31572C; margin-top: 20px;">
 
-			<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: #4F772D;">
+			<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; margin-top: 20px; border-color: #90A955; color: black;">
 		</div>
 
 	</div>
+
+	<div id="idProgressBar" class="text-center" style="display:none;">
+        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+            <span class="sr-only">Cargando...</span>
+        </div>
+    </div>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -50,7 +57,7 @@
 				type: "GET",
 				url: host + "profesionales/id/"+idProfesional,
 				headers: {
-					"Authorization": token,
+				//	"Authorization": token,
 					"Content-Type":"application/json"
 				},
 				success: function(response)
@@ -68,7 +75,7 @@
 						type: "GET",
 						url: host + "pacientes/id/"+idPaciente,
 						headers: {
-							"Authorization": token,
+							//"Authorization": token,
 							"Content-Type":"application/json"
 						},
 						success: function(response)
@@ -95,7 +102,7 @@
 								type: "GET",
 								url: host + "horarios/configuracionTurno/"+idConfiguracionTurno,
 								headers: {
-									"Authorization": token,
+									//"Authorization": token,
 									"Content-Type":"application/json"
 								},
 								success: function(response)

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Crear Usuario</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/profesionales.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="usuarioOk" align="center" style="display:none;">
+    	<h4 class="alert-heading">Bien!</h4>
+     	<p>Ya estas registrado</p>
+    </div>
+
+	<div class="alert alert-danger" role="alert" id="errorAltaUsuario" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Debe ingresar todos los datos solicitados</p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="errorContraseñaDiferente" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Las contraseñas son diferentes, vuelva a cargarlas</p>
+    </div>
+	
+	<div style="text-align: center; margin-top: 250px; margin-left: 40%;">
+			<h5 style="margin-bottom: 20px; text-align: start; color: #31572C">Necesitasmos que crees un usuario y contraseña</h5>
+	</div>
+
+
+	<div style="text-align: center; margin-top: 20px; margin-left: 40%;">
+	   	<div class="col-sm-4">
+	      <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+	    </div>
+	</div>
+
+	<div style="text-align: center; margin-top: 10px; margin-left: 40%;">
+	    <div class="col-sm-4">
+	      <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
+	    </div>
+	</div>
+
+	<div style="text-align: center; margin-top: 10px; margin-left: 40%;">
+	    <div class="col-sm-4">
+	      <input type="password" class="form-control" id="confirmarContraseña" placeholder="Confirmar contraseña">
+	    </div>
+	</div>
+
+
+	<div style="text-align: center; margin-top: 30px;">
+	
+			<input name="guardar" id="btnGuardar" type="button" class="btn btn-secondary" value="Guardar" onclick="crearUsuario()" style="width: 20%; background-color: #31572C;">
+		
+	</div>
+
+	
+
+
+</body>
+
+</html>

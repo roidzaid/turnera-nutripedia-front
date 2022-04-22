@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+	<meta charset="utf-8">
+	<title>Inicio</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/profesionales.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+		<nav class="nav">
+		  <a class="navbar-brand" href="#">
+          	<i class="fa fa-gamepad" aria-hidden="true">
+          	&nbsp;
+        	</i><img alt="Brand" src="imagenes/logo NUTRIPEDIA.jpeg" style="width: 150px;"></a>
+		  <a class="nav-link" onclick="perfil()" style="margin-top: 100px; cursor: pointer;">Perfil</a>
+		  <a class="nav-link" onclick="agenda()" style="margin-top: 100px; cursor: pointer;">Agenda</a>
+		  <a class="nav-link" onclick="inicio()" style="margin-top: 100px; cursor: pointer;">Salir</a>
+
+		</nav>
+	
+
+		<div class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" type="text/html" id="frameInicio" src="perfilProfesional.html" allowfullscreen>
+  			</iframe>
+		</div>
+  		
+
+
+</body>
+
+</html>

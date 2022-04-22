@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html style="width:100%;">
+<head>
+	<meta charset="utf-8">
+	<title>Carga de Profesional</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/profesionales.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="profesionalOk" align="center" style="display:none;">
+    	<h4 class="alert-heading">Bien!</h4>
+     	<p>Ya estas registrado</p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="errorProfesional" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Debe ingresar todos los datos para poder registrar sus datos</p>
+    </div>
+
+    <div class="alert alert-warning" role="alert" id="yaExiste" align="center" style="display:none;">
+    	<h4 class="alert-heading">Ya Existe!</h4>
+     	<p>Usted ya esta regitrado en el sistema</p>
+    </div>
+	
+	<h1 style="text-align: center; margin-top: 20px; color: #31572C">DATOS DEL PROFESIONAL</h1>
+	
+	<hr />
+
+	<div style="width: 50%; margin-left: 25%;">
+
+		 	  <div>
+			  	<h5 style="margin-bottom: 20px; text-align: start; color: #31572C">Solicitamos los datos por unica vez</h5>
+		 	  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="dni" class="col-sm-3 col-form-label">DNI</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="dni" placeholder="DNI">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="matricula" class="col-sm-3 col-form-label">Matricula</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="matricula" placeholder="Matricula">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="especialidad" class="col-sm-3 col-form-label">Especialidad</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="especialidad" placeholder="Especialidad">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="mail" placeholder="Mail">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="valorConsulta" class="col-sm-3 col-form-label">Valor de la consulta</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="valorConsulta" placeholder="Valor de la consulta">
+			    </div>
+			  </div>
+
+			   <div style="margin-top: 2%;">
+				<input name="guardarProfesional" id="btnGuardarProfesional" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarProfesional()" style="width: 200px; margin-top: 5px; background-color: #31572C";>
+
+				<input name="modifProfesional" id="btnModifProfesional" type="button" class="btn btn-secondary" value="Modificar" onclick="modifProfesional()" style="width: 200px; margin-top: 5px; background-color: #31572C";>
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+			  </div>
+
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			debugger;
+
+			/*$("#btnModifProfesional").prop('disabled', false);
+        	$("#btnGuardarProfesional").prop('disabled', false);*/
+
+			var paramstr = window.location.search.substr(1);
+       		var paramarr = paramstr.split ("&");
+       		var params = {};
+
+        	for ( var i = 0; i < paramarr.length; i++) {
+            	var tmparr = paramarr[i].split("=");
+            	params[tmparr[0]] = tmparr[1];
+        	}
+
+        	var idProfesional = params["idProfesional"]
+
+        	if(idProfesional == "undefined" || idProfesional == "" || idProfesional == null){
+
+        		$("#btnModifProfesional").css("display", "none");	
+        		$("#btnGuardarProfesional").css("display", "inline-block");	
+
+        	}else{
+
+        		$("#btnModifProfesional").css("display", "inline-block");	
+        		$("#btnGuardarProfesional").css("display", "none");	
+
+				$.ajax({
+					type: "GET",
+					url: host + "profesionales/id/"+idProfesional,
+					headers: {
+						//"Authorization": token,
+						"Content-Type":"application/json"
+					},
+					success: function(response)
+					{
+
+						debugger;
+
+						sessionStorage.setItem("sessionStorage_idProfesional", response.idProfesional);
+						
+						$("#idProfesional").val(response.idProfesional);
+						$("#nombre").val(response.nombre);
+						$("#apellido").val(response.apellido);
+						$("#dni").val(response.dni);
+						$("#matricula").val(response.matricula);
+						$("#especialidad").val(response.especialidad);
+						$("#telefono").val(response.telefono);
+						$("#mail").val(response.mail);
+						$("#valorConsulta").val(response.valorConsulta);
+
+						buscarHorarios();
+
+					},
+
+					dataType: "json",
+					error: function(xhr, status, error) {
+						
+						debugger;
+						if(status == 400 || status != 401){
+							debugger;
+							//pacientes($("#dni").val());
+
+
+						}else{
+							debugger;
+						alert("Error al buscar el Profecionales");
+						}
+
+					}
+				});
+			}	
+		});
+
+	</script>
+	
+</body>
+
+</html>

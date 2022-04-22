@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html style="width:100%;">
+<head>
+	<meta charset="utf-8">
+	<title>Carga de Horarios</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/Horarios.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="horarioOk" align="center" style="display:none;">
+    	<h4 class="alert-heading">Bien!</h4>
+     	<p>Horario registrado</p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="errorHorario" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Debe ingresar todos los datos para poder registrar el horario</p>
+    </div>
+
+    <div class="alert alert-warning" role="alert" id="yaExiste" align="center" style="display:none;">
+    	<h4 class="alert-heading">Ya Existe!</h4>
+     	<p>Usted ya registro ese horario</p>
+    </div>
+	
+	<h1 style="text-align: center; margin-top: 20px; color: #31572C">CARGA DE HORARIOS</h1>
+	
+	<hr />
+
+	<div style="text-align: center;">
+
+		<div style="width: 50%; min-width: 300px; margin-left: 25%;">
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="diaDeSemana" class="col-sm-3 col-form-label" style="text-align: center;">Dia de la semana</label>
+			    <div class="col-sm-9" style="text-align: center;">
+			      <select id="comboDiaDeSemana" class="form-control">
+	                		<option selected>Seleccione dia de la semana</option>			      	
+	                		<option>LUNES</option>
+	                		<option>MARTES</option>
+	                		<option>MIERCOLES</option>
+	                		<option>JUEVES</option>
+	                		<option>VIERNES</option>
+	                		<option>SABADO</option>
+	                		<option>DOMINGO</option>
+						</select>
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="tipoTurno" class="col-sm-3 col-form-label">Tipo de Turno</label>
+			    <div class="col-sm-9">
+			      <!-- <input type="text" class="form-control" id="tipoTurno" placeholder="Tipo de Turno"> -->
+			        <select id="comboTipoTurno" class="form-control">
+	                		<option selected>Seleccione Tipo de turno</option>			      	
+	                		<option>CONTROL DE ENFERMEDAD</option>
+	                		<option>CONTROL DE SALUD</option>
+						</select>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="horaDesde" class="col-sm-3 col-form-label">Hora Desde</label>
+			    <div class="col-sm-2">
+			      <input type="number"  min="0" max="23" step="1" class="form-control" id="horaDesde" placeholder="HH">
+			    </div>
+			    <div class="col-sm-2">
+			      <input type="number"  min="0" max="59" step="1" class="form-control" id="minutosDesde" placeholder="MM">
+			    </div>
+			  </div>
+
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="horaHasta" class="col-sm-3 col-form-label">Hora hasta</label>
+			    <div class="col-sm-2">
+			      <input type="number" min="0" max="23" step="1" class="form-control" id="horaHasta" placeholder="HH">
+			    </div>
+			    <div class="col-sm-2">
+			      <input type="number" min="0" max="59" step="1" class="form-control" id="minutosHasta" placeholder="MM">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="duracionTurnos" class="col-sm-3 col-form-label">Duracion de turnos</label>
+			    <div class="col-sm-2">
+			      <input type="number" min="1" step="1" class="form-control" id="duracionTurnos" placeholder="MM">
+			    </div>
+			  </div>
+
+
+			   
+
+		</div>
+
+		<div style="margin-top: 2%;">
+				<input name="guardarHorario" id="btnGuardarHorario" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarHorario()" style="width: 200px; margin-top: 5px; background-color: #31572C;">
+
+				<input name="modifHorario" id="btnModifHorario" type="button" class="btn btn-secondary" value="Modificar" onclick="modifHorario()" style="width: 200px; margin-top: 5px; background-color: #31572C">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			debugger;
+
+			var paramstr = window.location.search.substr(1);
+       		var paramarr = paramstr.split ("&");
+       		var params = {};
+
+        	for ( var i = 0; i < paramarr.length; i++) {
+            	var tmparr = paramarr[i].split("=");
+            	params[tmparr[0]] = tmparr[1];
+        	}
+
+        	sessionStorage.setItem("sessionStorage_idProfesional", params["idProfesional"]);
+        	sessionStorage.setItem("sessionStorage_idHorario", params["idHorario"]);
+
+        	var idHorario = params["idHorario"]
+
+        	if(idHorario == "undefined" || idHorario == "" || idHorario == null){
+
+
+        		$("#btnModifHorario").css("display", "none");	
+        		$("#btnGuardarHorario").css("display", "inline-block");	
+
+        	}else{
+
+        		$("#btnModifHorario").css("display", "inline-block");	
+        		$("#btnGuardarHorario").css("display", "none");	
+
+				$.ajax({
+					type: "GET",
+					url: host + "horarios/id/"+idHorario,
+					headers: {
+						//"Authorization": token,
+						"Content-Type":"application/json"
+					},
+					success: function(response)
+					{
+
+						debugger;
+
+						$("#comboDiaDeSemana").val(response.diaDeSemana);
+						$("#comboTipoTurno").val(response.tipoTurno);
+						$("#horaDesde").val(response.horaDesde);
+						$("#minutosDesde").val(response.minutosDesde);
+						$("#horaHasta").val(response.horaHasta);
+						$("#minutosHasta").val(response.minutosHasta);
+						$("#duracionTurnos").val(response.duracionTurnos)
+
+					},
+
+					dataType: "json",
+					error: function(xhr, status, error) {
+						
+						debugger;
+						if(status == 400 || status != 401){
+							debugger;
+							//pacientes($("#dni").val());
+
+
+						}else{
+							debugger;
+						alert("Error al buscar el horario");
+						}
+
+					}
+				});
+			}
+
+        });
+
+	</script>
+
+	
+	
+</body>
+
+</html>

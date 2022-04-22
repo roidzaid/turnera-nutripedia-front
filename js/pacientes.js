@@ -11,7 +11,7 @@ function buscarPaciente(){
 		type: "GET",
 		url: host + "pacientes/"+$("#dni").val(),
 		headers: {
-			"Authorization": token,
+			//"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -95,7 +95,7 @@ function guardarPaciente(){
 			type: "POST",
 			url: host + "pacientes",
 			headers: {
-				"Authorization": token,
+				//"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
