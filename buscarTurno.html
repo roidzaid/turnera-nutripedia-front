@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Buscar turno</title>
+	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/buscarTurno.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -117,14 +117,30 @@
 	  <div class="card-body">
 	    <h5 class="card-title" id="tarjetaProfesional" style="color: white;"></h5>
 	    <h6 class="card-subtitle mb-2 text-muted" id="subtituloProfecional"></h6>
-	    <p class="card-text" id="parrafoDiasAtencion" style="color: white;">Dias y horarios de atencion:</p>
+	    <p class="card-text" id="parrafoDiasAtencion" style="color: white;">Valor de la consulta:</p>
 	  </div>
-	  <ul id="listaHorarios" class="list-group list-group-flush">
+	  <ul id="listaValorConsulta" class="list-group list-group-flush">
 	  </ul>
-	  <div class="card-body">
-	    <p class="card-text" id="parrafoValorConsulta" style="color: white;"></p>
-	  </div>
-	</div>
+	
+	  <div id="myModalControEnfermedad" class="modal" tabindex="-1">
+
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">No tenemos turnos disponibles para el dia seleccionado</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <p id="parrafoControEnfermedad"></p>
+		      </div>
+		      <div class="modal-footer">
+						<input name="ok" id="btnOk" type="button" class="btn btn-secondary" value="OK" onclick="cerrarmyModalControEnfermedad()" style="width: 200px; background-color: #31572C;">
+
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 
 	</div>
 

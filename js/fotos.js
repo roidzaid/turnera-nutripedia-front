@@ -46,6 +46,8 @@ function guardarFoto(){
              $("#alertaError").fadeTo(2000, 500).slideUp(500, function(){
                     $("#alertaError").slideUp(500);
 
+                    $('#idProgressBar').css('display', 'none');
+
              });
 
         }else{
@@ -68,6 +70,8 @@ function guardarFoto(){
     //Error Listener
     ajax.addEventListener("error", function (e) {
          debugger;
+
+          $('#idProgressBar').css('display', 'none');
          
          $('#error').css('display', 'block');
          $("#error").fadeTo(2000, 500).slideUp(500, function(){
@@ -115,7 +119,8 @@ function buscarFoto(){
 		{
 			debugger;
 
-			var foto="imagenes/"+response;
+			//var foto="imagenes/"+response;
+            var foto="/turnos/imagenes/"+response;
 			
 			$("#foto").attr("src", foto);
 

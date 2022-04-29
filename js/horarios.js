@@ -176,3 +176,29 @@ function modifHorario(){
 		
 	};
 }
+
+
+function buscarTodosLosTiposDeTurno(){
+	debugger;
+			
+		$.ajax({
+			type: "GET",
+			url: host + "tipoTurno/all",
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				debugger;
+				$("#comboTipoTurno").append('<option value="">Tipos de Turnos</option>');
+				for (var i = 0; i < response.length; i++) {
+
+					var tipoTurno = response[i].tipoTurno;
+
+					$("#comboTipoTurno").append('<option>'+tipoTurno+'</option>');
+				}
+			}
+		});
+
+}

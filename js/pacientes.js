@@ -1,6 +1,6 @@
 function Cancelar(){
 
-	window.location = "inicioTurnera.html";
+	window.location = "index.html";
 
 }
 
@@ -148,7 +148,89 @@ function confirmarDatosPersonales(){
 
 	sessionStorage.setItem("sessionStorage_IdPaciente", $("#idPaciente").val());
 
-	window.location = "confirmarTurno.html";
+	var especialidad = sessionStorage.getItem("sessionStorage_especialidad");
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+
+			debugger;
+			
+			$.ajax({
+				type: "GET",
+				url: host + "profesionales/id/"+idProfesional,
+				headers: {
+				//	"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
+					
+					var nombreProfesional = response.nombre;
+					var apellidoProfesional = response.apellido;
+
+					var idPaciente = sessionStorage.getItem("sessionStorage_IdPaciente");
+
+					debugger;
+					
+					$.ajax({
+						type: "GET",
+						url: host + "pacientes/id/"+idPaciente,
+						headers: {
+							//"Authorization": token,
+							"Content-Type":"application/json"
+						},
+						success: function(response)
+						{
+							debugger;
+							
+							var nombrePaciente = response.nombre;
+							var apellidoPaciente = response.apellido;
+							var dniPaciente = response.dni;
+
+							debugger;
+							var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
+
+							var partsArray = idHorarioYFecha.split('-');
+							var idHorario = partsArray[0];
+							var fecha = partsArray[1]+"-"+partsArray[2]+"-"+partsArray[3];
+
+
+					        var idConfiguracionTurno = sessionStorage.getItem("sessionStorage_idConfiguracionTurno");
+
+							debugger;
+							
+							$.ajax({
+								type: "GET",
+								url: host + "horarios/configuracionTurno/"+idConfiguracionTurno,
+								headers: {
+									//"Authorization": token,
+									"Content-Type":"application/json"
+								},
+								success: function(response)
+								{
+									debugger;
+									
+									var hora = response.hora;
+
+									debugger;
+									$("#parrafoConfirmacionTurno").text("Por favor, confirme el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el paciente " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs");
+
+									$('#myModal2').modal('show');
+
+								}
+							});
+
+						}
+					});
+
+					
+				}
+			});
+	
+	
+
+
+
+	//window.location = "confirmarTurno.html";
 
 
 

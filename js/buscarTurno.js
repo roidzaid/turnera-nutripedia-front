@@ -6,7 +6,7 @@ function buscarTurno(){
 
 function Cancelar(){
 
-	window.location = "inicioTurnera.html";
+	window.location = "index.html";
 
 }
 
@@ -24,7 +24,7 @@ function buscarMisTurnos(){
 
 function registrarse(){
 
-	window.location = "AltaProfesional.html";
+	window.location = "altaProfesional.html";
 
 }
 
@@ -141,10 +141,13 @@ function tarjetaProfesional() {
 			$("#tarjetaProfesional").text(response.apellido + ", " + response.nombre);
 			$("#subtituloProfecional").text(especialidad);
 
-			$("#parrafoValorConsulta").text("El valor de la consulta: " + new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'ARS' }).format(response.valorConsulta));
+			/*$("#parrafoValorConsulta").text("El valor de la consulta: " + new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'ARS' }).format(response.valorConsulta));*/
+
+            /*debugger;
+            buscarDias()*/
 
             debugger;
-            buscarDias()
+            buscarValoresDeConsulta();
 			
 		}
 	});
@@ -189,7 +192,7 @@ function buscarDias(){
 
 	$.ajax({
 		type: "GET",
-		url: host + "horarios/diasDeAtencion/"+idProfesional,
+		url: host + "/horarios/horariosTarjeta/"+idProfesional,
 		headers: {
 			//"Authorization": token,
 			"Content-Type":"application/json"
@@ -197,17 +200,51 @@ function buscarDias(){
 		success: function(response)
 		{
 			debugger;
+
+			var list = response;
 			
 			$('#listaHorarios').empty();
 			for (var i = 0; i < response.length; i++) {
 
-				var diayHora = response[i].diaDeSemana + " de " + response[i].horaDesde+ " a " + response[i].horaHasta;
+				var dias = response[i];
 				debugger;
             	
-            	$('#listaHorarios').append("<li class=\"list-group-item\">"+diayHora+"</li>"); 
+            	$('#listaHorarios').append("<li class=\"list-group-item\">"+dias+"</li>"); 
 			}
 		}
 	});
+
+}
+
+
+function buscarValoresDeConsulta(){
+	
+	debugger;
+
+	var idProfesional = $("#comboProfesionales").val()
+
+		$.ajax({
+			type: "GET",
+			url: host + "valorConsulta/all/"+idProfesional,
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				debugger;
+				$('#listaValorConsulta').empty();
+				for (var i = 0; i < response.length; i++) {
+
+					var vc = response[i].tipoConsulta + ": " + new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'ARS' }).format(response[i].valorConsulta);
+					debugger;
+	            	
+	            	$('#listaValorConsulta').append("<li class=\"list-group-item\">"+vc+"</li>"); 
+				}
+			}
+		});
+
+
 
 }
 
@@ -283,16 +320,65 @@ function buscarHorariosDisponibles() {
 			$("#comboHora").append('<option value="">Horarios disponibles</option>');
 			for (var i = 0; i < response.length; i++) {
 
+				debugger;
 				var hora = response[i].hora;
 				var idConfiguracionTurno = response[i].idConfiguracionTurnos;
 
 				$("#comboHora").append('<option value='+idConfiguracionTurno+'>'+hora+'</option>');
+			}
+
+			debugger;
+
+			if ($("#comboTipoTurno").val() == "CONTROL DE ENFERMEDAD" && response.length <= 0){
+
+				debugger;
+				telefonoProfesional();
+				
 			}
 		}
 	});
 
 
 }
+
+
+function telefonoProfesional() {
+
+	debugger;
+	var idProfesional = $("#comboProfesionales").val();
+	debugger;
+
+	$.ajax({
+		type: "GET",
+		url: host + "profesionales/id/"+idProfesional,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+			
+			var telefono = response.telefono;
+
+			$("#parrafoControEnfermedad").text("Por favor enviar un mensaje al " + telefono + " para coordinar un turno por control de enfermedad");
+				
+			$('#myModalControEnfermedad').modal('show');
+			
+		}
+	});
+	
+}
+
+
+function cerrarmyModalControEnfermedad(){
+
+	$('#myModalControEnfermedad').modal('hide');
+
+}
+
+
+
 
 function PedirTurno(){
 
@@ -435,7 +521,8 @@ function confirmarTurno(){
             $('#turnoAsignado').css('display', 'block');
        		$("#turnoAsignado").fadeTo(4000, 500).slideUp(500, function(){
        		$("#turnoAsignado").slideUp(500);
-       		window.location = "inicioTurnera.html";
+       		
+       		window.location = "index.html";
        		});
 
 	            
@@ -452,7 +539,7 @@ function confirmarTurno(){
 			$('#errorAltaTurno').css('display', 'block');
 	       		$("#errorAltaTurno").fadeTo(2000, 500).slideUp(500, function(){
 	       		$("#errorAltaTurno").slideUp(500);
-	       		window.location = "inicioTurnera.html";
+	       		window.location = "index.html";
 	       		});
 
 
@@ -574,6 +661,7 @@ function PacienteCancelaTurno(idTurnoAsignado){
 
 function confirmarCacelacionTurno(){
 
+	$('#idProgressBarModal').css('display', 'block');
 
 	debugger;
 
@@ -589,8 +677,19 @@ function confirmarCacelacionTurno(){
 		success: function(response)
 		{
 			debugger;
+
+			$('#idProgressBarModal').css('display', 'none');
 			
-			location.reload();
+			$('#turnoAsignadoModal').css('display', 'block');
+	       		$("#turnoAsignadoModal").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#turnoAsignadoModal").slideUp(500);
+	       	
+	       		$('#myModal1').modal('hide');	
+			
+				location.reload();
+	       		});
+			
+			
 		}
 	});
 
@@ -600,6 +699,7 @@ function confirmarCacelacionTurno(){
 
 function PacienteConfirmaCacelacionTurno(){
 
+	$('#idProgressBarModal').css('display', 'block');
 
 	debugger;
 
@@ -616,9 +716,18 @@ function PacienteConfirmaCacelacionTurno(){
 		{
 			debugger;
 
-			$('#myModal1').modal('hide');	
+			$('#idProgressBarModal').css('display', 'none');
 			
-			misTurnos();
+			$('#turnoAsignadoModal').css('display', 'block');
+	       		$("#turnoAsignadoModal").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#turnoAsignadoModal").slideUp(500);
+	       	
+	       		$('#myModal1').modal('hide');	
+			
+				misTurnos();
+	       		});
+
+			
 		}
 	});
 

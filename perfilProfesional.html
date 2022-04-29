@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 70%;">
 <head>
 	<meta charset="utf-8">
-	<title>Perfil del Profesional</title>
+	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/profesionales.js"></script>
 	<script src="js/fotos.js"></script>
+	<script src="js/valorConsulta.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -98,20 +99,20 @@
 			    </div>
 			  </div>
 
-			  <div class="form-group row">
+			  <!-- <div class="form-group row">
 			    <label for="valorConsulta" class="col-sm-3 col-form-label" style="text-align: left;">Valor de la consulta</label>
 			    <div class="col-sm-7">
 			      <input type="text" class="form-control" id="valorConsulta" placeholder="Valor de la consulta"; disabled>
 			    </div>
-			  </div>
+			  </div> -->
 			
 			</div>
 			
 		</div>
 
-		<div style="display: inline-block; vertical-align: top; margin: 10px;">
+		<div style="margin: 10px;">
 
-			<div style="margin: 10px; text-align: left;">
+			<div style="margin: 20px; text-align: left;">
 
 				<h3 style="color: #31572C; display: inline-block;">Horarios</h3>
 
@@ -132,6 +133,33 @@
 							</tr>
 						</thead>
 						<tbody id="tbodyHorarios"></tbody>
+					</table>	
+				</div>
+			</div>
+			
+		</div>
+
+		<div style="margin: 10px;">
+
+			<div style="margin: 20px; text-align: left;">
+
+				<h3 style="color: #31572C; display: inline-block;">Valor de las consultas</h3>
+
+				<div title="Agregar valores" align="center"; style="display: inline-block;">
+					<i onclick="irAgregarValorConsulta()"class="material-icons" style="cursor: pointer;">add</i></div>
+
+				<div id="tHorarios" class="form-group row">
+				   <table id="tabValorConsulta" class="table">
+						<thead>
+							<tr>
+								<th id="idValorConsulta" style="display: none;">idValorConsulta</th>
+								<th>Tipo de Consulta</th>
+								<th>Valor</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="tbodyValorConsulta"></tbody>
 					</table>	
 				</div>
 			</div>
@@ -176,7 +204,9 @@
 					debugger;
 
 					buscarFoto();
-					debugger;					
+					debugger;		
+
+					buscarValoresDeConsultas(idProfesional);			
 			
 
 				},

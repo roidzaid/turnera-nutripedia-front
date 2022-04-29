@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Mis Turnos</title>
+	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/buscarTurno.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -74,6 +74,18 @@
 		</div>
 
 		<div id="myModal1" class="modal" tabindex="-1">
+
+			<div class="alert alert-success" role="alert" id="turnoAsignadoModal" align="center" style="display:none;">
+		    	<h4 class="alert-heading">Gracias por cancelar el tuno con anticipacion</h4>
+		     	<p>Ya le avisamos al profesional</p>
+		    </div>
+
+			<div class="alert alert-danger" role="alert" id="errorAltaTurnoModal" align="center" style="display:none;">
+			  	<h4 class="alert-heading">Error!</h4>
+			   	<p>Error al cancelar el turno</p>
+			</div>
+
+
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -96,6 +108,11 @@
 		      </div>
 		    </div>
 		  </div>
+		  <div id="idProgressBarModal" class="text-center" style="display:none;">
+		        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+		            <span class="sr-only">Cargando...</span>
+		        </div>
+		   </div>
 		</div>
 
 		

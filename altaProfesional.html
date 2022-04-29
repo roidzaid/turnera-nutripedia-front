@@ -2,7 +2,7 @@
 <html style="width:100%;">
 <head>
 	<meta charset="utf-8">
-	<title>Carga de Profesional</title>
+	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/profesionales.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -68,10 +68,14 @@
 			  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="especialidad" class="col-sm-3 col-form-label">Especialidad</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="especialidad" placeholder="Especialidad">
+			      <!-- <input type="text" class="form-control" id="especialidad" placeholder="Especialidad"> -->
+			      <select id="especialidad" class="form-control">
+	                		<option selected></option>
+						</select>
 			    </div>
-			  </div>
+			  </div> 
 
+			  
 			  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
 			    <div class="col-sm-9">
@@ -86,12 +90,12 @@
 			    </div>
 			  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
+			 <!--  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="valorConsulta" class="col-sm-3 col-form-label">Valor de la consulta</label>
 			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="valorConsulta" placeholder="Valor de la consulta">
 			    </div>
-			  </div>
+			  </div> -->
 
 			   <div style="margin-top: 2%;">
 				<input name="guardarProfesional" id="btnGuardarProfesional" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarProfesional()" style="width: 200px; margin-top: 5px; background-color: #31572C";>
@@ -99,7 +103,61 @@
 				<input name="modifProfesional" id="btnModifProfesional" type="button" class="btn btn-secondary" value="Modificar" onclick="modifProfesional()" style="width: 200px; margin-top: 5px; background-color: #31572C";>
 
 				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+
+				<input name="inicio" id="btnInicio" type="button" class="btn btn-secondary" value="Volver" onclick="inicio()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+
+
+
+				
 			  </div>
+
+
+			  <!-- <div id="myModalUsuario" class="modal" tabindex="-1">
+
+			  	<div class="alert alert-success" role="alert" id="usuarioOk" align="center" style="display:none;">
+			    	<h4 class="alert-heading">Bien!</h4>
+			     	<p>Ya estas registrado</p>
+			    </div>
+
+				<div class="alert alert-danger" role="alert" id="errorAltaUsuario" align="center" style="display:none;">
+			    	<h4 class="alert-heading">Error!</h4>
+			     	<p>Debe ingresar todos los datos solicitados</p>
+			    </div>
+
+			    <div class="alert alert-danger" role="alert" id="errorContraseñaDiferente" align="center" style="display:none;">
+			    	<h4 class="alert-heading">Error!</h4>
+			     	<p>Las contraseñas son diferentes, vuelva a cargarlas</p>
+			    </div>
+				
+
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">Crear usuario y contraseña</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body" style="text-align: -moz-center;">
+						   	<div class="col-sm-6" style="text-align: center; margin: 10px">
+   						        <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+							</div>
+						
+						    <div class="col-sm-6" style="text-align: center; margin: 10px">
+						      <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
+						    </div>
+							
+						    <div class="col-sm-6" style="text-align: center; margin: 10px">
+						      <input type="password" class="form-control" id="confirmarContraseña" placeholder="Confirmar contraseña">
+						    </div>
+						
+				      <div class="modal-footer">
+
+								<input name="guardar" id="btnGuardar" type="button" class="btn btn-secondary" value="Guardar" onclick="crearUsuario()" style="width: 20%; background-color: #31572C;">
+							
+				      </div>
+				    </div>
+				  </div>
+				  
+				</div> -->
 
 	</div>
 
@@ -126,10 +184,21 @@
         		$("#btnModifProfesional").css("display", "none");	
         		$("#btnGuardarProfesional").css("display", "inline-block");	
 
+        		$("#btnCancelar").css("display", "none");	
+        		$("#btnInicio").css("display", "inline-block");	
+
+				buscarEspecialidades();
+ 
+
         	}else{
 
         		$("#btnModifProfesional").css("display", "inline-block");	
         		$("#btnGuardarProfesional").css("display", "none");	
+
+        		$("#btnCancelar").css("display", "inline-block");	
+        		$("#btnInicio").css("display", "none");	
+
+        		buscarEspecialidades();
 
 				$.ajax({
 					type: "GET",
@@ -153,10 +222,9 @@
 						$("#especialidad").val(response.especialidad);
 						$("#telefono").val(response.telefono);
 						$("#mail").val(response.mail);
-						$("#valorConsulta").val(response.valorConsulta);
+						/*$("#valorConsulta").val(response.valorConsulta);*/
 
-						buscarHorarios();
-
+						
 					},
 
 					dataType: "json",
@@ -179,7 +247,7 @@
 		});
 
 	</script>
-	
+
 </body>
 
 </html>

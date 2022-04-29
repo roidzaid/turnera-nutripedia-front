@@ -1,6 +1,6 @@
 function inicio(){
 
-	window.location = "inicioTurnera.html";
+	window.location = "index.html";
 
 }
 
@@ -17,6 +17,7 @@ function irAgregarHorarios(){
 	window.location = "horarios.html?idProfesional="+$("#idProfesional").val();
 
 }
+
 
 function modifHorarios(idHorario){
 
@@ -79,7 +80,7 @@ function guardarProfesional(){
 			especialidad:$("#especialidad").val().toUpperCase(),
 			telefono:$("#telefono").val().toUpperCase(),
 			mail:$("#mail").val().toUpperCase(),
-			valorConsulta:$("#valorConsulta").val().toUpperCase()
+			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
 		JSON.stringify(profesional);
@@ -104,7 +105,8 @@ function guardarProfesional(){
 
 			      	window.location = "crearUsuario.html?idProfesional="+response.idProfesional;
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+response.idProfesional;
+			      	//$('#myModalUsuario').modal('show');
+			      	
 			      	
 			       	});
 			},
@@ -322,7 +324,9 @@ function modifProfesional(){
 			      	$("#profesionalOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#profesionalOk").slideUp(500);
 			      	
-			      	perfil()
+			      	
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+
 			       	});
 			},
 
@@ -415,5 +419,28 @@ function deleteHorarios(idHorario){
 	
 }
 
+function buscarEspecialidades(){
+	debugger;
+			
+		$.ajax({
+			type: "GET",
+			url: host + "especialidades/all",
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				debugger;
+				$("#especialidad").append('<option value="">Especialidades</option>');
+				for (var i = 0; i < response.length; i++) {
 
+					var especialidades = response[i].especialidad;
+
+					$("#especialidad").append('<option>'+especialidades+'</option>');
+				}
+			}
+		});
+
+}
 
