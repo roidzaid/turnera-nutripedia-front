@@ -85,6 +85,17 @@
 				    	<textarea id="motivoConsulta" class="form-control" aria-label="With textarea"></textarea>
 				    </div>
 			</div>
+
+			<div id="idMotivoConsultaNutricion" class="form-group row" style="width: 100%; display: none; text-align: left;">
+			    <label for="motivoConsultaNutricion" class="col-sm-10 col-form-label" style="text-align: left;">Ingrese el motivo de la consulta</label>
+				    <div class="col-sm-12">
+				    	<select id="comboMotivoConsultaNutricion" class="form-control">
+	                		<option selected>Seleccion motivo</option>
+	                		<option >PRIMERA VEZ</option>
+	                		<option >SEGUIMIENTO</option>
+						</select>
+				    </div>
+			</div>
 		
 			<div id="idComboFecha" class="form-group row" style="width: 100%;">
 			    <label for="comboFecha" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione fecha</label>
@@ -127,7 +138,7 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title">No tenemos turnos disponibles para el dia seleccionado</h5>
+		        <h5 class="modal-title">No tenemos turnos disponibles para el día seleccionado</h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
@@ -140,6 +151,25 @@
 		    </div>
 		  </div>
 		</div>
+
+
+		<div id="myModalSinDisponibilidad" class="modal" tabindex="-1">
+
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Ya no hay turnos disponibles para el día seleccionado</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-footer">
+						<input name="ok" id="btnOk" type="button" class="btn btn-secondary" value="OK" onclick="cerrarmyModalSinDisponibilidad()" style="width: 200px; background-color: #31572C;">
+
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
 
 
 	</div>

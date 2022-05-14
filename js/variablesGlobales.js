@@ -1,1 +1,1 @@
-var host = "http://31.220.109.172:8090/";
+var host = "http://localhost:8090/";

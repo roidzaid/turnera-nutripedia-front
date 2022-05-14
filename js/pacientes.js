@@ -212,7 +212,7 @@ function confirmarDatosPersonales(){
 									var hora = response.hora;
 
 									debugger;
-									$("#parrafoConfirmacionTurno").text("Por favor, confirme el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el paciente " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs");
+									$("#parrafoConfirmacionTurno").text("Por favor, confirme el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el/la consultante " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs");
 
 									$('#myModal2').modal('show');
 

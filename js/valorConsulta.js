@@ -81,7 +81,8 @@ function guardarValorConsulta(){
 			      	$("#avisoOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#avisoOk").slideUp(500);
 
-			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	window.location = "misValoresDeConsulta.html";
 			      	
 			       	});
 			},
@@ -201,7 +202,8 @@ function modifValorConsulta(){
 			      	$("#avisoOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#avisoOk").slideUp(500);
 
-			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	window.location = "misValoresDeConsulta.html";
 			      	
 			       	});
 			},
@@ -242,9 +244,10 @@ function modifValorConsulta(){
 
 function cancelarValorConsulta(){
 
-	var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+	//var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
 
-	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+	window.location = "misValoresDeConsulta.html";
 
 }
 

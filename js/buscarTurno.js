@@ -36,6 +36,12 @@ function buscarProfecionalesEspecialidad() {
 	debugger;
 
 	$("#comboProfesionales").empty();
+	$("#comboTipoTurno").empty();
+	$("#comboFecha").empty();
+	$("#comboHora").empty();
+	$("#idMotivoConsulta").css("display", "none");
+	$("#idMotivoConsultaNutricion").css("display", "none");
+
 
 	$.ajax({
 		type: "GET",
@@ -85,6 +91,10 @@ function buscarTipoTurno(){
 	var idProfesional = $("#comboProfesionales").val()
 
 	$("#comboTipoTurno").empty();
+	$("#comboFecha").empty();
+	$("#comboHora").empty();
+	$("#idMotivoConsulta").css("display", "none");
+	$("#idMotivoConsultaNutricion").css("display", "none");
 
 	
 
@@ -261,10 +271,17 @@ function buscarDiasdeAtencion(){
 		$("#idMotivoConsulta").css("display", "block");
 	}else{
 		$("#idMotivoConsulta").css("display", "none");
+	}
+
+	if ($("#comboEspecialidades").val() == "NUTRICION"){
+		$("#idMotivoConsultaNutricion").css("display", "block");
+	}else{
+		$("#idMotivoConsultaNutricion").css("display", "none");
 	} 
 
 
 	$("#comboFecha").empty();
+	$("#comboHora").empty();
 
 
 	debugger;
@@ -335,6 +352,14 @@ function buscarHorariosDisponibles() {
 				telefonoProfesional();
 				
 			}
+
+			if (response.length <= 0){
+
+				debugger;
+				sinDisponibilidad();
+				
+			}
+
 		}
 	});
 
@@ -367,6 +392,24 @@ function telefonoProfesional() {
 			
 		}
 	});
+	
+}
+
+function sinDisponibilidad() {
+
+	debugger;
+				
+	$('#myModalSinDisponibilidad').modal('show');
+	
+	
+}
+
+function cerrarmyModalSinDisponibilidad() {
+
+	debugger;
+				
+	$('#myModalSinDisponibilidad').modal('hide');
+	
 	
 }
 
@@ -450,6 +493,16 @@ function PedirTurno(){
 
 	}
 
+	if($("#comboEspecialidades").val() == "NUTRICION" & $("#comboMotivoConsultaNutricion").val() == ""){
+
+		datosOk = false;
+        $('#AlertaControlEnfermedad').css('display', 'block');
+       	$("#AlertaControlEnfermedad").fadeTo(2000, 500).slideUp(500, function(){
+       	$("#AlertaControlEnfermedad").slideUp(500);
+      	});
+
+	}
+
     
     if(datosOk){
 
@@ -458,7 +511,14 @@ function PedirTurno(){
 		sessionStorage.setItem("sessionStorage_idHorarioYFecha", $("#comboFecha").val());
 		sessionStorage.setItem("sessionStorage_idConfiguracionTurno", $("#comboHora").val());
 		sessionStorage.setItem("sessionStorage_tipoConsulta", $("#comboTipoTurno").val());
-		sessionStorage.setItem("sessionStorage_motivoConsulta", $("#motivoConsulta").val());
+	
+
+		if($("#comboEspecialidades").val() == "NUTRICION"){
+			sessionStorage.setItem("sessionStorage_motivoConsulta", $("#comboMotivoConsultaNutricion").val());
+		}else{
+			sessionStorage.setItem("sessionStorage_motivoConsulta", $("#motivoConsulta").val());
+		}
+
 
 		debugger;
 		window.location = "buscarPaciente.html?dni="+$("#dni").val();
@@ -620,7 +680,7 @@ function cancelarTurno(idTurnoAsignado){
 
 			sessionStorage.setItem("sessionStorage_idTurnoAsignado", response.idTurnoAsignado);
 
-			$("#parrafoConfirmacion").text("Usted esta cancelando el turno de " + paciente + " para el dia " + dia + " a las " + hora + "hs");
+			$("#parrafoConfirmacion").text("Usted está cancelando el turno de " + paciente + " para el dia " + dia + " a las " + hora + "hs");
 			
 			$('#myModal').modal('show');		
 				
@@ -650,7 +710,7 @@ function PacienteCancelaTurno(idTurnoAsignado){
 
 			sessionStorage.setItem("sessionStorage_idTurnoAsignado", response.idTurnoAsignado);
 
-			$("#parrafoConfirmacion").text("Usted esta cancelando el turno de " + profesional + " para el dia " + dia + " a las " + hora + "hs");
+			$("#parrafoConfirmacion").text("Usted está cancelando el turno con " + profesional + " para el dia " + dia + " a las " + hora + "hs");
 			
 			$('#myModal1').modal('show');		
 				

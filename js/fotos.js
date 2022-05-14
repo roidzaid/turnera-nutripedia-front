@@ -120,7 +120,7 @@ function buscarFoto(){
 			debugger;
 
 			//var foto="imagenes/"+response;
-            var foto="/turnos/imagenes/"+response;
+            var foto="/imagenes/"+response;
 			
 			$("#foto").attr("src", foto);
 

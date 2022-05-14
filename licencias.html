@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html style="width:100%;">
+<head>
+	<meta charset="utf-8">
+	<title>Espacio Nutripedia</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/licencias.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="avisoOk" align="center" style="display:none;">
+    	<h4 class="alert-heading">Bien!</h4>
+     	<p>Licencia registrada</p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="avisoError" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Debe ingresar todos los datos para poder registrar su licencia</p>
+    </div>
+	
+	<h1 style="text-align: center; margin-top: 20px; color: #31572C">CARGA DE LICENCIAS</h1>
+	
+	<hr />
+
+	<div style="text-align: center;">
+
+		<div style="width: 50%; min-width: 300px; margin-left: 25%;">
+
+			  <div class="form-group row" style="margin-bottom: 5px; display: none;">
+			    <label for="idLicencia" class="col-sm-3 col-form-label">idLicencia</label>
+			    <div class="col-sm-3">
+			      <input type="text" class="form-control" id="idLicencia">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px; display: none;">
+			    <label for="idProfesional" class="col-sm-3 col-form-label">idProfesional</label>
+			    <div class="col-sm-3">
+			      <input type="text" class="form-control" id="idProfesional">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="fechaDesde" class="col-sm-3 col-form-label">Fecha desde</label>
+			    <div class="col-sm-3">
+			      <input type="date" class="form-control" id="fechaDesde" placeholder="Fecha desde">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="fechaHasta" class="col-sm-3 col-form-label">Fecha hasta</label>
+			    <div class="col-sm-3">
+			      <input type="date" class="form-control" id="fechaHasta" placeholder="Fecha hasta">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="motivo" class="col-sm-3 col-form-label">Motivo de licencia</label>
+			    <div class="col-sm-9">
+				    	<textarea id="motivoLicencia" class="form-control" aria-label="With textarea"></textarea>
+				</div>
+
+			  </div>
+
+
+			   
+
+		</div>
+
+		<div style="margin-top: 2%;">
+				<input name="guardarLicencia" id="btnGuardarLicencia" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarLicencia()" style="width: 200px; margin-top: 5px; background-color: #31572C;">
+
+				<input name="modifLicencia" id="btnModifLicencia" type="button" class="btn btn-secondary" value="Modificar" onclick="modifLicencia()" style="width: 200px; margin-top: 5px; background-color: #31572C">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="cancelarLicencia()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			debugger;
+
+			idProfesional = sessionStorage.getItem("sessionStorage_idProfesional")
+			$("#idProfesional").val(idProfesional);
+
+			debugger;
+
+			var paramstr = window.location.search.substr(1);
+       		var paramarr = paramstr.split ("&");
+       		var params = {};
+
+        	for ( var i = 0; i < paramarr.length; i++) {
+            	var tmparr = paramarr[i].split("=");
+            	params[tmparr[0]] = tmparr[1];
+        	}
+
+        	var idLicencia = params["idLicencia"]
+
+        	if(idLicencia == "undefined" || idLicencia == "" || idLicencia == null){
+
+        		debugger;
+
+        		$("#btnModifLicencia").css("display", "none");	
+        		$("#btnGuardarLicencia").css("display", "inline-block");	
+
+
+
+        	}else{
+
+        		debugger;
+
+        		$("#btnModifLicencia").css("display", "inline-block");	
+        		$("#btnGuardarLicencia").css("display", "none");	
+
+
+				buscarLicencia(idProfesional, idLicencia);
+
+
+        	}
+
+			
+        });
+
+	</script>
+
+
+
+	
+	
+</body>
+
+</html>

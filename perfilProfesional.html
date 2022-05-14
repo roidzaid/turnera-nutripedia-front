@@ -17,9 +17,9 @@
 </head>
 <body>
 
-	<div style="text-align: center;">
+	<div style="text-align: center; margin: 20px;">
 		
-		<div style="display: inline-block; margin: 10px; vertical-align: top;">
+		<div style="display: inline-block; margin: 10px; vertical-align: top; width: 25%">
 			<div style="margin: 10px;">
 				
 				<div id=divFoto style="width: 18rem; display: inline-block;">
@@ -32,10 +32,7 @@
 
 		</div>
 
-		<div style="display: inline-block; margin: 10px; vertical-align: top;">
-
-			<div style="margin: 10px; text-align: left;">
-				
+		<div style="display: inline-block; margin: 10px; vertical-align: top; width: 70%">
 
 				<h3 style="color: #31572C; display: inline-block;">Datos personales</h3>
 
@@ -44,57 +41,57 @@
 
 			  <div class="form-group row" style="margin-bottom: 5px; display: none;">
 			    <label for="idProfesional" class="col-sm-3 col-form-label" style="text-align: left;">Nombre</label>
-			    <div class="col-sm-7">
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="idProfesional" placeholder="idProfesional"; disabled>
 			    </div>
 			  </div>
 
 
 			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="nombre" class="col-sm-3 col-form-label" style="text-align: left;">Nombre</label>
-			    <div class="col-sm-7">
+			    <label for="nombre" class="col-sm-3 col-form-label" style="text-align: left;">Nombres</label>
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="nombre" placeholder="Nombre"; disabled>
 			    </div>
 			  </div>
 
 			  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="apellido" class="col-sm-3 col-form-label" style="text-align: left;">Apellido</label>
-			    <div class="col-sm-7">
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="apellido" placeholder="Apellido"; disabled>
 			    </div>
 			  </div>
 			  
 			  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="dni" class="col-sm-3 col-form-label" style="text-align: left;">DNI</label>
-			    <div class="col-sm-7">
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="dni" placeholder="DNI"; disabled>
 			    </div>
 			  </div>
 
 			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="matricula" class="col-sm-3 col-form-label" style="text-align: left;">Matricula</label>
-			    <div class="col-sm-7">
+			    <label for="matricula" class="col-sm-3 col-form-label" style="text-align: left;">Matrícula</label>
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="matricula" placeholder="Matricula"; disabled>
 			    </div>
 			  </div>
 
 			  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="especialidad" class="col-sm-3 col-form-label" style="text-align: left;">Especialidad</label>
-			    <div class="col-sm-7">
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="especialidad" placeholder="Especialidad"; disabled>
 			    </div>
 			  </div>
 
 			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="telefono" class="col-sm-3 col-form-label" style="text-align: left;">Telefono</label>
-			    <div class="col-sm-7">
+			    <label for="telefono" class="col-sm-3 col-form-label" style="text-align: left;">Teléfono</label>
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="telefono" placeholder="Telefono"; disabled>
 			    </div>
 			  </div>
 
 			  <div class="form-group row" style="margin-bottom: 5px;">
 			    <label for="mail" class="col-sm-3 col-form-label" style="text-align: left;">Mail</label>
-			    <div class="col-sm-7">
+			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="mail" placeholder="Mail"; disabled>
 			    </div>
 			  </div>
@@ -110,7 +107,7 @@
 			
 		</div>
 
-		<div style="margin: 10px;">
+		<!-- <div style="margin: 10px;">
 
 			<div style="margin: 20px; text-align: left;">
 
@@ -124,10 +121,10 @@
 						<thead>
 							<tr>
 								<th style="display: none;">idHorario</th>
-								<th>Dia</th>
+								<th>Día</th>
 								<th>Horario</th>
 								<th>Tipo de turno</th>
-								<th>Duracion de turno</th>
+								<th>Duración de turno</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -137,9 +134,9 @@
 				</div>
 			</div>
 			
-		</div>
+		</div> -->
 
-		<div style="margin: 10px;">
+		<!-- <div style="margin: 10px;">
 
 			<div style="margin: 20px; text-align: left;">
 
@@ -164,7 +161,7 @@
 				</div>
 			</div>
 			
-		</div>
+		</div> -->
 
 	</div>
 
@@ -200,13 +197,13 @@
 					$("#mail").val(response.mail);
 					$("#valorConsulta").val(response.valorConsulta);
 
-					buscarHorarios();
+					//buscarHorarios(idProfesional);
 					debugger;
 
 					buscarFoto();
 					debugger;		
 
-					buscarValoresDeConsultas(idProfesional);			
+					//buscarValoresDeConsultas(idProfesional);			
 			
 
 				},

@@ -1,5 +1,6 @@
 function inicio(){
 
+
 	window.location = "index.html";
 
 }
@@ -46,10 +47,37 @@ function perfil(){
 
 function agenda(){
 
+	debugger;
+
+	
 	parent.document.getElementById("frameInicio").setAttribute('src', "agenda.html");
 
 }
 
+function misHorarios(){
+
+	debugger;
+
+	
+	parent.document.getElementById("frameInicio").setAttribute('src', "misHorarios.html");
+
+}
+
+function misPrecios(){
+
+	debugger;
+	
+	parent.document.getElementById("frameInicio").setAttribute('src', "misValoresDeConsulta.html");
+
+}
+
+function licencias(){
+
+	debugger;
+	
+	parent.document.getElementById("frameInicio").setAttribute('src', "misLicencias.html");
+
+}
 
 
 
@@ -302,8 +330,8 @@ function modifProfesional(){
 			matricula:$("#matricula").val().toUpperCase(),
 			especialidad:$("#especialidad").val().toUpperCase(),
 			telefono:$("#telefono").val().toUpperCase(),
-			mail:$("#mail").val().toUpperCase(),
-			valorConsulta:$("#valorConsulta").val().toUpperCase()
+			mail:$("#mail").val().toUpperCase()
+			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
 		JSON.stringify(profesional);
@@ -361,10 +389,10 @@ function modifProfesional(){
 
 }
 
-function buscarHorarios(){
+function buscarHorarios(idProfesional){
 	debugger;
 
-	var idProfesional = $("#idProfesional").val()
+	//var idProfesional = $("#idProfesional").val()
 
 	debugger;
 
@@ -413,7 +441,7 @@ function deleteHorarios(idHorario){
 		{
 			debugger;
 			
-			buscarHorarios();
+			window.location = "misHorarios.html";
 		}
 	});
 	
