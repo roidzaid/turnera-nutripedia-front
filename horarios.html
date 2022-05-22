@@ -33,9 +33,20 @@
 
 	<div style="text-align: center;">
 
-		<div style="width: 50%; min-width: 300px; margin-left: 25%;">
+		<div style="width: 50%; margin-left: 25%;">
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
+			<div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="tipoTurno" class="col-sm-3 col-form-label">Turno Eventual</label>
+			    <div class="col-sm-3" style= "text-align: start;">
+			      <input class="form-contro" type="checkbox" value="" id="checkboxTurnoEventual" style="padding: 0; width: 40px; height: 30px;" onclick="esEventual()">
+			    </div>
+			    <div class="col-sm-6" id="fechaTurnoEventual" style="display:none">
+			       <input type="date" class="form-control" id="fechaEventual" placeholder="Fecha"; onchange="buscarDiaEventual();">
+			    </div>
+			</div>
+
+
+			  <div class="form-group row" style="margin-bottom: 5px;" "display: block;">
 			    <label for="diaDeSemana" class="col-sm-3 col-form-label" style="text-align: center;">Día de la semana</label>
 			    <div class="col-sm-9" style="text-align: center;">
 			      <select id="comboDiaDeSemana" class="form-control">
@@ -154,7 +165,20 @@
 						$("#minutosDesde").val(response.minutosDesde);
 						$("#horaHasta").val(response.horaHasta);
 						$("#minutosHasta").val(response.minutosHasta);
-						$("#duracionTurnos").val(response.duracionTurnos)
+						$("#duracionTurnos").val(response.duracionTurnos);
+
+
+						if(response.fechaHorarioEventual != "" && response.fechaHorarioEventual != null){
+							
+							$("#checkboxTurnoEventual").prop('checked', true);
+							$("#fechaTurnoEventual").css("display", "inline-block");
+							$("#comboDiaDeSemana").prop('disabled', true);					
+
+							$("#fechaEventual").val(response.fechaHorarioEventual);	
+							
+
+						}
+
 
 					},
 

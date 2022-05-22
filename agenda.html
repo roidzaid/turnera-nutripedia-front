@@ -21,9 +21,18 @@
 
 	 	<div id="agenda" style="margin: 20px; text-align: left;">
 	 		
-	 		<h3 style="color: #31572C; display: inline-block;">Agenda</h3>
+	 		<div>
 
-		 	 <div id="tAgenda" class="form-group row" style="width:90%">
+	 		  <h3 style="color: #31572C;display: inline-block">Agenda</h3>
+
+	 		  <div style="display:inline-block; float: right;">
+				<div id="filtro" style="display:inline-block">
+			       <input type="date" class="form-control" id="filtroFecha" placeholder="Fecha"; onchange="buscarPorFechaAgenda();">
+			  	</div>
+			  </div>
+			</div>
+
+		 	 <div id="tAgenda" class="form-group row">
 			   <table id="tabAgenda" class="table">
 					<thead>
 						<tr>
@@ -34,10 +43,9 @@
 							<th>Nombre</th>
 							<th>Apellido</th>
 							<th>DNI</th>
-							<th>Telefono</th>
-							<th>Mail</th>
 							<th>Tipo Consulta</th>
 							<th>Motivo</th>
+							<th></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -93,6 +101,38 @@
 		   </div>
 		</div>
 
+		<div id="myModalPaciente" class="modal" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h3 id="nomYApe"class="modal-title"></h3>
+		      </div>
+			  
+			  <div>
+			  	<input type="text" class="form-control" id="fechaNac" placeholder="Fecha Nac">
+			  </div>
+			  <div>
+		      	<input type="text" class="form-control" id="dni" placeholder="DNI">
+			  </div>
+			  <div>			  
+		      	<input type="text" class="form-control" id="direccion" placeholder="Direccion">
+			  </div>			  
+			  <div>			  
+		      	<input type="text" class="form-control" id="localidad" placeholder="Localidad">
+			  </div>			  
+			  <div>			  
+		      	<input type="text" class="form-control" id="telefono" placeholder="Telefono">
+			  </div>			  
+			  <div>			  
+		      	<input type="text" class="form-control" id="mail" placeholder="Mail">
+			  </div>
+		    </div>
+		  </div>
+		</div>
+
+
+		  
+
 
 	</div>
 
@@ -131,14 +171,12 @@
 							var nombre = list[i].nombrePaciente;
 							var apellido = list[i].apellidoPaciente;
 							var dni = list[i].dniPaciente;
-							var telefono = list[i].telefonoPaciente;
-							var mail = list[i].mailPaciente;
 							var tipoConsulta = list[i].tipoConsulta;
 							var motivo = list[i].motivoConsulta;
 
 							debugger;
 
-							$("#tbodyAgenda").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+telefono+'</td><td>'+mail+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
+							$("#tbodyAgenda").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
 
 						}
 					}else{

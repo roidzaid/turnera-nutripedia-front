@@ -23,7 +23,7 @@
 			<div style="margin: 10px;">
 				
 				<div id=divFoto style="width: 18rem; display: inline-block;">
-				  <img id="foto" class="card-img-top" alt="Foto perfil" style="height: 300px; width: 270px;">
+				  <img id="foto" class="card-img-top" alt="Foto perfil">
 				</div>
 				
 				<div title="Actualizar foto" align="center"; style="display: inline-block; vertical-align: top;">
@@ -32,7 +32,7 @@
 
 		</div>
 
-		<div style="display: inline-block; margin: 10px; vertical-align: top; width: 70%">
+		<div style="display: inline-block; margin: 10px; vertical-align: top; width: 65%; text-align: start;">
 
 				<h3 style="color: #31572C; display: inline-block;">Datos personales</h3>
 
@@ -93,6 +93,13 @@
 			    <label for="mail" class="col-sm-3 col-form-label" style="text-align: left;">Mail</label>
 			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="mail" placeholder="Mail"; disabled>
+			    </div>
+			  </div>
+
+			   <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="instagram" class="col-sm-3 col-form-label" style="text-align: left;">Instagram</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="instagram" placeholder="Instagram"; disabled>
 			    </div>
 			  </div>
 
@@ -196,6 +203,7 @@
 					$("#telefono").val(response.telefono);
 					$("#mail").val(response.mail);
 					$("#valorConsulta").val(response.valorConsulta);
+					$("#instagram").val(response.instagram);
 
 					//buscarHorarios(idProfesional);
 					debugger;

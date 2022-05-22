@@ -42,6 +42,9 @@ function buscarProfecionalesEspecialidad() {
 	$("#idMotivoConsulta").css("display", "none");
 	$("#idMotivoConsultaNutricion").css("display", "none");
 
+	$("#tarjeta1").css("display", "none");	
+
+
 
 	$.ajax({
 		type: "GET",
@@ -96,6 +99,10 @@ function buscarTipoTurno(){
 	$("#idMotivoConsulta").css("display", "none");
 	$("#idMotivoConsultaNutricion").css("display", "none");
 
+	$("#redes").css("display", "none");	
+
+	$("#linkRedes").empty();
+	$("#linkRedes").attr("href", "#");
 	
 
 	debugger;
@@ -150,6 +157,19 @@ function tarjetaProfesional() {
 
 			$("#tarjetaProfesional").text(response.apellido + ", " + response.nombre);
 			$("#subtituloProfecional").text(especialidad);
+
+
+			if(response.instagram != "" && response.instagram != null){
+				$("#redes").css("display", "inline-block");	
+				
+				var partsArray = response.instagram.split('/');
+				var aliasInsta = partsArray[3];
+
+				$("#linkRedes").text("@"+aliasInsta);
+				$("#linkRedes").attr("href", response.instagram);
+
+
+			}
 
 			/*$("#parrafoValorConsulta").text("El valor de la consulta: " + new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'ARS' }).format(response.valorConsulta));*/
 
@@ -279,6 +299,12 @@ function buscarDiasdeAtencion(){
 		$("#idMotivoConsultaNutricion").css("display", "none");
 	} 
 
+	if (tipoTurno == "CONTROL OFTALMOLOGICO"){
+		$("#idMotivoConsultaOftalmologia").css("display", "block");
+	}else{
+		$("#idMotivoConsultaOftalmologia").css("display", "none");
+	}
+
 
 	$("#comboFecha").empty();
 	$("#comboHora").empty();
@@ -310,6 +336,17 @@ function buscarDiasdeAtencion(){
 	});
 
 }
+
+
+
+function verDescOftalmologia(){
+	if($("#flexCheckSeAtendioPreviamente").is(":checked")){
+		$("#idDescOftalmologia").css("display", "block");
+	}else{
+		$("#idDescOftalmologia").css("display", "none");
+	}
+}
+
 
 
 function buscarHorariosDisponibles() {
@@ -516,7 +553,31 @@ function PedirTurno(){
 		if($("#comboEspecialidades").val() == "NUTRICION"){
 			sessionStorage.setItem("sessionStorage_motivoConsulta", $("#comboMotivoConsultaNutricion").val());
 		}else{
-			sessionStorage.setItem("sessionStorage_motivoConsulta", $("#motivoConsulta").val());
+
+			if($("#comboEspecialidades").val() == "OFTALMOLOGIA INFANTIL"){
+
+				if($("#flexCheckFondoDeOjo").is(":checked")){
+
+					if($("#flexCheckSeAtendioPreviamente").is(":checked")){
+						sessionStorage.setItem("sessionStorage_motivoConsulta", "Requiere fondo de ojo - Fue atendidx previamente en: " + $("#DescOftalmologia").val());
+					}else{
+						sessionStorage.setItem("sessionStorage_motivoConsulta", "Requiere fondo de ojo - Primera vez");
+					}
+
+				}else{
+					if($("#flexCheckSeAtendioPreviamente").is(":checked")){
+						sessionStorage.setItem("sessionStorage_motivoConsulta", "No requiere fondo de ojo - Fue atendidx previamente en: " + $("#DescOftalmologia").val());
+					}else{
+						sessionStorage.setItem("sessionStorage_motivoConsulta", "No requiere fondo de ojo - Primera vez");
+					}		
+				}
+
+			}else{
+
+				sessionStorage.setItem("sessionStorage_motivoConsulta", $("#motivoConsulta").val());
+
+			}
+			
 		}
 
 
@@ -815,3 +876,107 @@ function PacienteCancelaConfirmacionDeCancelacion(){
 
 }
 
+function verDatosPaciente(dni){
+
+	$('#myModalPaciente').modal('show');	
+
+	$.ajax({
+		type: "GET",
+		url: host + "pacientes/"+dni,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+			
+			$("#nomYApe").text(response.apellido +", " +response.nombre);
+			      $("#dni").val("DNI: "+response.dni);
+			 $("#fechaNac").val("Fecha de nac: "+response.fechaNac);
+			$("#direccion").val("Direccion: "+response.direccion);
+			$("#localidad").val("Localidad: "+response.localidad);
+			 $("#telefono").val("Telefono: "+response.telefono);
+			     $("#mail").val("Mail: "+response.mail);
+
+			
+			$("#dni").prop('disabled', true);
+			$("#fechaNac").prop('disabled', true);
+			$("#direccion").prop('disabled', true);
+			$("#localidad").prop('disabled', true);
+			$("#telefono").prop('disabled', true);
+			$("#mail").prop('disabled', true);
+
+		},
+		dataType: "json",
+		error: function(xhr, status, error) {
+			
+			if(status == 400 || status != 401){
+				debugger;
+				window.location = "altaPacientes.html?dni="+$("#dni").val();
+
+
+			}else{
+				debugger;
+			alert("Error al buscar el paciente");
+			}
+
+		}
+	});	
+}
+
+function buscarPorFechaAgenda(){
+	
+	debugger;
+
+	if($("#filtroFecha").val()=="" || $("#filtroFecha").val()==null){
+		location.reload();
+	}else{
+
+		var idProfesional = sessionStorage.getItem("idProfesional");
+
+		debugger;
+
+		$.ajax({
+			type: "GET",
+			url: host + "turnos/agenda/"+idProfesional+"/"+$("#filtroFecha").val(),
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				var list = response;  
+
+				debugger;
+
+				if (list.length > 0){
+
+					$("#tbodyAgenda").empty();
+
+					for (var i = 0; i < list.length; i++) {
+
+						debugger;
+						var idTurnoAsignado = list[i].idTurnoAsignado;
+						var idPaciente = list[i].idPaciente;
+						var fecha = list[i].fecha;
+						var hora = list[i].hora;
+						var nombre = list[i].nombrePaciente;
+						var apellido = list[i].apellidoPaciente;
+						var dni = list[i].dniPaciente;
+						var tipoConsulta = list[i].tipoConsulta;
+						var motivo = list[i].motivoConsulta;
+
+						debugger;
+
+						$("#tbodyAgenda").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
+
+					}
+				}else{
+					$("#tbodyAgenda").empty();
+				}
+			}
+		});
+	}
+
+}

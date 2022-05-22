@@ -23,8 +23,15 @@ function irAgregarHorarios(){
 function modifHorarios(idHorario){
 
 	debugger;
-	window.location = "horarios.html?idProfesional="+$("#idProfesional").val()+"&idHorario="+idHorario;
+
+	sessionStorage.setItem("sessionStorage_idHorario", idHorario);
+
+	$('#myModalModifHorarios').modal('show');
+
+	//window.location = "horarios.html?idProfesional="+$("#idProfesional").val()+"&idHorario="+idHorario;
 }
+
+
 
 function actualizarFoto(){
 
@@ -108,6 +115,7 @@ function guardarProfesional(){
 			especialidad:$("#especialidad").val().toUpperCase(),
 			telefono:$("#telefono").val().toUpperCase(),
 			mail:$("#mail").val().toUpperCase(),
+			instagram:$("#instagram").val()
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
@@ -330,7 +338,8 @@ function modifProfesional(){
 			matricula:$("#matricula").val().toUpperCase(),
 			especialidad:$("#especialidad").val().toUpperCase(),
 			telefono:$("#telefono").val().toUpperCase(),
-			mail:$("#mail").val().toUpperCase()
+			mail:$("#mail").val().toUpperCase(),
+			instagram:$("#instagram").val()
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
@@ -416,9 +425,10 @@ function buscarHorarios(idProfesional){
 				var horario = response[i].horaDesde+ " a " + response[i].horaHasta;
 				var tipoTurno = response[i].tipoTurno;
 				var duracion = response[i].duracionTurnos + " min";
+				var eventual = response[i].fechaHorarioEventual;
 				debugger;
 
-				$("#tbodyHorarios").append('<tr><td style="display: none;">'+idHorario+'</td><td>'+dia+'</td><td>'+horario+'</td><td>'+tipoTurno+'</td><td>'+duracion+'</td><<td colspan="2"><div align="center"><i onclick="modifHorarios(\'' + idHorario + '\')"class="material-icons button edit" style="margin-right:3px; cursor: pointer;">edit</i><i onclick="deleteHorarios(\'' + idHorario + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
+				$("#tbodyHorarios").append('<tr><td style="display: none;">'+idHorario+'</td><td>'+dia+'</td><td>'+horario+'</td><td>'+tipoTurno+'</td><td>'+duracion+'</td><td>'+eventual+'</td><<td colspan="2"><div align="center"><i onclick="modifHorarios(\'' + idHorario + '\')"class="material-icons button edit" style="margin-right:3px; cursor: pointer;">edit</i><i onclick="deleteHorarios(\'' + idHorario + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
 			}
 		}
 	});

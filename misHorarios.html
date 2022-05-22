@@ -5,6 +5,7 @@
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/profesionales.js"></script>
+	<script src="js/horarios.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -37,6 +38,7 @@
 								<th>Horario</th>
 								<th>Tipo de turno</th>
 								<th>Duración de turno</th>
+								<th>Eventual</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -49,6 +51,35 @@
 		</div>
 		
 	</div>
+
+		<div id="myModalModifHorarios" class="modal" tabindex="-1">
+
+
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Modificación de horarios!</h5>
+   		      </div>
+		      <div class="modal-body">
+		        <p id="parrafoConfirmacion">Si modificás un horario ya establecido, recordá volver a asignar los turnos otorgados ese día, para evitar turnos duplicados </p>
+		      </div>
+		      <div class="modal-footer">
+
+		        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="irModifHorarios()" style="width: 200px; background-color: #31572C;">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="CancelarIrModifHorarios()()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
+
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div id="idProgressBarModal" class="text-center" style="display:none;">
+		        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+		            <span class="sr-only">Cargando...</span>
+		        </div>
+		   </div>
+		</div>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
