@@ -12,162 +12,204 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 </head>
-<body>
+<body class="m-0 vh-100 row justify-content-center align-items-center">
 
-	<h3 style="text-align: center; margin-top: 20px; color: #31572C">DATOS PERSONALES DE EL/LA PACIENTE</h3>
-	
-	<hr />
-	
-	<div style="margin:10px; text-align: center;">
+	<div class="col-auto p-8 text-center" style="text-align: center; margin: 0; padding: 0">
 
-		<div style="width: 50%; margin-left: 25%;">
-
-			<h5 style="color: #31572C; margin-top: 20px;">Por favor ingrese el DNI de el/la consultante.</h5>
-		</div>
-
-		<div style="width: 50%; margin-left: 25%;">
-
-		  <div class="form-group row">
-		    <!-- <label for="dni" class="col-sm-2 col-form-label">DNI</label> -->
-		    <div class="col-sm-7" style="margin-top: 20px;">
-		      <input id="dni" class="form-control" type="text" placeholder="Ingresar DNI">
-		    </div>
-		    <div class="col-sm-4" style="margin-top: 20px;">
-		      <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Validar" style="width: 200px; background-color: #31572C;" onclick="buscarPaciente()">
-		    </div>
-		  </div>
-
-		  <!-- <div class="form-group row">
-		    <div class="col-sm-4" style="display: inline-block;">
-		      <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Siguiente" style="margin: 5px; margin-right: 10%; width: 200px;" onclick="buscarPaciente()">
-		    </div>
-		  </div> -->
-		</div>
-
-
-	 	<div id="datosPersonales" style="display: none; width: 50%; margin-left: 25%;">
-
-		 	  <div>
-		 	  	<h3 style="margin-bottom: 20px; text-align: start; color: #31572C">Verifique si los datos son correctos</h3>
-		 	  </div>
-
-		 	  <div class="form-group row" style="margin-bottom: 5px; display: none">
-			    <label for="idPaciente" class="col-sm-3 col-form-label">idPaciente</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="idPaciente" placeholder="idPaciente">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="nombre" class="col-sm-3 col-form-label">Nombres</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
-			    </div>
-			  </div>
-			  
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="fechaNac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="fechaNac" placeholder="Fecha Nac">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="dniBD" class="col-sm-3 col-form-label">DNI</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="dniBD" placeholder="DNI">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="direccion" placeholder="Direccion">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="localidad" placeholder="Localidad">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
-			    </div>
-			  </div>
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
-			    <div class="col-sm-8">
-			      <input type="text" class="form-control" id="mail" placeholder="Mail">
-			    </div>
-			  </div>
-
-
-			  <div style="margin-top: 2%;">
-				<input name="confirmarDatosPersonales" id="btnconfirmarDatosPersonales" type="button" class="btn btn-secondary" value="Siguiente" onclick="confirmarDatosPersonales()" style="width: 200px; background-color: #31572C; margin-top: 20px;">
-
-				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; margin-top: 20px; border-color: #90A955; color: black;">
-			  </div>
-		
-		</div>
-
-	    	
-
-	</div>
-
-	<div id="myModal2" class="modal" tabindex="-1">
-
-		<div class="alert alert-success" role="alert" id="turnoAsignado" align="center" style="display:none;">
-	    	<h4 class="alert-heading">Gracias!</h4>
-	     	<p>El turno fue confirmado, te enviamos un mail con los datos.</p>
+		<div class="alert alert-success" role="alert" id="pacienteOk" align="center" style="display:none;">
+	    	<h4 class="alert-heading">Bien!</h4>
+	     	<p>El/la consultante fue registradx</p>
 	    </div>
 
-		<div class="alert alert-danger" role="alert" id="errorAltaTurno" align="center" style="display:none;">
-		  	<h4 class="alert-heading">Error!</h4>
-		   	<p>Hubo un error al asignar el turno, vuelva a intentar en un momento</p>
+	    <div class="alert alert-danger" role="alert" id="errorPaciente" align="center" style="display:none;">
+	    	<h4 class="alert-heading">Error!</h4>
+	     	<p>Debe ingresar todos los datos de el/la consultante</p>
+	    </div>
+
+	    <div class="alert alert-warning" role="alert" id="yaExiste" align="center" style="display:none;">
+	    	<h4 class="alert-heading">Ya Existe!</h4>
+	     	<p>El DNI ya existe en la base de datos</p>
+	    </div>
+
+		<h3 style="text-align: center; margin-top: 20px; color: #31572C">DATOS PERSONALES DE EL/LA PACIENTE</h3>
+		
+		<hr />
+		
+		<div style="margin:10px;">
+
+			<h5 style="color: #31572C; margin-top: 20px;">Por favor ingrese el DNI de el/la consultante.</h5>
+
+			    
+		    <div class="col-sm-12" style="margin-top: 20px;">
+		      <input id="dni" class="form-control" type="text" placeholder="Ingresar DNI">
+		    </div>
+
+
+			<div style="text-align: center; margin-top: 30px;">
+		
+				 <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Validar" style="width: 200px; background-color: #31572C;" onclick="buscarPaciente()">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black; margin: 10px;">
+			
+			</div>
+
+		
+
+		 	<div id="datosPersonales" style="display: none;">
+
+			 	  
+		 	  	<h3 style="margin-bottom: 20px; color: #31572C">Verifique si los datos son correctos</h3>
+			 	  
+
+			 	  <div class="form-group row" style="margin-bottom: 5px; display: none">
+				    <label for="idPaciente" class="col-sm-3 col-form-label">idPaciente</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="idPaciente" placeholder="idPaciente">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="nombre" class="col-sm-3 col-form-label">Nombres</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="fechaNac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="fechaNac" placeholder="Fecha Nac">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="dniBD" class="col-sm-3 col-form-label">DNI</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="dniBD" placeholder="DNI">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="direccion" placeholder="Direccion">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+				    </div>
+				  </div>
+
+				  <div class="form-group row" style="margin-bottom: 5px;">
+				    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="mail" placeholder="Mail">
+				    </div>
+				  </div>
+
+
+				  <div style="margin-top: 2%;">
+					<input name="confirmarDatosPersonales" id="btnconfirmarDatosPersonales" type="button" class="btn btn-secondary" value="Siguiente" onclick="confirmarDatosPersonales()" style="width: 200px; background-color: #31572C; margin-top: 20px;">
+
+					<input name="modifcarDatosPaciente" id="btnModifcarDatosPaciente" type="button" class="btn btn-secondary" value="Modificar datos" onclick="modifcarDatosPaciente()" style="width: 200px; background-color: #31572C; margin-top: 20px;">				
+
+					<input name="guardarModifcarDatosPaciente" id="btnGuardarModifcarDatosPaciente" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarModifcarDatosPaciente()" style="width: 200px; background-color: #31572C; margin-top: 20px; display: none;">				
+
+					<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; margin-top: 20px; border-color: #90A955; color: black;">
+				  </div>
+			
+			</div>
+
+		    	
+
 		</div>
 
+		<div id="myModal2" class="modal" tabindex="-1">
 
-
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title">Nuevo turno</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        <p id="parrafoConfirmacionTurno"></p>
-		      </div>
-		      <div class="modal-footer">
-		        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary">Confirmar</button> -->
-
-		        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()" style="width: 200px; background-color: #31572C;">
-
-				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
-
-
-
-		      </div>
+			<div class="alert alert-success" role="alert" id="turnoAsignado" align="center" style="display:none;">
+		    	<h4 class="alert-heading">Gracias!</h4>
+		     	<p>El turno fue confirmado, te enviamos un mail con los datos.</p>
 		    </div>
-		  </div>
-		  <div id="idProgressBar" class="text-center" style="display:none;">
-	        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
-	            <span class="sr-only">Cargando...</span>
-	        </div>
-	       </div>
+
+			<div class="alert alert-danger" role="alert" id="errorAltaTurno" align="center" style="display:none;">
+			  	<h4 class="alert-heading">Error!</h4>
+			   	<p>Hubo un error al asignar el turno, vuelva a intentar en un momento</p>
+			</div>
+
+
+
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Nuevo turno</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <p id="parrafoConfirmacionTurno"></p>
+			      </div>
+			      <div class="modal-footer">
+			        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-primary">Confirmar</button> -->
+
+			        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()" style="width: 200px; background-color: #31572C;">
+
+					<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+
+
+
+			      </div>
+			    </div>
+			  </div>
+			  <div id="idProgressBar" class="text-center" style="display:none;">
+		        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+		            <span class="sr-only">Cargando...</span>
+		        </div>
+		       </div>
+			</div>
+
+			<div id="myModal3" class="modal" tabindex="-1">
+
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Atencion!</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <p id=>No encontramos el DNI ingresado.</p>
+			      </div>
+			      <div class="modal-footer">
+
+			        <input name="primeraVez" id="btnPrimeraVez" type="button" class="btn btn-secondary" value="Primera vez" onclick="primeraVez()" style="width: 200px; background-color: #31572C;">
+
+					<input name="volverAIntentar" id="btnVolverAIntentar" type="button" class="btn btn-secondary" value="Volver a intentar" onclick="volverAIntentar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+
+			      </div>
+			    </div>
+			  </div>
+			  <div id="idProgressBar" class="text-center" style="display:none;">
+		        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+		            <span class="sr-only">Cargando...</span>
+		        </div>
+		       </div>
+			</div>
 		</div>
 
 </body>

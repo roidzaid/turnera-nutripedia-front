@@ -15,26 +15,25 @@
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body>
-
-	<div style="text-align: center; margin: 20px;">
+<body class="m-0 vh-100 row justify-content-center align-items-center">
 		
-		<div style="display: inline-block; margin: 10px; vertical-align: top; width: 25%">
 			<div style="margin: 10px;">
 				
-				<div id=divFoto style="width: 18rem; display: inline-block;">
+				<h3 style="color: #31572C; display: inline-block;">Foto perfil</h3>
+
+				<div title="Actualizar foto" align="center"; style="display: inline-block; vertical-align: top;">
+					<i onclick="actualizarFoto()"class="material-icons button edit" style="cursor: pointer;">edit</i></div>
+
+				<div id=divFoto style="width: 18rem;">
 				  <img id="foto" class="card-img-top" alt="Foto perfil">
 				</div>
 				
-				<div title="Actualizar foto" align="center"; style="display: inline-block; vertical-align: top;">
-					<i onclick="actualizarFoto()"class="material-icons button edit" style="cursor: pointer;">edit</i></div>
+				
 			</div>
 
-		</div>
+		<div>
 
-		<div style="display: inline-block; margin: 10px; vertical-align: top; width: 65%; text-align: start;">
-
-				<h3 style="color: #31572C; display: inline-block;">Datos personales</h3>
+				<h3 style="color: #31572C; display: inline-block; margin: 10px;">Datos personales</h3>
 
 				<div title="Modificar datos personales" align="center"; style="display: inline-block;">
 					<i onclick="ModifDatos()"class="material-icons button edit" style="cursor: pointer;">edit</i></div>
@@ -102,87 +101,30 @@
 			      <input type="text" class="form-control" id="instagram" placeholder="Instagram"; disabled>
 			    </div>
 			  </div>
-
-			  <!-- <div class="form-group row">
-			    <label for="valorConsulta" class="col-sm-3 col-form-label" style="text-align: left;">Valor de la consulta</label>
-			    <div class="col-sm-7">
-			      <input type="text" class="form-control" id="valorConsulta" placeholder="Valor de la consulta"; disabled>
-			    </div>
-			  </div> -->
-			
 			</div>
-			
-		</div>
-
-		<!-- <div style="margin: 10px;">
-
-			<div style="margin: 20px; text-align: left;">
-
-				<h3 style="color: #31572C; display: inline-block;">Horarios</h3>
-
-				<div title="Agregar horarios" align="center"; style="display: inline-block;">
-					<i onclick="irAgregarHorarios()"class="material-icons" style="cursor: pointer;">add</i></div>
-
-				<div id="tHorarios" class="form-group row">
-				   <table id="tabHorarios" class="table">
-						<thead>
-							<tr>
-								<th style="display: none;">idHorario</th>
-								<th>Día</th>
-								<th>Horario</th>
-								<th>Tipo de turno</th>
-								<th>Duración de turno</th>
-								<th></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody id="tbodyHorarios"></tbody>
-					</table>	
-				</div>
-			</div>
-			
-		</div> -->
-
-		<!-- <div style="margin: 10px;">
-
-			<div style="margin: 20px; text-align: left;">
-
-				<h3 style="color: #31572C; display: inline-block;">Valor de las consultas</h3>
-
-				<div title="Agregar valores" align="center"; style="display: inline-block;">
-					<i onclick="irAgregarValorConsulta()"class="material-icons" style="cursor: pointer;">add</i></div>
-
-				<div id="tHorarios" class="form-group row">
-				   <table id="tabValorConsulta" class="table">
-						<thead>
-							<tr>
-								<th id="idValorConsulta" style="display: none;">idValorConsulta</th>
-								<th>Tipo de Consulta</th>
-								<th>Valor</th>
-								<th></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody id="tbodyValorConsulta"></tbody>
-					</table>	
-				</div>
-			</div>
-			
-		</div> -->
-
-	</div>
+	
 
 
 
 	<script type="text/javascript">
 		$(document).ready(function () {
+			
+			if (sessionStorage.getItem("token") == null){
+				salir();
+			}
+
+			debugger;
+			var token = sessionStorage.getItem("token");
+
 			debugger;
 
-			var idProfesional = sessionStorage.getItem("idProfesional");
+			//var idProfesional = sessionStorage.getItem("idProfesional");
+
+			var usuario = sessionStorage.getItem("usuario");
 
 			$.ajax({
 				type: "GET",
-				url: host + "profesionales/id/"+idProfesional,
+				url: host + "profesionales/usuario/"+usuario,
 				headers: {
 					//"Authorization": token,
 					"Content-Type":"application/json"

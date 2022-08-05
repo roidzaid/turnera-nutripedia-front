@@ -137,7 +137,16 @@
 	</div>
 
 	<script type="text/javascript">
+		
 		$(document).ready(function () {
+
+			if (sessionStorage.getItem("token") == null){
+				salir();
+			}
+
+			debugger;
+			var token = sessionStorage.getItem("token");
+	
 			debugger;
 
 			var idProfesional = sessionStorage.getItem("idProfesional");

@@ -9,6 +9,13 @@ function Cancelar(){
 
 function guardarHorario(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var datosOk = true;
@@ -68,7 +75,7 @@ function guardarHorario(){
 			type: "PUT",
 			url: host + "profesionales/horario/"+idProfesional,
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -138,6 +145,13 @@ function irModifHorarios() {
 
 function modifHorario(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var datosOk = true;
@@ -201,7 +215,7 @@ function modifHorario(){
 			type: "PUT",
 			url: host + "horarios/"+idHorario,
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -252,13 +266,21 @@ function modifHorario(){
 
 
 function buscarTodosLosTiposDeTurno(){
+	
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 			
 		$.ajax({
 			type: "GET",
 			url: host + "tipoTurno/all",
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)

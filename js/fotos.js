@@ -11,6 +11,13 @@ function Cancelar(){
 
 function guardarFoto(){
 
+    if (sessionStorage.getItem("token") == null){
+        salir();
+    }
+
+    debugger;
+    var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var paramstr = window.location.search.substr(1);
@@ -102,6 +109,13 @@ function guardarFoto(){
 
 function buscarFoto(){
 
+    if (sessionStorage.getItem("token") == null){
+       salir();
+    }
+
+    debugger;
+    var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var idProfesional = $("#idProfesional").val()
@@ -112,7 +126,7 @@ function buscarFoto(){
 		type: "GET",
 		url: host + "fotos/"+idProfesional,
 		headers: {
-			//"Authorization": token,
+			"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -120,6 +134,7 @@ function buscarFoto(){
 			debugger;
 
 			//var foto="imagenes/"+response;
+            //cambiar con barra para subir a prod
             var foto="/imagenes/"+response;
 			
 			$("#foto").attr("src", foto);

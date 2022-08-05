@@ -4,6 +4,14 @@ function buscarTurno(){
 
 }
 
+
+function buscarMisDatos(){
+	window.location = "buscarPaciente.html?dni="+$("#dni").val();
+
+}
+
+
+
 function Cancelar(){
 
 	window.location = "index.html";
@@ -22,11 +30,11 @@ function buscarMisTurnos(){
 
 }
 
-function registrarse(){
+/*function registrarse(){
 
 	window.location = "altaProfesional.html";
 
-}
+}*/
 
 
 

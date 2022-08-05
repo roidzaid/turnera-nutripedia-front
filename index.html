@@ -11,32 +11,26 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 </head>
-<body background="imagenes/logo NUTRIPEDIA.jpeg" style="background-repeat: no-repeat; background-position-x: center";>
+<body class="m-0 vh-100 row justify-content-center align-items-center">
 
-	<div style="text-align: right; margin: 10px">
+	<div class="col-auto p-5 text-center" style="text-align: center; margin: 0; padding: 0">
 
-		<input name="pacientes" id="btnPacientes" type="button" class="btn btn-secondary" value="Pacientes" onclick="index()" style="width: 200px; 
-			background-color: #31572C;">
+		<img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png">
 
-		<input name="profesionales" id="btnProfesionales" type="button" class="btn btn-secondary" value="Profesionales" onclick="login()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
+		<div style="margin: 20px">
+			<a href="https://www.instagram.com/espacionutripedia/"><img src="imagenes/instagram.png" style="width: 40px; margin-right: 10px">@espacionutripedia</a>
+		</div>
 
-	</div>
-
-	<div style="text-align: center; margin-top: 400px;">
-		<a href="https://www.instagram.com/espacionutripedia/"><img src="imagenes/instagram.png" style="width: 40px; margin-right: 10px">@espacionutripedia</a>
-	</div>
-
-	<div style="text-align: center; margin-top: 50px;">
-	
-		<input name="buscarTurno" id="btnBuscarTurno" type="button" class="btn btn-secondary" value="Pedir turno" onclick="buscarTurno()" style="width: 200px; background-color: #31572C;">
-
-		<input name="misTurnos" id="btnMisTurnos" type="button" class="btn btn-secondary" value="Mis turnos" onclick="buscarMisTurnos()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
+		<div style="margin: 20px">
 		
-	</div>
+			<input name="buscarTurno" id="btnBuscarTurno" type="button" class="btn btn-secondary" value="Pedir turno" onclick="buscarTurno()" style="width: 200px; background-color: #31572C;">
 
+			<input name="misTurnos" id="btnMisTurnos" type="button" class="btn btn-secondary" value="Mis turnos" onclick="buscarMisTurnos()" style="width: 200px; background-color: white; border-color: #90A955; color: black; margin: 10px">
 
-	
-
+			<input name="misTurnos" id="btnMisDatos" type="button" class="btn btn-secondary" value="Mis datos" onclick="buscarMisDatos()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
+			
+		</div>
+	</div>	
 
 </body>
 

@@ -48,7 +48,9 @@ function buscarPaciente(){
 			
 			if(status == 400 || status != 401){
 				debugger;
-				window.location = "altaPacientes.html?dni="+$("#dni").val();
+				//window.location = "altaPacientes.html?dni="+$("#dni").val();
+
+				$('#myModal3').modal('show');	
 
 
 			}else{
@@ -58,6 +60,19 @@ function buscarPaciente(){
 
 		}
 	});
+}
+
+function primeraVez() {
+	
+	$('#myModal3').modal('hide');	
+	window.location = "altaPacientes.html?dni="+$("#dni").val();
+	
+
+}
+
+function volverAIntentar(){
+
+	$('#myModal3').modal('hide');
 }
 
 function guardarPaciente(){
@@ -226,13 +241,111 @@ function confirmarDatosPersonales(){
 				}
 			});
 	
+
+}
+
+function modifcarDatosPaciente(){
+
+	$("#datosPersonales").prop('disabled', false);
+	$("#botones").prop('disabled', false);
+	$("#idPaciente").prop('disabled', false);
+	$("#nombre").prop('disabled', false);
+	$("#apellido").prop('disabled', false);
+	$("#dniBD").prop('disabled', false);
+	$("#fechaNac").prop('disabled', false);
+	$("#direccion").prop('disabled', false);
+	$("#localidad").prop('disabled', false);
+	$("#telefono").prop('disabled', false);
+	$("#mail").prop('disabled', false);
+
+	$("#btnconfirmarDatosPersonales").css("display", "none");	
+	$("#btnModifcarDatosPaciente").css("display", "none");	
+    $("#btnGuardarModifcarDatosPaciente").css("display", "inline-block");	
+
+}
+
+
+function guardarModifcarDatosPaciente() {
 	
+	debugger;
+
+	var datosOk = true;
+	if($("#nombre").val() == "" || $("#apellido").val() == "" || $("#dni").val()== "" || $("#fechaNac").val()== "" || $("#direccion").val()== "" || $("#localidad").val()== "" || $("#telefono").val()== "" || $("#mail").val()== ""){
+		datosOk = false;
+		$('#errorPaciente').css('display', 'block');
+       		$("#errorPaciente").fadeTo(2000, 500).slideUp(500, function(){
+       		$("#errorPaciente").slideUp(500);
+       		});
+	}
+
+	if(datosOk){
+		debugger;
+
+		var paciente = {
+			idPaciente:$("#idPaciente").val(),
+			nombre:$("#nombre").val().toUpperCase(),
+			apellido:$("#apellido").val().toUpperCase(),
+			dni:$("#dniBD").val().toUpperCase(),
+			fechaNac:$("#fechaNac").val().toUpperCase(),
+			direccion:$("#direccion").val().toUpperCase(),
+			localidad:$("#localidad").val().toUpperCase(),
+			telefono:$("#telefono").val().toUpperCase(),
+			mail:$("#mail").val().toUpperCase()
+			
+		}
+
+		JSON.stringify(paciente);
+
+		debugger;
+		$.ajax({
+			type: "PUT",
+			url: host + "pacientes",
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				debugger;
+
+				$('#pacienteOk').css('display', 'block');
+			      	$("#pacienteOk").fadeTo(2000, 500).slideUp(500, function(){
+			      	$("#pacienteOk").slideUp(500);
+			      	
+			      	location.reload();
+			       	
+			       	});
 
 
+		       	
+			},
 
-	//window.location = "confirmarTurno.html";
+			dataType: "json",
+			data: JSON.stringify(paciente),
+
+			error: function(jqXHR, textStatus, errorThrown) {
+				debugger;
+
+				if(jqXHR.status == 500 || jqXHR.status == 501){
+					debugger;
+					datosOk = false;
+					$('#yaExiste').css('display', 'block');
+			       		$("#yaExiste").fadeTo(2000, 500).slideUp(500, function(){
+			       		$("#yaExiste").slideUp(500);
+			       		});
 
 
+				}else{
+					debugger;
+					datosOk = false;
+					$('#error').css('display', 'block');
+			       		$("#error").fadeTo(2000, 500).slideUp(500, function(){
+			       		$("#error").slideUp(500);
+			       		});
+				};
+			}
 
-
+		})
+		
+	};
 }

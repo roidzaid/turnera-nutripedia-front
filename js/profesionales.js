@@ -5,6 +5,13 @@ function inicio(){
 
 }
 
+function salir() {
+    debugger;
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
+    window.location = "login.html";
+}
+
 
 function ModifDatos(){
 
@@ -91,6 +98,14 @@ function licencias(){
 
 function guardarProfesional(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
+
 	debugger;
 
 	var datosOk = true;
@@ -104,7 +119,6 @@ function guardarProfesional(){
 
 	if(datosOk){
 		
-		
 	    debugger;
 
 		var profesional = {
@@ -115,7 +129,8 @@ function guardarProfesional(){
 			especialidad:$("#especialidad").val().toUpperCase(),
 			telefono:$("#telefono").val().toUpperCase(),
 			mail:$("#mail").val().toUpperCase(),
-			instagram:$("#instagram").val()
+			instagram:$("#instagram").val(),
+			usuario:sessionStorage.getItem("usuario")
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
@@ -126,7 +141,7 @@ function guardarProfesional(){
 			type: "POST",
 			url: host + "profesionales",
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -139,9 +154,12 @@ function guardarProfesional(){
 			      	$("#profesionalOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#profesionalOk").slideUp(500);
 
-			      	window.location = "crearUsuario.html?idProfesional="+response.idProfesional;
-
+			      	//window.location = "crearUsuario.html?idProfesional="+response.idProfesional;
 			      	//$('#myModalUsuario').modal('show');
+
+			      	sessionStorage.setItem("idProfesional", response.idProfesional);
+			      	window.location = "perfilProfesional.html?idProfesional="+response.idProfesional;;
+					
 			      	
 			      	
 			       	});
@@ -179,7 +197,7 @@ function guardarProfesional(){
 }
 
 
-function crearUsuario(){
+/*function crearUsuario(){
 
 	debugger;
 
@@ -277,26 +295,28 @@ function crearUsuario(){
 	};
 
 }
-
-function ingresar(){
+*/
+/*function ingresar(){
 
 	debugger;
 
-	var usuario = $("#usuario").val();
-	var contraseña = $("#contraseña").val();
+	var url = host + 'usuarios/login';
+	var credentials = $("#usuario").val() + ":" + $("#contraseña").val();
+    var auth = "Basic " + btoa(credentials);
 
 	
 	$.ajax({
 		type: "GET",
-		url: host + "usuarios/"+usuario+"/"+contraseña,
+		url: hostUsuarios + "usuarios/login",
 		headers: {
-			//"Authorization": token,
-			"Content-Type":"application/json"
-		},
+            'Authorization':auth,
+            'Content-Type':'application/json'
+        },
 		success: function(response)
 		{
 			debugger;
 			sessionStorage.setItem("idProfesional", response.idProfesional);
+			sessionStorage.setItem("token", "Bearer " + response);
 			window.location = "siteProfesional.html";
 		},
 		error: function(xhr, status, error) {
@@ -309,11 +329,18 @@ function ingresar(){
         }
 	});
 
-}
+}*/
 
 
 
 function modifProfesional(){
+
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
 
 	debugger;
 
@@ -350,7 +377,7 @@ function modifProfesional(){
 			type: "PUT",
 			url: host + "profesionales/"+idProfesional,
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -399,6 +426,14 @@ function modifProfesional(){
 }
 
 function buscarHorarios(idProfesional){
+	
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	//var idProfesional = $("#idProfesional").val()
@@ -409,7 +444,7 @@ function buscarHorarios(idProfesional){
 		type: "GET",
 		url: host + "horarios/diasDeAtencion/"+idProfesional,
 		headers: {
-			//"Authorization": token,
+			"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
@@ -438,13 +473,20 @@ function buscarHorarios(idProfesional){
 
 function deleteHorarios(idHorario){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 	
 	$.ajax({
 		type: "DELETE",
 		url: host + "horarios/"+idHorario,
 		headers: {
-			//"Authorization": token,
+			"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)

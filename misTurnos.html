@@ -14,42 +14,41 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
-<body>
+<body class="m-0 vh-100 row justify-content-center align-items-center">
 
-	<h3 style="text-align: center; margin-top: 20px; color: #31572C">MIS TURNOS</h3>
-	
-	<hr />
-	
-	<div style="margin:10px;">
+	<div class="col-auto p-8 text-center" style="text-align: center; margin: 0; padding: 0">
+			
+		<h3 style="text-align: center; margin-top: 20px; color: #31572C">MIS TURNOS</h3>
 
-		<div style="width: 50%; margin-left: 25%;">
+		<h5 style="color: #31572C">Por favor ingrese el DNI y buscaremos sus turnos pendientes</h5>
+		
+		<div>
 
-			<h5 style="color: #31572C">Por favor ingrese el DNI y buscaremos sus turnos pendientes</h5>
-		</div>
-
-		<div style="width: 50%; margin-left: 25%;">
-
-		  <div class="form-group row">
-		    <!-- <label for="dni" class="col-sm-2 col-form-label">DNI</label> -->
-		    <div class="col-sm-7">
-		      <input id="dni" class="form-control" type="text" placeholder="Ingresar DNI">
+		    <div class="col-sm-12" style="margin-top: 20px;">
+		     	<input id="dni" class="form-control" type="text" placeholder="Ingresar DNI">
 		    </div>
-		    <div class="col-sm-4">
-		      <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Buscar" style="width: 200px; background-color: #31572C;" onclick="misTurnos()">
-		    </div>
-		  </div>
+
+
+			<div style="text-align: center; margin-top: 30px;">
+		
+				<input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Buscar" style="width: 200px; background-color: #31572C;" onclick="misTurnos()">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black; margin: 10px;">
+			
+			</div>
+
 
 		  
 		</div>
 
-		<div id="sinTurnos" style="display: none; width: 50%; margin-left: 25%;">
+		<div id="sinTurnos" style="display: none;">
 			<p>No tiene turnos pendientes</p>
 			<div id="btnOk" style="margin-top: 2%;">
 				<input name="Ok" id="btnOk" type="button" class="btn btn-secondary" value="Ok" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
 			</div>
 		</div>
 
-	 	<div id="misTurnos" style="display: none; width: 50%; margin-left: 25%;">
+	 	<div id="misTurnos" style="display: none;">
 
 		 	 <div id="tMisTurnos" class="form-group row" style="margin-bottom: 5px; margin: 20px; display: none">
 			   <table id="tabMisTurnos" class="table">

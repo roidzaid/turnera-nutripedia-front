@@ -24,13 +24,21 @@ function cancelarLicencia(){
 
 
 function buscarLicencias(idProfesional){
+	
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	$.ajax({
 			type: "GET",
 			url: host + "licencias/lista/"+idProfesional,
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -56,13 +64,21 @@ function buscarLicencias(idProfesional){
 
 
 function buscarLicencia(idProfesional, idLicencia){
+	
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	$.ajax({
 			type: "GET",
 			url: host + "licencias/"+idProfesional+"/"+idLicencia,
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -97,6 +113,13 @@ function buscarLicencia(idProfesional, idLicencia){
 
 function guardarLicencia(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var datosOk = true;
@@ -128,7 +151,7 @@ function guardarLicencia(){
 			type: "POST",
 			url: host + "licencias",
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -181,6 +204,13 @@ function guardarLicencia(){
 
 function modifLicencia(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var idProfesional = $("#idProfesional").val()
@@ -215,7 +245,7 @@ function modifLicencia(){
 			type: "PUT",
 			url: host + "licencias/"+idProfesional+"/"+idLicencia,
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -267,6 +297,12 @@ function modifLicencia(){
 
 function deleteLicencia(idProfesional, idLicencia){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
 
 	debugger;
 	
@@ -274,7 +310,7 @@ function deleteLicencia(idProfesional, idLicencia){
 		type: "DELETE",
 		url: host + "licencias/"+idProfesional+"/"+idLicencia,
 		headers: {
-			//"Authorization": token,
+			"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)

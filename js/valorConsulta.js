@@ -38,6 +38,13 @@ function buscarTipoTurnoValorConsulta(idProfesional){
 
 function guardarValorConsulta(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var datosOk = true;
@@ -52,10 +59,10 @@ function guardarValorConsulta(){
 	if(datosOk){
 		
 	    debugger;
-
+	    
 		var valorTurnoModel = {
 			idValorConsulta:"",
-			idProfesional:sessionStorage.getItem("sessionStorage_idProfesional"),
+			idProfesional:sessionStorage.getItem("idProfesional"),
 			tipoConsulta:$("#comboTipoTurno").val().toUpperCase(),
 			valorConsulta:$("#valorConsulta").val(),
 			
@@ -68,7 +75,7 @@ function guardarValorConsulta(){
 			type: "POST",
 			url: host + "valorConsulta",
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -159,6 +166,13 @@ function irModifValorConsulta(idValorConsulta){
 
 function modifValorConsulta(){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	debugger;
 
 	var datosOk = true;
@@ -171,7 +185,7 @@ function modifValorConsulta(){
 	}
 
 	if(datosOk){
-		
+
 	    debugger;
 
 		var valorTurnoModel = {
@@ -189,7 +203,7 @@ function modifValorConsulta(){
 			type: "PUT",
 			url: host + "valorConsulta/"+$("#idValorConsulta").val(),
 			headers: {
-				//"Authorization": token,
+				"Authorization": token,
 				"Content-Type":"application/json"
 			},
 			success: function(response)
@@ -254,6 +268,13 @@ function cancelarValorConsulta(){
 
 function deleteValorConsulta(idValorConsulta){
 
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+
 	var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 
 	debugger;
@@ -262,7 +283,7 @@ function deleteValorConsulta(idValorConsulta){
 		type: "DELETE",
 		url: host + "valorConsulta/"+idValorConsulta,
 		headers: {
-			//"Authorization": token,
+			"Authorization": token,
 			"Content-Type":"application/json"
 		},
 		success: function(response)
