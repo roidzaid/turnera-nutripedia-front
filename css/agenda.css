@@ -1,0 +1,45 @@
+i{
+    color: #1841183b;
+    cursor: pointer;    
+}
+
+
+i:hover {
+    color: #31572C;
+
+}
+
+
+#idFiltroFecha{
+     cursor: pointer;  
+     max-width: 500px;
+     margin: 10px;
+}
+
+#idFiltroFecha:hover{
+    background: #1841183b;
+}
+
+
+#tAgenda {
+  overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+
+#tabAgenda {
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+  border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+#tabAgenda th,
+#tabAgenda td {
+  padding: 8px;
+}
+
+/* Cambiar el tamaño de fuente y reducir el relleno en pantallas pequeñas */
+@media (max-width: 768px) {
+  #tabAgenda th,
+  #tabAgenda td {
+    font-size: 14px;
+    padding: 6px;
+  }
+}

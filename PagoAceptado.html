@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Espacio Nutripedia</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/buscarTurno.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/pago.css">
+
+</head>
+<body>
+
+
+	<div class="alert alert-success" role="alert" id="Aceptado" align="center" style="display:none;">
+    	<h4 class="alert-heading">Su pago ya fue aceptado!</h4>
+     	<p>El turno fue confirmado, te enviamos un mail con los datos del turno</p>
+    </div>
+
+
+	<div class="alert alert-danger" role="alert" id="errorRegistrarPago" align="center" style="display:none;">
+	    	<h4 class="alert-heading">Error!</h4>
+	     	<p>Hubo un error en el registro del pago.</p>
+      </div>
+
+
+
+	<div id="idContainerPago">
+		<div id="idPagoForm">
+
+			<img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png" class="img-fluid" alt="Logo Nutripedia">
+
+
+			<div>
+			
+				<input name="buscarTurno" id="btnBuscarTurno" type="button" class="btn btn-secondary" value="Pedir otro turno" onclick="buscarTurno()">
+
+				<input name="salir" id="btnSalir" type="button" class="btn btn-secondary" value="Salir" onclick="Cancelar()">
+				
+			</div>
+
+			<div id="idDivInstagram">
+			    <a id="idInstagram" href="https://www.instagram.com/espacionutripedia/"><img src="imagenes/instagram.png"></a>
+			</div>
+		</div>	
+	</div>
+
+	<div id="idProgressBar" class="text-center" style="display:none;">
+        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+            <span class="sr-only">Cargando...</span>
+        </div>
+       </div>
+
+</body>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+
+      debugger;
+		var paramstr = window.location.search.substr(1);
+ 		var paramarr = paramstr.split ("&");
+ 		var params = {};
+
+    	for ( var i = 0; i < paramarr.length; i++) {
+        	var tmparr = paramarr[i].split("=");
+        	params[tmparr[0]] = tmparr[1];
+    	}
+
+    	var payment_id = params["payment_id"]
+    	var status = params["status"]
+        	
+
+
+      	var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
+
+		var partsArray = idHorarioYFecha.split('-');
+		var idHorario = partsArray[0];
+		var fec = partsArray[1]+"-"+partsArray[2]+"-"+partsArray[3];
+
+		debugger;
+
+
+		if(status == "approved"){
+			var estadoPago = "APROBADO"
+		}else{
+			var estadoPago = "PENDIENTE"
+		}
+
+
+		var registroEstadoPago = {
+			idTurno:sessionStorage.getItem("sessionStorage_idTurno"),
+			idPago:payment_id,
+			estado:estadoPago,
+		}
+
+
+
+		JSON.stringify(registroEstadoPago);
+
+		debugger;
+		$.ajax({
+			type: "POST",
+			url: hostPagos + "cobros/registroPago",
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+
+				debugger;
+
+				//confirmarTurno(status, payment_id);
+
+				confirmarPago(sessionStorage.getItem("sessionStorage_idTurno"), payment_id, estadoPago);
+
+				$('#idProgressBar').css('display', 'none');
+				
+				$('#Aceptado').css('display', 'block');
+		       		$("#Aceptado").fadeTo(4000, 500).slideUp(500, function(){
+		       		$("#Aceptado").slideUp(500);
+		       		//window.location = "index.html";
+		       		});
+				
+
+			},
+
+			dataType: "json",
+			data: JSON.stringify(registroEstadoPago),
+
+			error: function(jqXHR, textStatus, errorThrown) {
+				debugger;
+
+				$('#idProgressBar').css('display', 'none');
+				
+				$('#errorRegistrarPago').css('display', 'block');
+		       		$("#errorRegistrarPago").fadeTo(2000, 500).slideUp(500, function(){
+		       		$("#errorRegistrarPago").slideUp(500);
+		       		window.location = "index.html";
+		       		});
+
+
+			}
+		})
+
+      });
+</script>
+
+</html>

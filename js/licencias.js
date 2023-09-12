@@ -17,7 +17,8 @@ function irModifLicencia(idProfesional, idLicencia){
 
 function cancelarLicencia(){
 
-	window.location = "misLicencias.html";
+	//window.location = "misLicencias.html";
+	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
 
 
 }
@@ -164,8 +165,8 @@ function guardarLicencia(){
 			      	$("#avisoOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#avisoOk").slideUp(500);
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-			      	window.location = "misLicencias.html";
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "misLicencias.html";
 			      	
 			       	});
 			},
@@ -258,8 +259,8 @@ function modifLicencia(){
 			      	$("#avisoOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#avisoOk").slideUp(500);
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-			      	window.location = "misLicencias.html";
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "misLicencias.html";
 			      	
 			       	});
 			},

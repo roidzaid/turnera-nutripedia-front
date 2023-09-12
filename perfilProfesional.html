@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html style="height: 70%;">
+<html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/profesionales.js"></script>
 	<script src="js/fotos.js"></script>
+	<script src="js/valorConsulta.js"></script>
+	<script src="js/horarios.js"></script>
+	<script src="js/licencias.js"></script>
 	<script src="js/valorConsulta.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -14,98 +18,245 @@
 
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" type="text/css" href="css/perfil.css">
 </head>
-<body class="m-0 vh-100 row justify-content-center align-items-center">
+<body style="margin:5px; padding:0">
+
+<!-- foto -->
 		
-			<div style="margin: 10px;">
-				
-				<h3 style="color: #31572C; display: inline-block;">Foto perfil</h3>
+	<div id="idDatosPersonales">
+		<div id="idBloqueFoto">
+		
+			<div id="idBloqueTitulo">
+				<h3 id="idFotoTitulo">Foto perfil</h3>
 
-				<div title="Actualizar foto" align="center"; style="display: inline-block; vertical-align: top;">
-					<i onclick="actualizarFoto()"class="material-icons button edit" style="cursor: pointer;">edit</i></div>
-
-				<div id=divFoto style="width: 18rem;">
-				  <img id="foto" class="card-img-top" alt="Foto perfil">
+				<div id="idEditFoto" title="Actualizar foto" align="center">
+					<i onclick="actualizarFoto()"class="material-icons button edit">edit</i>
 				</div>
-				
-				
+			</div>	
+
+			<div id=divFoto>
+			  <img id="foto" class="card-img-top" alt="Foto perfil">
+			</div>
+			
+			
+		</div>
+
+<!-- Datos profesional -->
+		<div id="idBloqueDatos">
+
+			<div id="idBloqueTitulo">
+				<h3 id="idDatosTitulo">Datos personales</h3>
+
+				<div id="idEditDatos" title="Modificar datos personales" align="center";>
+					<i onclick="ModifDatos()"class="material-icons button edit">edit</i></div>
 			</div>
 
-		<div>
-
-				<h3 style="color: #31572C; display: inline-block; margin: 10px;">Datos personales</h3>
-
-				<div title="Modificar datos personales" align="center"; style="display: inline-block;">
-					<i onclick="ModifDatos()"class="material-icons button edit" style="cursor: pointer;">edit</i></div>
-
-			  <div class="form-group row" style="margin-bottom: 5px; display: none;">
-			    <label for="idProfesional" class="col-sm-3 col-form-label" style="text-align: left;">Nombre</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="idProfesional" placeholder="idProfesional"; disabled>
+			<div id="idBloqueCampos">
+			  <div id="idCamposDatos" style="display: none;">
+			    <label id="idLabelDatos" for="idProfesional" style="text-align: left;">idProfesional</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="idProfesional" placeholder="idProfesional"; disabled>
 			    </div>
 			  </div>
 
-
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="nombre" class="col-sm-3 col-form-label" style="text-align: left;">Nombres</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="nombre" placeholder="Nombre"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="nombre">Nombres</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="nombre" placeholder="Nombre"; disabled>
 			    </div>
 			  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="apellido" class="col-sm-3 col-form-label" style="text-align: left;">Apellido</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="apellido" placeholder="Apellido"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="apellido">Apellido</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="apellido" placeholder="Apellido"; disabled>
 			    </div>
 			  </div>
 			  
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="dni" class="col-sm-3 col-form-label" style="text-align: left;">DNI</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="dni" placeholder="DNI"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="dni" >DNI</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="dni" placeholder="DNI"; disabled>
 			    </div>
 			  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="matricula" class="col-sm-3 col-form-label" style="text-align: left;">Matrícula</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="matricula" placeholder="Matricula"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="matricula">Matrícula</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="matricula" placeholder="Matricula"; disabled>
 			    </div>
 			  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="especialidad" class="col-sm-3 col-form-label" style="text-align: left;">Especialidad</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="especialidad" placeholder="Especialidad"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="especialidad">Especialidad</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="especialidad" placeholder="Especialidad"; disabled>
 			    </div>
 			  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="telefono" class="col-sm-3 col-form-label" style="text-align: left;">Teléfono</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="telefono" placeholder="Telefono"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="telefono">Teléfono</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="telefono" placeholder="Telefono"; disabled>
 			    </div>
 			  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="mail" class="col-sm-3 col-form-label" style="text-align: left;">Mail</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="mail" placeholder="Mail"; disabled>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="mail">Mail</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="mail" placeholder="Mail"; disabled>
 			    </div>
 			  </div>
 
-			   <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="instagram" class="col-sm-3 col-form-label" style="text-align: left;">Instagram</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="instagram" placeholder="Instagram"; disabled>
+			   <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="instagram">Instagram</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="instagram" placeholder="Instagram"; disabled>
+			    </div>
+			  </div>
+
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="aliasMP">Alias MP</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="aliasMP" placeholder="Alias Mercado Pago"; disabled>
 			    </div>
 			  </div>
 			</div>
+		</div>
+
+	</div>
+
+<!-- Horarios -->
+	<div id="idBloqueTablas">
+
+		
+		<div id="idBloqueHorarios">
+
+			<div id="idBloqueTitulo">
+				<h3 id="idDatosTitulo">Horarios</h3>
+
+				
+				<div id="idEditDatos" title="Agregar horarios" align="center">
+					<i onclick="irAgregarHorarios()"class="material-icons" style="cursor: pointer;">add</i></div>
+			</div>
+
+			
+			<div id="tHorarios" class="form-group row">
+			   <table id="tabHorarios" class="table">
+					<thead>
+						<tr>
+							<th style="display: none;">idHorario</th>
+							<th>Día</th>
+							<th>Horario</th>
+							<th>Tipo de turno</th>
+							<th>Duración de turno</th>
+							<th>Eventual</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="tbodyHorarios"></tbody>
+				</table>	
+			</div>
+		</div>
+		
+		
+		
 	
 
+		<div id="myModalModifHorarios" class="modal" tabindex="-1">
 
 
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Modificación de horarios!</h5>
+   		      </div>
+		      <div class="modal-body">
+		        <p id="parrafoConfirmacion">Si modificás un horario ya establecido, recordá volver a asignar los turnos otorgados ese día, para evitar turnos duplicados </p>
+		      </div>
+		      <div class="modal-footer">
+
+		        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="irModifHorarios()">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="CancelarIrModifHorarios()()">
+
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div id="idProgressBarModal" class="text-center" style="display:none;">
+		        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+		            <span class="sr-only">Cargando...</span>
+		        </div>
+		   </div>
+		</div>
+
+<!-- Licencias -->
+
+		
+
+		<div id="idBloqueLicencias">
+
+			<div id="idBloqueTitulo">
+				<h3 id="idDatosTitulo">Licencias</h3>
+
+				
+				<div id="idEditDatos" title="Agregar horarios" align="center"; style="display: inline-block;">
+				<i onclick="irAgregarLicencias()"class="material-icons" style="cursor: pointer;">add</i></div>
+			</div>
+
+
+			<div id="tLicencias" class="form-group row">
+			   <table id="tabLicencias" class="table">
+					<thead>
+						<tr>
+							<th style="display: none;">idHorario</th>
+							<th style="display: none;">idprofesiona</th>
+							<th>Fecha desde</th>
+							<th>Fecha Hasta</th>
+							<th>Motivo de licencia</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="tbodyLicencias"></tbody>
+				</table>	
+			</div>
+		</div>
+
+<!-- Honorarios -->
+		<div id="idBloqueHonorarios">
+
+			<div id="idBloqueTitulo">
+				<h3 id="idDatosTitulo">Honorarios</h3>
+
+				
+				<div id="idEditDatos" title="Agregar valores" align="center"; style="display: inline-block;">
+				<i onclick="irAgregarValorConsulta()"class="material-icons" style="cursor: pointer;">add</i></div>
+			</div>
+
+
+			<div id="tHonorarios" class="form-group row">
+			   <table id="tabHonorarios" class="table">
+					<thead>
+						<tr>
+							<th id="idValorConsulta" style="display: none;">idValorConsulta</th>
+							<th>Tipo de Consulta</th>
+							<th>Valor</th>
+							<th>Seña</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="tbodyValorConsulta"></tbody>
+				</table>	
+			</div>
+		</div>
+			
+		
+	</div>
+<!-- buscar datos profesional -->
 	<script type="text/javascript">
 		$(document).ready(function () {
 			
@@ -146,6 +297,7 @@
 					$("#mail").val(response.mail);
 					$("#valorConsulta").val(response.valorConsulta);
 					$("#instagram").val(response.instagram);
+					$("#aliasMP").val(response.aliasMP);
 
 					//buscarHorarios(idProfesional);
 					debugger;
@@ -153,8 +305,16 @@
 					buscarFoto();
 					debugger;		
 
-					//buscarValoresDeConsultas(idProfesional);			
+					//buscarValoresDeConsultas(idProfesional);		
+
+					buscarHorarios(response.idProfesional);
+					debugger;	
+
+					buscarLicencias(response.idProfesional);
+					debugger;
 			
+					buscarValoresDeConsultas(response.idProfesional);
+					debugger;
 
 				},
 
@@ -179,47 +339,43 @@
 
 	</script>
 
-	<!-- <script type="text/javascript">
+<!-- Buscar horarios
+	<script type="text/javascript">
 		$(document).ready(function () {
 			debugger;
 
-			var idProfesional = $("#idProfesional").val()	
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 
+			buscarHorarios(idProfesional);
+			debugger;
+		});
+	</script>
 
+	Buscar Licencias
+	<script type="text/javascript">
+		$(document).ready(function () {
 			debugger;
 
-			$.ajax({
-				type: "GET",
-				url: host + "horarios/diasDeAtencion/"+idProfesional,
-				headers: {
-					//"Authorization": token,
-					"Content-Type":"application/json"
-				},
-				success: function(response)
-				{
-					debugger;
-					$("#comboFecha").append('<option value="">Fechas disponibles</option>');
-					for (var i = 0; i < response.length; i++) {
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 
-						debugger;
-						var idHorario = list[i].idHorario;
-						var dia = list[i].diaDeSemana;
-						var horario = response[i].horaDesde+ " a " + response[i].horaHasta;
-						var tipoTurno = list[i].tipoTurno;
-						var duracion = list[i].duracionTurnos;
-						debugger;
-
-						$("#tbodyMisTurnos").append('<tr><td>'+idHorario+'</td><td>'+dia+'</td><td>'+horario+'</td><td>'+tipoTurno+'</td><td>'+duracion+'</td></tr>');
-						
-					}
-				}
-			});
-
-
+			buscarLicencias(idProfesional);
+			debugger;
 		});
+	</script>
 
+	Buscar Honorarios
+	<script type="text/javascript">
+		$(document).ready(function () {
+			debugger;
+
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+
+			buscarValoresDeConsultas(idProfesional);
+			debugger;
+		});
 	</script> -->
-	
+
+
 </body>
 
 </html>

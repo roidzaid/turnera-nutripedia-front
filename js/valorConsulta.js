@@ -62,9 +62,10 @@ function guardarValorConsulta(){
 	    
 		var valorTurnoModel = {
 			idValorConsulta:"",
-			idProfesional:sessionStorage.getItem("idProfesional"),
+			idProfesional:sessionStorage.getItem("sessionStorage_idProfesional"),
 			tipoConsulta:$("#comboTipoTurno").val().toUpperCase(),
 			valorConsulta:$("#valorConsulta").val(),
+			valorDeSeña:$("#valorDeSeña").val(),
 			
 		}
 
@@ -88,9 +89,9 @@ function guardarValorConsulta(){
 			      	$("#avisoOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#avisoOk").slideUp(500);
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-			      	window.location = "misValoresDeConsulta.html";
-			      	
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "misValoresDeConsulta.html";
+
 			       	});
 			},
 
@@ -145,10 +146,11 @@ function buscarValoresDeConsultas(idProfesional){
 					var idValorConsulta = response[i].idValorConsulta;
 					var tipoConsulta = response[i].tipoConsulta;
 					var valorConsulta = response[i].valorConsulta;
+					var valorDeSeña = response[i].valorDeSeña;
 					
 					debugger;
 
-					$("#tbodyValorConsulta").append('<tr><td style="display: none;">'+idValorConsulta+'</td><td>'+tipoConsulta+'</td><td>'+valorConsulta+'</td><<td colspan="2"><div align="center"><i onclick="irModifValorConsulta(\'' + idValorConsulta + '\')"class="material-icons button edit" style="margin-right:3px; cursor: pointer;">edit</i><i onclick="deleteValorConsulta(\'' + idValorConsulta + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
+					$("#tbodyValorConsulta").append('<tr><td style="display: none;">'+idValorConsulta+'</td><td>'+tipoConsulta+'</td><td>'+valorConsulta+'</td><td>'+valorDeSeña+'</td><<td colspan="2"><div align="center"><i onclick="irModifValorConsulta(\'' + idValorConsulta + '\')"class="material-icons button edit" style="margin-right:3px; cursor: pointer;">edit</i><i onclick="deleteValorConsulta(\'' + idValorConsulta + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
 				}
 			}
 		});
@@ -193,6 +195,7 @@ function modifValorConsulta(){
 			idProfesional:sessionStorage.getItem("sessionStorage_idProfesional"),
 			tipoConsulta:$("#comboTipoTurno").val().toUpperCase(),
 			valorConsulta:$("#valorConsulta").val(),
+			valorDeSeña:$("#valorDeSeña").val(),
 			
 		}
 
@@ -216,8 +219,8 @@ function modifValorConsulta(){
 			      	$("#avisoOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#avisoOk").slideUp(500);
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-			      	window.location = "misValoresDeConsulta.html";
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "misValoresDeConsulta.html";
 			      	
 			       	});
 			},
@@ -259,9 +262,9 @@ function modifValorConsulta(){
 function cancelarValorConsulta(){
 
 	//var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
-	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-
-	window.location = "misValoresDeConsulta.html";
+	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+s
+	//window.location = "misValoresDeConsulta.html";
 
 }
 

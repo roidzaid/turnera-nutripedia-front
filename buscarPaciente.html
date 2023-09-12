@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/pacientes.js"></script>
@@ -10,11 +11,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/buscarPaciente.css">
 
 </head>
-<body class="m-0 vh-100 row justify-content-center align-items-center">
+<body>
 
-	<div class="col-auto p-8 text-center" style="text-align: center; margin: 0; padding: 0">
+	<div  style="text-align: center;">
 
 		<div class="alert alert-success" role="alert" id="pacienteOk" align="center" style="display:none;">
 	    	<h4 class="alert-heading">Bien!</h4>
@@ -31,34 +33,47 @@
 	     	<p>El DNI ya existe en la base de datos</p>
 	    </div>
 
-		<h3 style="text-align: center; margin-top: 20px; color: #31572C">DATOS PERSONALES DE EL/LA PACIENTE</h3>
+		<h3 style="text-align: center; margin-top: 20px; color: #31572C">DATOS DEL PACIENTE</h3>
 		
 		<hr />
 		
 		<div style="margin:10px;">
 
-			<h5 style="color: #31572C; margin-top: 20px;">Por favor ingrese el DNI de el/la consultante.</h5>
+			<h5 style="color: #31572C; margin-top: 20px;">Por favor ingrese el DNI del paciente y verifiquelos.</h5>
 
 			    
-		    <div class="col-sm-12" style="margin-top: 20px;">
+		   <!--  <div class="col-sm-12" style="margin-top: 20px"; display="inline-block">
 		      <input id="dni" class="form-control" type="text" placeholder="Ingresar DNI">
-		    </div>
+		    </div> -->
 
+		    <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="dni" class="col-sm-3 col-form-label">DNI</label>
+			    <div class="col-sm-8" style="display: inline-block;">
+			      <input type="text" class="form-control" id="dni" placeholder="DNI">
+			      
+			      <div style="text-align: end; margin: 10px">
+					 <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Buscar" onclick="buscarPaciente()">
+				  </div>
 
-			<div style="text-align: center; margin-top: 30px;">
+			    </div>
+			    
+			 </div>
+
+<!-- 
+			<div style="text-align: end; margin: 10px">
 		
-				 <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Validar" style="width: 200px; background-color: #31572C;" onclick="buscarPaciente()">
+				 <input name="buscarPaciente" id="buscarPaciente" type="button" class="btn btn-secondary" value="Buscar" onclick="buscarPaciente()">
 
-				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black; margin: 10px;">
+				 <input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()">
 			
-			</div>
+			</div> -->
 
 		
 
-		 	<div id="datosPersonales" style="display: none;">
+		 	<div id="datosPersonales">
 
 			 	  
-		 	  	<h3 style="margin-bottom: 20px; color: #31572C">Verifique si los datos son correctos</h3>
+		 	  	<!-- <h3 style="margin-bottom: 20px; color: #31572C">Verifique si los datos son correctos</h3> -->
 			 	  
 
 			 	  <div class="form-group row" style="margin-bottom: 5px; display: none">
@@ -125,21 +140,23 @@
 				  </div>
 
 
-				  <div style="margin-top: 2%;">
-					<input name="confirmarDatosPersonales" id="btnconfirmarDatosPersonales" type="button" class="btn btn-secondary" value="Siguiente" onclick="confirmarDatosPersonales()" style="width: 200px; background-color: #31572C; margin-top: 20px;">
-
-					<input name="modifcarDatosPaciente" id="btnModifcarDatosPaciente" type="button" class="btn btn-secondary" value="Modificar datos" onclick="modifcarDatosPaciente()" style="width: 200px; background-color: #31572C; margin-top: 20px;">				
-
-					<input name="guardarModifcarDatosPaciente" id="btnGuardarModifcarDatosPaciente" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarModifcarDatosPaciente()" style="width: 200px; background-color: #31572C; margin-top: 20px; display: none;">				
-
-					<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; margin-top: 20px; border-color: #90A955; color: black;">
-				  </div>
 			
 			</div>
 
 		    	
 
 		</div>
+
+		 <div>
+			<input name="confirmarDatosPersonales" id="btnconfirmarDatosPersonales" type="button" class="btn btn-secondary" value="Siguiente" onclick="confirmarDatosPersonales()">
+
+			<input name="modifcarDatosPaciente" id="btnModifcarDatosPaciente" type="button" class="btn btn-secondary" value="Modificar datos" onclick="modifcarDatosPaciente()">		
+
+			<input name="guardarModifcarDatosPaciente" id="btnGuardarModifcarDatosPaciente" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarModifcarDatosPaciente()">				
+
+			<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()">
+		 </div>
+
 
 		<div id="myModal2" class="modal" tabindex="-1">
 
@@ -151,6 +168,11 @@
 			<div class="alert alert-danger" role="alert" id="errorAltaTurno" align="center" style="display:none;">
 			  	<h4 class="alert-heading">Error!</h4>
 			   	<p>Hubo un error al asignar el turno, vuelva a intentar en un momento</p>
+			</div>
+
+			<div class="alert alert-danger" role="alert" id="errorPagoReserva" align="center" style="display:none;">
+			  	<h4 class="alert-heading">Error!</h4>
+			   	<p>El pago fue rechazado. Por favor, verifique los datos y vuelva a intentarlo</p>
 			</div>
 
 
@@ -165,12 +187,13 @@
 			        <p id="parrafoConfirmacionTurno"></p>
 			      </div>
 			      <div class="modal-footer">
+			        
 			        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 			        <button type="button" class="btn btn-primary">Confirmar</button> -->
 
-			        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()" style="width: 200px; background-color: #31572C;">
+			        <input name="pagarSeña" id="btnPagarSeña" type="button" class="btn btn-secondary" value="Pagar" onclick="confirmarTurno()">
 
-					<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+					<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()">
 
 
 
@@ -197,9 +220,9 @@
 			      </div>
 			      <div class="modal-footer">
 
-			        <input name="primeraVez" id="btnPrimeraVez" type="button" class="btn btn-secondary" value="Primera vez" onclick="primeraVez()" style="width: 200px; background-color: #31572C;">
+			        <input name="primeraVez" id="btnPrimeraVez" type="button" class="btn btn-secondary" value="Primera vez" onclick="primeraVez()">
 
-					<input name="volverAIntentar" id="btnVolverAIntentar" type="button" class="btn btn-secondary" value="Volver a intentar" onclick="volverAIntentar()" style="width: 200px; margin-top: 5px; background-color: white; border-color: #90A955; color: black;">
+					<input name="volverAIntentar" id="btnVolverAIntentar" type="button" class="btn btn-secondary" value="Volver a intentar" onclick="volverAIntentar()">
 
 			      </div>
 			    </div>
@@ -210,6 +233,49 @@
 		        </div>
 		       </div>
 			</div>
+
+
+			<div id="myModal4" class="modal" tabindex="-1">
+
+				<div class="alert alert-success" role="alert" id="turnoAsignado" align="center" style="display:none;">
+			    	<h4 class="alert-heading">Gracias!</h4>
+			     	<p>El turno fue confirmado, te enviamos un mail con los datos.</p>
+			    </div>
+
+				<div class="alert alert-danger" role="alert" id="errorAltaTurno" align="center" style="display:none;">
+				  	<h4 class="alert-heading">Error!</h4>
+				   	<p>Hubo un error al asignar el turno, vuelva a intentar en un momento</p>
+				</div>
+
+
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">Nuevo turno</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        <p id="parrafoConfirmacionTurnosinMP"></p>
+				      </div>
+				      <div class="modal-footer">
+
+				        <input name="pagarSeña" id="btnPagarSeña" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarTurno()">
+
+						<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()">
+
+
+
+				      </div>
+				    </div>
+				  </div>
+				  <div id="idProgressBar" class="text-center" style="display:none;">
+			        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+			            <span class="sr-only">Cargando...</span>
+			        </div>
+			       </div>
+				</div>
+
+
 		</div>
 
 </body>

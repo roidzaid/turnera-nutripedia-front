@@ -42,6 +42,13 @@ function buscarPaciente(){
 			$("#telefono").prop('disabled', true);
 			$("#mail").prop('disabled', true);
 
+
+			if(sessionStorage.getItem("sessionStorage_idConfiguracionTurno") == ""){
+				$("#btnModifcarDatosPaciente").css("display", "inline-block");	
+				$("#btnconfirmarDatosPersonales").css("display", "none");	
+			}
+
+
 		},
 		dataType: "json",
 		error: function(xhr, status, error) {
@@ -181,14 +188,23 @@ function confirmarDatosPersonales(){
 					
 					var nombreProfesional = response.nombre;
 					var apellidoProfesional = response.apellido;
+					var especialidad = response.especialidad;
+					var mailProfesional = response.mail;
 
 					var idPaciente = sessionStorage.getItem("sessionStorage_IdPaciente");
+
+					if (especialidad == 'NUTRICION'){
+						var tipoConsulta = sessionStorage.getItem("sessionStorage_motivoConsulta")
+					}else{
+						var tipoConsulta = sessionStorage.getItem("sessionStorage_tipoConsulta")	
+					}
+
 
 					debugger;
 					
 					$.ajax({
 						type: "GET",
-						url: host + "pacientes/id/"+idPaciente,
+						url: host + "valorConsulta/valor/"+idProfesional+"/"+tipoConsulta,
 						headers: {
 							//"Authorization": token,
 							"Content-Type":"application/json"
@@ -197,25 +213,14 @@ function confirmarDatosPersonales(){
 						{
 							debugger;
 							
-							var nombrePaciente = response.nombre;
-							var apellidoPaciente = response.apellido;
-							var dniPaciente = response.dni;
+							var seña = response.valorDeSeña;
 
-							debugger;
-							var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
-
-							var partsArray = idHorarioYFecha.split('-');
-							var idHorario = partsArray[0];
-							var fecha = partsArray[1]+"-"+partsArray[2]+"-"+partsArray[3];
+							sessionStorage.setItem("sessionStorage_valorDeSeña", response.valorDeSeña);
 
 
-					        var idConfiguracionTurno = sessionStorage.getItem("sessionStorage_idConfiguracionTurno");
-
-							debugger;
-							
 							$.ajax({
 								type: "GET",
-								url: host + "horarios/configuracionTurno/"+idConfiguracionTurno,
+								url: host + "pacientes/id/"+idPaciente,
 								headers: {
 									//"Authorization": token,
 									"Content-Type":"application/json"
@@ -224,20 +229,92 @@ function confirmarDatosPersonales(){
 								{
 									debugger;
 									
-									var hora = response.hora;
+									var nombrePaciente = response.nombre;
+									var apellidoPaciente = response.apellido;
+									var mailPaciente = response.mail;
+									var dniPaciente = response.dni;
+
+
+									sessionStorage.setItem("sessionStorage_NombrePaciente", nombrePaciente);
+									sessionStorage.setItem("sessionStorage_ApellidoPaciente", apellidoPaciente);
+									sessionStorage.setItem("sessionStorage_MailPaciente", mailPaciente);
+
 
 									debugger;
-									$("#parrafoConfirmacionTurno").text("Por favor, confirme el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el/la consultante " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs");
+									var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
 
-									$('#myModal2').modal('show');
+									var partsArray = idHorarioYFecha.split('-');
+									var idHorario = partsArray[0];
+									var fecha = partsArray[1]+"-"+partsArray[2]+"-"+partsArray[3];
+
+
+							        var idConfiguracionTurno = sessionStorage.getItem("sessionStorage_idConfiguracionTurno");
+
+									debugger;
+									
+									$.ajax({
+										type: "GET",
+										url: host + "horarios/configuracionTurno/"+idConfiguracionTurno,
+										headers: {
+											//"Authorization": token,
+											"Content-Type":"application/json"
+										},
+										success: function(response)
+										{
+
+											var hora = response.hora;
+
+											debugger;
+
+											$.ajax({
+											type: "GET",
+											url: hostPagos + "cobros/buscarMP/"+idProfesional,
+											headers: {
+												//"Authorization": token,
+												"Content-Type":"application/json"
+											},
+
+											success: function(response)
+											{
+
+
+												if(mailPaciente == mailProfesional){
+
+													debugger;
+													$("#parrafoConfirmacionTurnosinMP").text("Por favor, confirmar el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el/la consultante " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs.");
+
+													$('#myModal4').modal('show');
+
+												}else{
+
+													debugger;
+													$("#parrafoConfirmacionTurno").text("Por favor, para confirmar el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el/la consultante " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs. Necesitamos que abone en concepto de seña el monto de $" + seña);
+
+													$('#myModal2').modal('show');
+												}
+
+											},
+											/*dataType: "json",*/
+											error: function(xhr, status, error) {
+												
+												debugger;
+												$("#parrafoConfirmacionTurnosinMP").text("Por favor, confirmar el turno con: " + apellidoProfesional + ", " + nombreProfesional + " para el/la consultante " +  apellidoPaciente + ", " + nombrePaciente + " el día " + fecha + " a las " + hora + "hs.");
+
+												$('#myModal4').modal('show');
+
+											}
+										});
+
+										}
+
+									});
 
 								}
-							});
+							});							
 
 						}
 					});
-
-					
+	
 				}
 			});
 	

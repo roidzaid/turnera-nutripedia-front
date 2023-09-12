@@ -1,9 +1,9 @@
 function Cancelar(){
 
-/*	var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+	var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-*/
-	window.location = "misHorarios.html";
+
+	//window.location = "misHorarios.html";
 }
 
 
@@ -42,7 +42,7 @@ function guardarHorario(){
 
 	if(datosOk){
 		
-		idProfesional = sessionStorage.getItem("idProfesional");
+		idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 	    debugger;
 
 	    var fecha = "";
@@ -88,8 +88,8 @@ function guardarHorario(){
 			      	$("#horarioOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#horarioOk").slideUp(500);
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-			      	window.location = "misHorarios.html";
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "misHorarios.html";
 			      	
 			       	});
 			},
@@ -228,8 +228,8 @@ function modifHorario(){
 			      	$("#horarioOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#horarioOk").slideUp(500);
 
-			      	//window.location = "perfilProfesional.html?idProfesional="+idProfesional;
-			      	window.location = "misHorarios.html";
+			      	window.location = "perfilProfesional.html?idProfesional="+idProfesional;
+			      	//window.location = "misHorarios.html";
 			      	
 			       	});
 			},

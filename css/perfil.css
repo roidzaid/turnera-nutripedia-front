@@ -1,0 +1,245 @@
+/*Estilos bloque fotos*/
+#idDatosPersonales {
+    /*display: inline-block;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+#idBloqueFoto{
+    flex: 1;
+}
+
+#idBloqueTitulo{
+    text-align: center
+       
+}
+
+#idFotoTitulo{
+    color: #31572C;
+    display: inline-block;  
+}
+
+#idEditFoto{
+    vertical-align: top;
+    display: inline-block;  
+}
+
+#divFoto{
+  text-align: center; /* Centrar horizontalmente */
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+    
+}
+
+#foto{
+ 
+}
+
+img {
+  max-width: 560px;
+  height: auto; /* Mantener la proporción de aspecto de la imagen */
+}
+
+i{
+    color: #1841183b;
+    cursor: pointer;    
+}
+
+
+i:hover {
+    color: #31572C;
+
+}
+
+/*Estilos bloque datos*/
+#idBloqueDatos{
+     flex: 1;
+     margin-top: 15px;
+
+}
+
+#idDatosTitulo{
+    color: #31572C;
+    display: inline-block;
+}
+
+#idEditDatos{
+    vertical-align: top;
+    display: inline-block; 
+}
+
+
+#idBloqueCampos{
+    margin-left: 10px;
+    text-align: center;
+}
+
+#idCamposDatos{
+    
+}
+
+#idLabelDatos{
+    margin: 0px;
+    
+}
+
+#idInputDatos{
+
+}
+
+#nombre, 
+#apellido,
+#dni,
+#matricula,
+#especialidad,
+#telefono,
+#mail,
+#instagram,
+#aliasMP{
+    width: 80%;
+    height: 35px;
+    border: 1px;
+    background: #74a5743b;
+    border-radius: 4px;
+
+}
+
+
+
+/*Estilos tabla horarios*/
+#idBloqueHorarios{
+    margin: 10px;
+    text-align: center; /* Centrar horizontalmente */
+    display: flex;
+    flex-direction: column; /* Alinear verticalmente */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+#tHorarios{
+    background: #74a5743b;
+    width: 80%;
+    border-radius: 16px;
+    overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+#tabHorarios{
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+  }
+
+/*Estilos tabla licencias*/
+#idBloqueLicencias{
+    margin: 10px;
+    text-align: center; /* Centrar horizontalmente */
+    display: flex;
+    flex-direction: column; /* Alinear verticalmente */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+#tLicencias{
+    background: #74a5743b;
+    width: 80%;
+    border-radius: 16px;
+    overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+#tabLicencias{
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+/*Estilos tabla honorarios*/
+#idBloqueHonorarios{
+    margin: 10px;
+    text-align: center; /* Centrar horizontalmente */
+    display: flex;
+    flex-direction: column; /* Alinear verticalmente */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+#tHonorarios{
+    background: #74a5743b;
+    width: 80%;
+    border-radius: 16px;
+    overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+#tabHonorarios{
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+
+/*Estilos todas las tablas*/
+
+#idBloqueTablas{
+    margin-top: 10px;
+}
+
+#tabHorarios th,
+#tabHorarios td,
+#tabLicencias th,
+#tabLicencias td,
+#tabHonorarios th,
+#tabHonorarios td{
+  padding: 8px;
+}
+
+
+/*botones de confirmacion de modificacion*/
+
+#btnConfirmarTurno {
+    width: 200px;
+    margin-top: 5px;
+    background-color: #31572C;
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+
+#btnConfirmarTurno:hover {
+  background-color: #90A955; /* Cambia este color al color que desees al pasar el mouse */
+}
+
+
+#btnCancelar {
+    width: 200px;
+    margin-top: 5px;
+    background-color: white;
+    border-color: #90A955;
+    color: black; /* Cambia el color del texto si es necesario */
+  }
+
+#btnCancelar:hover {
+  background-color: #90A955;  /* Cambia este color al color que desees al pasar el mouse */
+  color: white;
+}
+
+
+/*responsive*/
+
+@media (max-width: 768px) {
+  #idDatosPersonales {
+    flex-direction: column; 
+  }
+
+  #idBloqueFoto,
+  #idBloqueDatos {
+    width: 100%;
+  }
+
+  #tabHonorarios th,
+  #tabHonorarios td {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+   #idFotoTitulo, #idDatosTitulo {
+    font-size: 18px; 
+  }
+
+  #btnConfirmarTurno, #btnCancelar {
+    margin-top: 3px; 
+  }
+
+  #idCamposDatos {
+    display: inline-block;
+    text-align: center;
+  }
+}

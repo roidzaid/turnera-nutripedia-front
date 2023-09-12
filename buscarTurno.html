@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/buscarTurno.js"></script>
@@ -9,6 +10,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/buscarTurno.css">
+
+	<script src="https://sdk.mercadopago.com/js/v2"></script>
+
 
 </head>
 <body>
@@ -48,124 +53,150 @@
 	
 	<hr />
 
+	
 	<div style="text-align: center;">
-	<div id="combosTurnos" style="width: 40%; margin-left: 8%; display: inline-block;">
+	<div id="contenedorPrincipal">
+		<div id="idBloqueSeleccion">
 
-			<div id="idComboEspecialidades" class="form-group row" style="width: 100%; ">
-			    <label for="comboEspecialidades" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione especialidad</label>
-				    <div class="col-sm-12">
-				    	<select id="comboEspecialidades" class="form-control" onchange="buscarProfecionalesEspecialidad();">
-	                		<option selected></option>
-						</select>
-				    </div>
-			</div>
+				<div id="idComboEspecialidades" class="form-group row">
+				    <label for="comboEspecialidades" class="col-sm-10 col-form-label">Seleccione especialidad</label>
+					    <div class="col-sm-12">
+					    	<select id="comboEspecialidades" class="form-control" onchange="buscarProfecionalesEspecialidad();">
+		                		<option selected></option>
+							</select>
+					    </div>
+				</div>
 
-			<div id="idComboProfesionales" class="form-group row" style="width: 100%;">
-			    <label for="comboProfesionales" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione profesional</label>
-				    <div class="col-sm-12">
-				    	<select id="comboProfesionales" class="form-control" onchange="buscarTipoTurno();">
-	                		<option selected></option>
-						</select>
-				    </div>
-			</div>
+				<div id="idComboProfesionales" class="form-group row">
+				    <label for="comboProfesionales" class="col-sm-10 col-form-label">Seleccione profesional</label>
+					    <div class="col-sm-12">
+					    	<select id="comboProfesionales" class="form-control" onchange="buscarTipoTurno();">
+		                		<option selected></option>
+							</select>
+					    </div>
+				</div>
 
-			<div id="idComboTipoTurno" class="form-group row" style="width: 100%;">
-			    <label for="comboTipoTurno" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione tipo de turno</label>
-				    <div class="col-sm-12">
-				    	<select id="comboTipoTurno" class="form-control" onchange="buscarDiasdeAtencion();">
-	                		<option selected></option>
-						</select>
-				    </div>
-			</div>
-
-
-			<div id="idMotivoConsulta" class="form-group row" style="width: 100%; display: none; text-align: left;">
-			    <label for="motivoConsulta" class="col-sm-10 col-form-label" style="text-align: left;">Ingrese el motivo de la consulta</label>
-				    <div class="col-sm-12">
-				    	<textarea id="motivoConsulta" class="form-control" aria-label="With textarea"></textarea>
-				    </div>
-			</div>
-
-			<div id="idMotivoConsultaNutricion" class="form-group row" style="width: 100%; display: none; text-align: left;">
-			    <label for="motivoConsultaNutricion" class="col-sm-10 col-form-label" style="text-align: left;">Ingrese el motivo de la consulta</label>
-				    <div class="col-sm-12">
-				    	<select id="comboMotivoConsultaNutricion" class="form-control">
-	                		<option selected>Seleccion motivo</option>
-	                		<option >PRIMERA VEZ</option>
-	                		<option >SEGUIMIENTO</option>
-						</select>
-				    </div>
-			</div>
-
-			<div id="idMotivoConsultaOftalmologia" class="form-group row" style="width: 100%; display: none; text-align: left;">
-				    <div class="col-sm-12">
-				    	<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckFondoDeOjo">
-							  <label class="form-check-label" for="flexCheckDefault">
-							    Requiere fondo de ojo
-							  </label>
-							</div>
-				    </div>
-				    <div class="col-sm-12">
-				    	<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckSeAtendioPreviamente" onchange="verDescOftalmologia();">
-							  <label class="form-check-label" for="flexCheckDefault">
-							    Se atendió previamente
-							  </label>
-							</div>
-				    </div>
-
-			</div>
-
-	    <div id="idDescOftalmologia" class="form-group row" style="width: 100%; display: none; text-align: left;">
-			    <label for="motivoConsulta" class="col-sm-10 col-form-label" style="text-align: left;">¿Dónde fue atendidx?</label>
-				    <div class="col-sm-12">
-				    	<textarea id="DescOftalmologia" class="form-control" aria-label="With textarea"></textarea>
-				    </div>
-			</div>
+				<div id="idComboTipoTurno" class="form-group row">
+				    <label for="comboTipoTurno" class="col-sm-10 col-form-label">Seleccione tipo de turno</label>
+					    <div class="col-sm-12">
+					    	<select id="comboTipoTurno" class="form-control" onchange="buscarDiasdeAtencion();">
+		                		<option selected></option>
+							</select>
+					    </div>
+				</div>
 
 
+				<div id="idMotivoConsulta" class="form-group row"  style="display: none;">
+				    <label for="motivoConsulta" class="col-sm-10 col-form-label">Ingrese el motivo de la consulta</label>
+					    <div class="col-sm-12">
+					    	<textarea id="motivoConsulta" class="form-control" aria-label="With textarea"></textarea>
+					    </div>
+				</div>
 
-		
-			<div id="idComboFecha" class="form-group row" style="width: 100%;">
-			    <label for="comboFecha" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione fecha</label>
-				    <div class="col-sm-12">
-				    	<select id="comboFecha" class="form-control" onchange="buscarHorariosDisponibles();">
-						</select>
-				    </div>
-			</div>
+				<div id="idMotivoConsultaNutricion" class="form-group row"  style="display: none;">
+				    <label for="motivoConsultaNutricion" class="col-sm-10 col-form-label">Ingrese el motivo de la consulta</label>
+					    <div class="col-sm-12">
+					    	<select id="comboMotivoConsultaNutricion" class="form-control">
+		                		<option selected>Seleccion motivo</option>
+		                		<option >PRIMERA VEZ</option>
+		                		<option >SEGUIMIENTO</option>
+							</select>
+					    </div>
+				</div>
+
+				<div id="idMotivoConsultaOftalmologia" class="form-group row"  style="display: none;">
+					    <div class="col-sm-12">
+					    	<div class="form-check">
+								  <input class="form-check-input" type="checkbox" value="" id="flexCheckFondoDeOjo">
+								  <label class="form-check-label" for="flexCheckDefault">
+								    Requiere fondo de ojo
+								  </label>
+								</div>
+					    </div>
+					    <div class="col-sm-12">
+					    	<div class="form-check">
+								  <input class="form-check-input" type="checkbox" value="" id="flexCheckSeAtendioPreviamente" onchange="verDescOftalmologia();">
+								  <label class="form-check-label" for="flexCheckDefault">
+								    Se atendió previamente
+								  </label>
+								</div>
+					    </div>
+
+				</div>
+
+		    <div id="idDescOftalmologia" class="form-group row" style="display: none;">
+				    <label for="motivoConsulta" class="col-sm-10 col-form-label" style="text-align: left;">¿Dónde fue atendidx?</label>
+					    <div class="col-sm-12">
+					    	<textarea id="DescOftalmologia" class="form-control" aria-label="With textarea"></textarea>
+					    </div>
+				</div>
+
+
 
 			
+				<div id="idComboFecha" class="form-group row">
+				    <label for="comboFecha" class="col-sm-10 col-form-label">Seleccione fecha</label>
+					    <div class="col-sm-12">
+					    	<select id="comboFecha" class="form-control" onchange="buscarHorariosDisponibles();">
+							</select>
+					    </div>
+				</div>
 
-			<div id="idComboHora" class="form-group row" style="width: 100%;">
-			    <label for="comboHora" class="col-sm-10 col-form-label" style="text-align: left;">Seleccione horario</label>
-				    <div class="col-sm-12">
-				    	<select id="comboHora" class="form-control" onchange="ConfirmarTurno();">
-	                		<option selected></option>
-						</select>
-				    </div>
+				
+
+				<div id="idComboHora" class="form-group row">
+				    <label for="comboHora" class="col-sm-10 col-form-label">Seleccione horario</label>
+					    <div class="col-sm-12">
+					    	<select id="comboHora" class="form-control" onchange="ConfirmarTurno();">
+		                		<option selected></option>
+							</select>
+					    </div>
+				</div>
 			</div>
 
-			<div style="margin-top: 2%;">
-				<input name="solicitarTurno" id="btnSolicitarTurno" type="button" class="btn btn-secondary" value="Siguiente" onclick="PedirTurno()" style="width: 200px; background-color: #31572C;">
+			<!-- Foto y datos profesional -->
 
-				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
+			<div id=tarjeta>
+			  
+			  <div id="idDivFoto">
+			  		<img id="fotoPerfil" src="" alt="...">
+			  </div>
+
+			  <div id="idDatos">
+					  
+					  <div>
+					    <div id="idDivNombre">
+					    	<h5 id="tarjetaProfesional"></h5>
+					    </div>
+
+					    <h6 id="subtituloProfecional"></h6>
+					    <h6 id="licencias"></h6>
+					  </div>
+
+						<div id="idListaValores">
+						  <ul class="list-group list-group-flush" id="listaValorConsulta">
+					  	</ul>
+					  </div>
+
+					  <div id="idRedes">
+						  	<img src="imagenes/instagram.png">
+								<a id=linkRedes href="#"></a>
+						</div>
+
+			  </div>
+
 			</div>
-	</div>
-
-	<div id=tarjeta1 class="card" style="width: 18rem; display: none; vertical-align: top; background-color: #132A13; margin-top: 20px">
-	  <img id="fotoPerfil" src="" class="card-img-top" alt="..." style="width: 50%; margin-top: 10px; height: 250px; width: 200px;">
-	  <div class="card-body">
-	    <h5 class="card-title" id="tarjetaProfesional" style="color: white;"></h5>
-	    <h6 class="card-subtitle mb-2 text-muted" id="subtituloProfecional"></h6>
-	  </div>
-	  <div id=redes style="margin: 10px; display: none">
-	  	<img src="imagenes/instagram.png" style="width: 40px; margin-right: 10px">
-			<a id=linkRedes href="#"></a>
 		</div>
-		  <ul id="listaValorConsulta" class="list-group list-group-flush">
-	  	</ul>
+
+			<!-- Botones -->
+			<div id="idBotones">
+				<input name="solicitarTurno" id="btnSolicitarTurno" type="button" class="btn btn-secondary" value="Siguiente" onclick="PedirTurno()">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()">
+			</div>
 	</div>
+
+<!-- modal sin turno -->
 
 	  <div id="myModalControEnfermedad" class="modal" tabindex="-1">
 
@@ -202,12 +233,6 @@
 		    </div>
 		  </div>
 		</div>
-
-
-
-
-	
-
 
 
 

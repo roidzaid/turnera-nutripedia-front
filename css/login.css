@@ -1,0 +1,62 @@
+#usuario,
+#contraseña {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 10px;
+}
+
+
+#btnIngresar {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 10px;
+    background-color: #31572C;
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+
+#btnIngresar:hover {
+  background-color: #90A955; /* Cambia este color al color que desees al pasar el mouse */
+}
+
+#btnRegistrarse {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 10px;
+    background-color: white;
+    border-color: #90A955;
+    color: black; /* Cambia el color del texto si es necesario */
+  }
+
+#btnRegistrarse:hover {
+  background-color: #90A955;  /* Cambia este color al color que desees al pasar el mouse */
+  color: white;
+}
+
+
+#idLoginForm {
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 20px; /* Espaciado interno para separar el contenido */
+    background-color: #f9f9f9; /* Color de fondo del formulario */
+    box-shadow: 0 0 10px 11px rgb(0 0 0 / 20%) /* Sombra */
+}
+
+#idContainerLogin {
+    max-width: 500px;
+    width: 100%;
+    
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../imagenes/Sandias V2.png');
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Fija la imagen de fondo */
+}

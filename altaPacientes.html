@@ -2,6 +2,7 @@
 <html style="width:100%;">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/pacientes.js"></script>
@@ -9,6 +10,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/altaPaciente.css">
 </head>
 <body>
 
@@ -27,86 +29,86 @@
      	<p>El DNI ya existe en la base de datos</p>
     </div>
 	
-	<h1 style="text-align: center; margin-top: 20px; color: #31572C">DATOS PERSONALES DE EL/LA PACIENTE</h1>
+	<h1 style="text-align: center; margin-top: 20px; color: #31572C">DATOS DEL PACIENTE</h1>
 	
 	<hr />
 
-	<div style="width: 50%; margin-left: 25%;">
+	<div style="margin:10px; text-align: center;">
 
-		 	  <div>
-		 	  	<h3 style="margin-bottom: 20px; text-align: start; color: #31572C">Por favor ingrese los siguientes datos:</h3>
-		 	  </div>
+ 	  <div>
+ 	  	<h3 style="margin-bottom: 20px; text-align: start; color: #31572C">Por favor ingrese los siguientes datos</h3>
+ 	  </div>
 
-		 	  <div>
-			  	<h5 style="margin-bottom: 20px; text-align: start; color: #31572C">Se solicitan por única vez</h5>
-		 	  </div>
+ 	  <div>
+	  	<h5 style="margin-bottom: 20px; text-align: start; color: #31572C">Se solicitan por única vez</h5>
+ 	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="nombre" class="col-sm-3 col-form-label">Nombres</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="nombre" class="col-sm-3 col-form-label">Nombres</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+	    </div>
+	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
-			    </div>
-			  </div>
-			  
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="fechaNac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
-			    <div class="col-sm-9">
-			      <input type="date" class="form-control" id="fechaNac" placeholder="Fecha Nac">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="fechaNac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
+	    <div class="col-sm-9">
+	      <input type="date" class="form-control" id="fechaNac" placeholder="Fecha Nac">
+	    </div>
+	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="dni" class="col-sm-3 col-form-label">DNI</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="dni" placeholder="DNI">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="dni" class="col-sm-3 col-form-label">DNI</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="dni" placeholder="DNI">
+	    </div>
+	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="direccion" placeholder="Direccion">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="direccion" placeholder="Direccion">
+	    </div>
+	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="localidad" placeholder="Localidad">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+	    </div>
+	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+	    </div>
+	  </div>
 
-			  <div class="form-group row" style="margin-bottom: 5px;">
-			    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
-			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="mail" placeholder="Mail">
-			    </div>
-			  </div>
+	  <div class="form-group row" style="margin-bottom: 5px;">
+	    <label for="mail" class="col-sm-3 col-form-label">Mail</label>
+	    <div class="col-sm-9">
+	      <input type="text" class="form-control" id="mail" placeholder="Mail">
+	    </div>
+	  </div>
 
 
 
-			   <div style="margin-top: 2%;">
-				<input name="guardarPaciente" id="btnGuardarPaciente" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarPaciente()" style="width: 200px; background-color: #31572C;">
-
-				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
-			  </div>
 
 	</div>
 
+	   <div>
+		<input name="guardarPaciente" id="btnGuardarPaciente" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarPaciente()">
+
+		<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="Cancelar()">
+	  </div>
 	
 	
 </body>

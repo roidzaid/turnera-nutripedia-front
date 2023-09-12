@@ -9,54 +9,48 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/actualizarContraseña.css">
 
 </head>
-<body class="m-0 vh-100 row justify-content-center align-items-center">
+<body>
 
-	<div class="col-auto p-5 text-center" style="text-align: center; margin: 0; padding: 0">
+	<div id="idContainerActualizarContraseña">
+		<div id="idActualizarContraseñaForm">
 
-		<div class="alert alert-success" role="alert" id="usuarioOk" align="center" style="display:none;">
-	    	<h4 class="alert-heading">Bien!</h4>
-	     	<p>La clave fue actualizada</p>
-	    </div>
-
-	    <div class="alert alert-danger" role="alert" id="errorContraseñaDiferente" align="center" style="display:none;">
-	    	<h4 class="alert-heading">Error!</h4>
-	     	<p>Las contraseñas son diferentes, vuelva a cargarlas</p>
-	    </div>
-		
-		<img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png">
-
-		<div>
-		   	<div class="col-sm-12">
-		      	<p>Por seguridad, actualice su contraseña</p>
+			<div class="alert alert-success" role="alert" id="usuarioOk" align="center" style="display:none;">
+		    	<h4 class="alert-heading">Bien!</h4>
+		     	<p>La clave fue actualizada</p>
 		    </div>
-		</div>
 
-		<div style="margin-top: 10px">
-		   	<div class="col-sm-12">
-		      <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+		    <div class="alert alert-danger" role="alert" id="errorContraseñaDiferente" align="center" style="display:none;">
+		    	<h4 class="alert-heading">Error!</h4>
+		     	<p>Las contraseñas son diferentes, vuelva a cargarlas</p>
 		    </div>
-		</div>
-
-		<div style="margin-top: 10px">
-		    <div class="col-sm-12">
-		      <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
-		    </div>
-		</div>
-
-		<div style="margin-top: 10px">
-		    <div class="col-sm-12">
-		      <input type="password" class="form-control" id="confirmarContraseña" placeholder="Confirmar contraseña">
-		    </div>
-		</div>
-
-
-		<div style="text-align: center; margin-top: 30px;">
-				<input name="guardar" id="btnGuardar" type="button" class="btn btn-secondary" value="Guardar" onclick="actulizarPass()" style="width: 200px; background-color: #31572C; margin: 10px;">
-
-				<input name="registrarse" id="btnRegistrarse" type="button" class="btn btn-secondary" value="cancelar" onclick="cancelar()" style="width: 200px; background-color: white; border-color: #90A955; color: black; margin: 10px;">
 			
+			<img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png" class="img-fluid" alt="Logo Nutripedia">
+
+			<div>
+			   	<p>Por seguridad, actualice su contraseña</p>
+			</div>
+
+			<div>
+			   	<input type="text" class="form-control" id="usuario" placeholder="Usuario">
+			</div>
+
+			<div>
+			    <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
+			</div>
+
+			<div>
+				<input type="password" class="form-control" id="confirmarContraseña" placeholder="Confirmar contraseña">
+			</div>
+
+
+			<div>
+				<input name="guardar" id="btnActualizar" type="button" class="btn btn-secondary" value="Guardar" onclick="actulizarPass()">
+
+				<input name="registrarse" id="btnCancelar" type="button" class="btn btn-secondary" value="cancelar" onclick="cancelar()">
+			</div>
 		</div>
 	</div>
 

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Espacio Nutripedia</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/buscarTurno.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="css/agenda.css">
+
+</head>
+<body>
+	
+	<div style="margin:20px;">
+		
+
+	 	<div id="agenda" style="margin: 20px; text-align: left;">
+	 		
+	 		<div>
+
+	 		  <h3 style="color: #31572C;display: inline-block">Agenda general de todos los profesionales</h3>
+
+	 		  <div id="filtro">
+			      <input id="idFiltroFecha"type="date" class="form-control" placeholder="Fecha"; onchange="buscarPorFechaAgenda();">
+			  </div>
+			</div>
+
+		 	 <div id="tAgenda" class="form-group row">
+			   <table id="tabAgenda" class="table">
+					<thead>
+						<tr>
+							<th style="display: none;">idTurnoAsignado</th>
+							<th style="display: none;">idPaciente</th>
+							<th style="display: none;">idProfesional</th>
+							<th>Fecha</th>
+							<th>Hora</th>
+							<th>Profesional</th>
+							<th>Especialidad</th>
+							<th>Paciente</th>
+							<th>DNI</th>
+							<th>Tipo Consulta</th>
+							<th>Motivo</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="tbodyAgenda"></tbody>
+				</table>	
+			</div>
+
+		</div>
+
+		<div id="sinTurnos" style="display: none;">
+			<p>No tiene turnos pendientes</p>
+		</div>
+
+		<div id="myModal" class="modal" tabindex="-1">
+
+			<div class="alert alert-success" role="alert" id="turnoAsignadoModal" align="center" style="display:none;">
+		    	<h4 class="alert-heading">Cancelamos el turno</h4>
+		     	<p>Ya le avisamos al paciente a su mail</p>
+		    </div>
+
+			<div class="alert alert-danger" role="alert" id="errorAltaTurnoModal" align="center" style="display:none;">
+			  	<h4 class="alert-heading">Error!</h4>
+			   	<p>Error al cancelar el turno</p>
+			</div>
+
+
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Confirmar cancelacion de turno</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <p id="parrafoConfirmacion"></p>
+		      </div>
+		      <div class="modal-footer">
+		        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-primary">Confirmar</button> -->
+
+		        <input name="confirmarTurno" id="btnConfirmarTurno" type="button" class="btn btn-secondary" value="Confirmar" onclick="confirmarCacelacionTurno()" style="width: 200px; background-color: #31572C;">
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="CancelarConfirmacion()" style="width: 200px; background-color: white; border-color: #90A955; color: black;">
+
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div id="idProgressBarModal" class="text-center" style="display:none;">
+		        <div class="spinner-border" role="status" style="height: 50px;width: 50px;">
+		            <span class="sr-only">Cargando...</span>
+		        </div>
+		   </div>
+		</div>
+
+		<div id="myModalPaciente" class="modal" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h3 id="nomYApe"class="modal-title"></h3>
+		      </div>
+			  
+			  <div>
+			  	<input type="text" class="form-control" id="fechaNac" placeholder="Fecha Nac">
+			  </div>
+			  <div>
+		      	<input type="text" class="form-control" id="dni" placeholder="DNI">
+			  </div>
+			  <div>			  
+		      	<input type="text" class="form-control" id="direccion" placeholder="Direccion">
+			  </div>			  
+			  <div>			  
+		      	<input type="text" class="form-control" id="localidad" placeholder="Localidad">
+			  </div>			  
+			  <div>			  
+		      	<input type="text" class="form-control" id="telefono" placeholder="Telefono">
+			  </div>			  
+			  <div>			  
+		      	<input type="text" class="form-control" id="mail" placeholder="Mail">
+			  </div>
+		    </div>
+		  </div>
+		</div>
+
+
+		  
+
+
+	</div>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function () {
+
+			if (sessionStorage.getItem("token") == null){
+				salir();
+			}
+
+			debugger;
+			var token = sessionStorage.getItem("token");
+	
+			debugger;
+
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+
+			debugger;
+
+			$.ajax({
+				type: "GET",
+				url: host + "turnos/agendaGeneral",
+				headers: {
+					//"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					var list = response;  
+
+					debugger;
+
+					if (list.length > 0){
+
+						$("#tbodyAgenda").empty();
+
+						for (var i = 0; i < list.length; i++) {
+
+							debugger;
+							var idTurnoAsignado = list[i].idTurnoAsignado;
+							var idPaciente = list[i].idPaciente;
+							var idProfesional = list[i].idProfesional;
+							var profesional = list[i].apellidoProfesional + ", " + list[i].nombreProfesional;
+							var especialidad = list[i].especialidad
+							var fecha = list[i].fecha;
+							var hora = list[i].hora;
+							var paciente = list[i].apellidoPaciente+ ", " + list[i].nombrePaciente;
+							var dni = list[i].dniPaciente;
+							var tipoConsulta = list[i].tipoConsulta;
+							var motivo = list[i].motivoConsulta;
+							var estadoPago = list[i].estadoPago;
+
+							debugger;
+
+							if (estadoPago == "APROBADO"){
+
+								$("#tbodyAgenda").append('<tr style="background: #b0e8bb"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td style="display: none;">'+idProfesional+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+profesional+'</td><td>'+especialidad+'</td><td>'+paciente+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><td>'+estadoPago+'</td></tr>');
+
+							}else{
+
+								$("#tbodyAgenda").append('<tr style="background: #ffe083a3"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td style="display: none;">'+idProfesional+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+profesional+'</td><td>'+especialidad+'</td><td>'+paciente+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><td>'+estadoPago+'</td></tr>');
+							}
+
+
+						}
+					}else{	
+						$("#sinTurnos").css("display", "block");
+					}
+				}
+			});
+
+		});
+
+	</script>
+
+</body>
+
+</html>

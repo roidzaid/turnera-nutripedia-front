@@ -6,6 +6,7 @@ function buscarTurno(){
 
 
 function buscarMisDatos(){
+
 	window.location = "buscarPaciente.html?dni="+$("#dni").val();
 
 }
@@ -143,7 +144,7 @@ function buscarTipoTurno(){
 	
 function tarjetaProfesional() {
 
-	$("#tarjeta1").css("display", "inline-block");	
+	$("#tarjeta").css("display", "inline-block");	
 
 	debugger;
 	var idProfesional = $("#comboProfesionales").val()
@@ -163,12 +164,16 @@ function tarjetaProfesional() {
 
 			buscarFotoPerfil();
 
+			debugger;
 			$("#tarjetaProfesional").text(response.apellido + ", " + response.nombre);
 			$("#subtituloProfecional").text(especialidad);
 
+			debugger;
+			buscarLicencias(idProfesional);
 
+			debugger;
 			if(response.instagram != "" && response.instagram != null){
-				$("#redes").css("display", "inline-block");	
+				// $("#redes").css("display", "inline-block");	
 				
 				var partsArray = response.instagram.split('/');
 				var aliasInsta = partsArray[3];
@@ -190,6 +195,33 @@ function tarjetaProfesional() {
 		}
 	});
 	
+}
+
+
+function buscarLicencias(idProfesional){
+
+	debugger;
+	$.ajax({
+		type: "GET",
+		url: host + "licencias/lista/"+idProfesional,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+
+        	var diaDesde = response[0].diaDesde;
+			var diaHasta = response[0].diaHasta;
+			var motivoDeLicencia = response[0].motivoDeLicencia;
+
+			debugger;
+			$("#licencias").text("Licencia desde el " + diaDesde + " hasta el " + diaHasta);
+
+		}
+	});
+
 }
 
 function buscarFotoPerfil(){
@@ -277,7 +309,7 @@ function buscarValoresDeConsulta(){
 					var vc = response[i].tipoConsulta + ": " + new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'ARS' }).format(response[i].valorConsulta);
 					debugger;
 	            	
-	            	$('#listaValorConsulta').append("<li class=\"list-group-item\">"+vc+"</li>"); 
+	            	$('#listaValorConsulta').append("<li id=\"idLiValores\" class=\"list-group-item\">"+vc+"</li>"); 
 				}
 			}
 		});
@@ -609,9 +641,12 @@ function PedirTurno(){
 }*/
 
 
-function confirmarTurno(){
+function pagarSeña(){
 
-	$("#btnConfirmarTurno").prop('disabled', true);
+	$("#btnPagarSeña").prop('disabled', true);
+
+	//grabo el turno en la base como turno asignado pendiente de pago
+	//confirmarTurno();
 
 	var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
 
@@ -621,6 +656,143 @@ function confirmarTurno(){
 
 	debugger;
 
+	var pagarReserva = {
+		idReserva:"",
+		idPaciente:sessionStorage.getItem("sessionStorage_IdPaciente"),
+		idTurno:sessionStorage.getItem("sessionStorage_idTurno"),
+		nombrePaciente:sessionStorage.getItem("sessionStorage_NombrePaciente"),
+		apellidoPaciente:sessionStorage.getItem("sessionStorage_ApellidoPaciente"),
+		mailPaciente:sessionStorage.getItem("sessionStorage_MailPaciente"),
+	    idProfesional:sessionStorage.getItem("sessionStorage_idProfesional"),
+	    fechaTurno:fec,
+	    horaTurno:idHorario,
+	    seña:sessionStorage.getItem("sessionStorage_valorDeSeña"),
+	    estado:"",
+	    idPagoMP:""
+	}
+
+	JSON.stringify(pagarReserva);
+
+	debugger;
+	$.ajax({
+		type: "POST",
+		url: hostPagos + "cobros/reservaTurno",
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+
+			debugger;
+
+			window.location = response.initPoint;
+
+			//confirmarTurno()
+
+		},
+
+		dataType: "json",
+		data: JSON.stringify(pagarReserva),
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			debugger;
+
+			$('#idProgressBar').css('display', 'none');
+			
+			$('#errorPagoReserva').css('display', 'block');
+	       		$("#errorPagoReserva").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#errorPagoReserva").slideUp(500);
+	       		window.location = "index.html";
+	       		});
+
+
+		}
+	})
+
+}
+
+
+function confirmarPago(idTurnoAsignado, idPagoMP, estadoPago){
+
+	$('#idProgressBarModal').css('display', 'block');
+
+	debugger;
+
+	
+	$.ajax({
+		type: "PUT",
+		url: host + "turnos/"+idTurnoAsignado+"/"+idPagoMP+"/"+estadoPago,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+
+			//location.reload();
+			
+		}
+	});
+
+}
+
+
+function verificarPagoManual(idTurnoAsignado){
+
+	$('#idProgressBarModal').css('display', 'block');
+
+	debugger;
+
+	
+	$.ajax({
+		type: "PUT",
+		url: host + "turnos/"+idTurnoAsignado,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+
+			$.ajax({
+				type: "PUT",
+				url: hostPagos + "cobros/registrarEstadoManual/"+idTurnoAsignado,
+				headers: {
+					//"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
+			
+					location.reload();
+			
+				}
+			});
+
+			
+		}
+	});
+
+}
+
+
+
+function confirmarTurno(){
+
+	$("#btnConfirmarTurno").prop('disabled', true);
+
+	var idHorarioYFecha = sessionStorage.getItem("sessionStorage_idHorarioYFecha");
+
+	var partsArray = idHorarioYFecha.split('-');
+	var idHorario = partsArray[0];
+	var fec = partsArray[1]+"-"+partsArray[2]+"-"+partsArray[3];
+			
+	debugger;
+
 	var guardarTurno = {
 		idConfiguracionTurno:sessionStorage.getItem("sessionStorage_idConfiguracionTurno"),
 		fecha:fec,
@@ -628,7 +800,9 @@ function confirmarTurno(){
 		especialidad:sessionStorage.getItem("sessionStorage_especialidad"),
 		idPaciente:sessionStorage.getItem("sessionStorage_IdPaciente"),
 		tipoConsulta:sessionStorage.getItem("sessionStorage_tipoConsulta"),
-		motivoConsulta:sessionStorage.getItem("sessionStorage_motivoConsulta")
+		motivoConsulta:sessionStorage.getItem("sessionStorage_motivoConsulta"),
+		estadoPago:"PENDIENTE", 
+		idPagoMP:""
 	}
 
 	JSON.stringify(guardarTurno);
@@ -645,14 +819,21 @@ function confirmarTurno(){
 		{
 			debugger;
 
-			$('#idProgressBar').css('display', 'none');
+			sessionStorage.setItem("sessionStorage_idTurno", response.idTurnoAsignado);
+
+			/*$('#idProgressBar').css('display', 'none');
 
             $('#turnoAsignado').css('display', 'block');
        		$("#turnoAsignado").fadeTo(4000, 500).slideUp(500, function(){
        		$("#turnoAsignado").slideUp(500);
+       		});*/
+       		enviarMails(guardarTurno);
+
+       		pagarSeña();
+
+
+       		//window.location = "index.html";
        		
-       		window.location = "index.html";
-       		});
 
 	            
 		},
@@ -674,8 +855,83 @@ function confirmarTurno(){
 
 		}
 	})
+	
 	$('#idProgressBar').css('display', 'block');
 	           
+}
+
+
+function enviarMails(guardarTurno){
+
+	JSON.stringify(guardarTurno);
+
+	debugger;
+	$.ajax({
+		type: "POST",
+		url: host + "mails/enviar",
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+	            
+		},
+
+		dataType: "json",
+		data: JSON.stringify(guardarTurno),
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			debugger;
+
+			$('#idProgressBar').css('display', 'none');
+			
+			$('#errorAltaTurno').css('display', 'block');
+	       		$("#errorAltaTurno").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#errorAltaTurno").slideUp(500);
+	       		window.location = "index.html";
+	       		});
+
+
+		}
+	})
+
+}
+
+
+function enviarMailsCancelacion(idTurnoAsignado){
+
+	
+	debugger;
+	$.ajax({
+		type: "POST",
+		url: host + "mails/enviarCancelacion/"+idTurnoAsignado,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
+	            
+		},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			debugger;
+
+			$('#idProgressBar').css('display', 'none');
+			
+			$('#errorAltaTurno').css('display', 'block');
+	       		$("#errorAltaTurno").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#errorAltaTurno").slideUp(500);
+	       		window.location = "index.html";
+	       		});
+
+
+		}
+	})
+
 }
 
 
@@ -795,10 +1051,11 @@ function confirmarCacelacionTurno(){
 	debugger;
 
 	var idTurnoAsignado = sessionStorage.getItem("sessionStorage_idTurnoAsignado");
-	
+
+	debugger;
 	$.ajax({
-		type: "DELETE",
-		url: host + "turnos/"+idTurnoAsignado,
+		type: "POST",
+		url: host + "mails/enviarCancelacion/"+idTurnoAsignado,
 		headers: {
 			//"Authorization": token,
 			"Content-Type":"application/json"
@@ -806,18 +1063,70 @@ function confirmarCacelacionTurno(){
 		success: function(response)
 		{
 			debugger;
+			$.ajax({
+				type: "DELETE",
+				url: host + "turnos/"+idTurnoAsignado,
+				headers: {
+					//"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
 
-			$('#idProgressBarModal').css('display', 'none');
+					$('#idProgressBarModal').css('display', 'none');
+					
+					$('#turnoAsignadoModal').css('display', 'block');
+			       		$("#turnoAsignadoModal").fadeTo(2000, 500).slideUp(500, function(){
+			       		$("#turnoAsignadoModal").slideUp(500);
+			       	
+			       		$('#myModal1').modal('hide');	
+					
+						//enviarMailsCancelacion(idTurnoAsignado);
+
+						location.reload();
+			       		});
+					
+					
+				}
+			});
+	            
+		},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			debugger;
+
+			$('#idProgressBar').css('display', 'none');
 			
-			$('#turnoAsignadoModal').css('display', 'block');
-	       		$("#turnoAsignadoModal").fadeTo(2000, 500).slideUp(500, function(){
-	       		$("#turnoAsignadoModal").slideUp(500);
-	       	
-	       		$('#myModal1').modal('hide');	
-			
-				location.reload();
+			$('#errorAltaTurno').css('display', 'block');
+	       		$("#errorAltaTurno").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#errorAltaTurno").slideUp(500);
+	       		window.location = "index.html";
 	       		});
-			
+
+
+		}
+	})
+
+}
+
+
+function CacelacionTurnoPagoRechazado(idTurno){
+
+
+	debugger;
+
+	
+	$.ajax({
+		type: "DELETE",
+		url: host + "turnos/"+idTurno,
+		headers: {
+			//"Authorization": token,
+			"Content-Type":"application/json"
+		},
+		success: function(response)
+		{
+			debugger;
 			
 		}
 	});
@@ -833,10 +1142,12 @@ function PacienteConfirmaCacelacionTurno(){
 	debugger;
 
 	var idTurnoAsignado = sessionStorage.getItem("sessionStorage_idTurnoAsignado");
-	
+
+
+	debugger;
 	$.ajax({
-		type: "DELETE",
-		url: host + "turnos/"+idTurnoAsignado,
+		type: "POST",
+		url: host + "mails/enviarCancelacion/"+idTurnoAsignado,
 		headers: {
 			//"Authorization": token,
 			"Content-Type":"application/json"
@@ -844,22 +1155,48 @@ function PacienteConfirmaCacelacionTurno(){
 		success: function(response)
 		{
 			debugger;
+			$.ajax({
+				type: "DELETE",
+				url: host + "turnos/"+idTurnoAsignado,
+				headers: {
+					//"Authorization": token,
+					"Content-Type":"application/json"
+				},
+				success: function(response)
+				{
+					debugger;
 
-			$('#idProgressBarModal').css('display', 'none');
+					$('#idProgressBarModal').css('display', 'none');
+					
+					$('#turnoAsignadoModal').css('display', 'block');
+			       		$("#turnoAsignadoModal").fadeTo(2000, 500).slideUp(500, function(){
+			       		$("#turnoAsignadoModal").slideUp(500);
+			       	
+			       		$('#myModal1').modal('hide');	
+					
+						//enviarMailsCancelacion(idTurnoAsignado);
+
+						misTurnos();
+			       		});
+
+					
+				}
+			});
+	            
+		},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			debugger;
+
+			$('#idProgressBar').css('display', 'none');
 			
-			$('#turnoAsignadoModal').css('display', 'block');
-	       		$("#turnoAsignadoModal").fadeTo(2000, 500).slideUp(500, function(){
-	       		$("#turnoAsignadoModal").slideUp(500);
-	       	
-	       		$('#myModal1').modal('hide');	
-			
-				misTurnos();
+			$('#errorAltaTurno').css('display', 'block');
+	       		$("#errorAltaTurno").fadeTo(2000, 500).slideUp(500, function(){
+	       		$("#errorAltaTurno").slideUp(500);
+	       		window.location = "index.html";
 	       		});
-
-			
 		}
-	});
-
+	})
 }
 
 
@@ -941,7 +1278,7 @@ function buscarPorFechaAgenda(){
 		location.reload();
 	}else{
 
-		var idProfesional = sessionStorage.getItem("idProfesional");
+		var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 
 		debugger;
 
@@ -974,10 +1311,21 @@ function buscarPorFechaAgenda(){
 						var dni = list[i].dniPaciente;
 						var tipoConsulta = list[i].tipoConsulta;
 						var motivo = list[i].motivoConsulta;
+						var estadoPago = list[i].estadoPago;
 
 						debugger;
 
-						$("#tbodyAgenda").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
+						/*$("#tbodyAgenda").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');*/
+
+						if (estadoPago == "APROBADO"){
+
+								$("#tbodyAgenda").append('<tr style="background: #b0e8bb"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;" title="Cancelar turno">delete</i><i onclick="verificarPagoManual(\'' + idTurnoAsignado + '\')"class="material-icons button done" style="margin-right:3px; cursor: pointer;" title="Marcar como pago pendiente">done</i></div></td></tr>');
+
+						}else{
+
+								$("#tbodyAgenda").append('<tr style="background: #ffe083a3"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;" title="Cancelar turno">delete</i><i onclick="verificarPagoManual(\'' + idTurnoAsignado + '\')"class="material-icons button alarm" style="margin-right:3px; cursor: pointer;" title="Confirmar pago de reserva">alarm</i></div></td></tr>');
+						}
+
 
 					}
 				}else{

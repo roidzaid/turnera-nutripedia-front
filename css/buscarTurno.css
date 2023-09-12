@@ -1,0 +1,120 @@
+#btnSolicitarTurno {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    background-color: #31572C;
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+
+#btnSolicitarTurno:hover {
+  background-color: #90A955; /* Cambia este color al color que desees al pasar el mouse */
+}
+
+#btnCancelar {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    background-color: white;
+    border-color: #90A955;
+    color: black; /* Cambia el color del texto si es necesario */
+  }
+
+#btnCancelar:hover {
+  background-color: #90A955;  /* Cambia este color al color que desees al pasar el mouse */
+  color: white;
+}
+
+
+#idDatos{
+    text-align: center;  
+    background: linear-gradient(to bottom, #31572C, #5bab7b);
+}
+
+#contenedorPrincipal{
+    display: flex; /* Muestra los elementos en la misma línea */
+    justify-content: center; /* Centra horizontalmente los elementos */
+}
+
+
+#idBloqueSeleccion{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+#tarjeta{
+    display: none;
+    width: 30%;
+    max-width: 400px;
+    margin: 1%;
+}
+
+#idDivFoto{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#idDivNombre{
+    
+}
+
+#subtituloProfecional{
+}
+
+#idRedes{
+  
+}
+
+#idRedes img {
+  max-width: 30px;
+  height: auto; /* Mantener la proporción de aspecto de la imagen */
+  margin: 10px;
+  transition: transform 0.3s; /* Agregar una transición para suavizar el efecto */
+}
+
+
+#idRedes img:hover{
+    transform: scale(1.2); /* Escala la imagen al 120% del tamaño original */
+
+}
+
+
+
+#idDivFoto img{
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    max-width: 400px;
+    
+}
+
+#idLiValores{
+    background: none;
+}
+
+#idBotones{
+
+}
+
+body {
+    background: #b9cbb8;
+}
+
+@media (max-width: 768px) {
+
+    #contenedorPrincipal{
+        display: block;
+
+    }
+
+    #idBloqueSeleccion{
+        width: 90%;
+        
+    }
+
+    #tarjeta{
+        width: 90%;
+    }
+
+}

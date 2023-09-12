@@ -68,6 +68,39 @@ function agenda(){
 
 }
 
+function agendaGeneral(){
+
+	debugger;
+
+	
+	parent.document.getElementById("frameInicio").setAttribute('src', "agendaGeneral.html");
+
+}
+
+function Sobreturnos(){
+	parent.document.getElementById("frameInicio").setAttribute('src', "sobreturnos.html");	
+}
+
+function gestionProfesionales(){
+
+	debugger;
+
+	
+	parent.document.getElementById("frameInicio").setAttribute('src', "gestionProfesionales.html");
+
+}
+
+function gestionEspecialidades(){
+
+	debugger;
+
+	
+	parent.document.getElementById("frameInicio").setAttribute('src', "gestionEspecialidades.html");
+
+}
+
+
+
 function misHorarios(){
 
 	debugger;
@@ -130,7 +163,8 @@ function guardarProfesional(){
 			telefono:$("#telefono").val().toUpperCase(),
 			mail:$("#mail").val().toUpperCase(),
 			instagram:$("#instagram").val(),
-			usuario:sessionStorage.getItem("usuario")
+			usuario:sessionStorage.getItem("usuario"),
+			aliasMP:$("#aliasMP").val()
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
@@ -154,10 +188,7 @@ function guardarProfesional(){
 			      	$("#profesionalOk").fadeTo(2000, 500).slideUp(500, function(){
 			      	$("#profesionalOk").slideUp(500);
 
-			      	//window.location = "crearUsuario.html?idProfesional="+response.idProfesional;
-			      	//$('#myModalUsuario').modal('show');
-
-			      	sessionStorage.setItem("idProfesional", response.idProfesional);
+			      	//sessionStorage.setItem("sessionStorage_idProfesional", response.idProfesional);
 			      	window.location = "perfilProfesional.html?idProfesional="+response.idProfesional;;
 					
 			      	
@@ -345,7 +376,7 @@ function modifProfesional(){
 	debugger;
 
 	var datosOk = true;
-	if($("#nombre").val() == "" || $("#apellido").val() == "" || $("#dni").val()== "" || $("#matricula").val()== "" || $("#especialidad").val()== "" || $("#telefono").val()== "" || $("#mail").val()== "" || $("#valorConsulta").val()== ""){
+	if($("#nombre").val() == "" || $("#apellido").val() == "" || $("#dni").val()== "" || $("#matricula").val()== "" || $("#especialidad").val()== "" || $("#telefono").val()== "" || $("#mail").val()== ""){
 		datosOk = false;
 		$('#errorProfesional').css('display', 'block');
        		$("#errorProfesional").fadeTo(2000, 500).slideUp(500, function(){
@@ -366,7 +397,8 @@ function modifProfesional(){
 			especialidad:$("#especialidad").val().toUpperCase(),
 			telefono:$("#telefono").val().toUpperCase(),
 			mail:$("#mail").val().toUpperCase(),
-			instagram:$("#instagram").val()
+			instagram:$("#instagram").val(),
+			aliasMP:$("#aliasMP").val()
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
@@ -493,7 +525,9 @@ function deleteHorarios(idHorario){
 		{
 			debugger;
 			
-			window.location = "misHorarios.html";
+			//window.location = "misHorarios.html";
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+			window.location = "perfilProfesional.html?idProfesional="+idProfesional;
 		}
 	});
 	
@@ -524,3 +558,61 @@ function buscarEspecialidades(){
 
 }
 
+
+function darDeBaja(idProfesional){
+
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+	
+
+	debugger;
+		$.ajax({
+			type: "PUT",
+			url: host + "profesionales/OFF/"+idProfesional,
+			headers: {
+				"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				debugger;
+
+				location.reload();
+			},
+
+		})
+		
+}
+
+function darDeAlta(idProfesional){
+
+	if (sessionStorage.getItem("token") == null){
+		salir();
+	}
+
+	debugger;
+	var token = sessionStorage.getItem("token");
+	
+
+	debugger;
+		$.ajax({
+			type: "PUT",
+			url: host + "profesionales/ON/"+idProfesional,
+			headers: {
+				"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				debugger;
+
+				location.reload();
+			},
+
+		})
+		
+}

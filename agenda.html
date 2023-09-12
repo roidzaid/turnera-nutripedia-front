@@ -12,6 +12,7 @@
 
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="css/agenda.css">
 
 </head>
 <body>
@@ -25,11 +26,9 @@
 
 	 		  <h3 style="color: #31572C;display: inline-block">Agenda</h3>
 
-	 		  <div style="display:inline-block; float: right;">
-				<div id="filtro" style="display:inline-block">
-			       <input type="date" class="form-control" id="filtroFecha" placeholder="Fecha"; onchange="buscarPorFechaAgenda();">
-			  	</div>
-			  </div>
+				<div id="idFiltro">
+			       <input id="idFiltroFecha" type="date" class="form-control" placeholder="Fecha"; onchange="buscarPorFechaAgenda();">
+  			  	</div>
 			</div>
 
 		 	 <div id="tAgenda" class="form-group row">
@@ -46,7 +45,7 @@
 							<th>Tipo Consulta</th>
 							<th>Motivo</th>
 							<th></th>
-							<th></th>
+							
 						</tr>
 					</thead>
 					<tbody id="tbodyAgenda"></tbody>
@@ -62,8 +61,8 @@
 		<div id="myModal" class="modal" tabindex="-1">
 
 			<div class="alert alert-success" role="alert" id="turnoAsignadoModal" align="center" style="display:none;">
-		    	<h4 class="alert-heading">Gracias por cancelar el tuno con anticipacion</h4>
-		     	<p>Ya le avisamos al profesional</p>
+		    	<h4 class="alert-heading">Cancelamos el turno</h4>
+		     	<p>Ya le avisamos al paciente a su mail</p>
 		    </div>
 
 			<div class="alert alert-danger" role="alert" id="errorAltaTurnoModal" align="center" style="display:none;">
@@ -149,7 +148,7 @@
 	
 			debugger;
 
-			var idProfesional = sessionStorage.getItem("idProfesional");
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 
 			debugger;
 
@@ -182,13 +181,22 @@
 							var dni = list[i].dniPaciente;
 							var tipoConsulta = list[i].tipoConsulta;
 							var motivo = list[i].motivoConsulta;
+							var estadoPago = list[i].estadoPago;
 
 							debugger;
 
-							$("#tbodyAgenda").append('<tr><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;">delete</i></div></td></tr>');
+							if (estadoPago == "APROBADO"){
+
+								$("#tbodyAgenda").append('<tr style="background: #b0e8bb"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;" title="Cancelar turno">delete</i><i onclick="verificarPagoManual(\'' + idTurnoAsignado + '\')"class="material-icons button attach_money" style="margin-right:3px; cursor: pointer;" title="Marcar como pendiente">attach_money</i></div></td><td>'+estadoPago+'</td></tr>');
+
+							}else{
+
+								$("#tbodyAgenda").append('<tr style="background: #ffe083a3"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+nombre+'</td><td>'+apellido+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><i onclick="cancelarTurno(\'' + idTurnoAsignado + '\')"class="material-icons button delete" style="margin-right:3px; cursor: pointer;" title="Cancelar turno">delete</i><i onclick="verificarPagoManual(\'' + idTurnoAsignado + '\')"class="material-icons button attach_money" style="margin-right:3px; cursor: pointer;" title="Confirmar pago de reserva">attach_money</i></div></td><td>'+estadoPago+'</td></tr>');
+							}
+
 
 						}
-					}else{
+					}else{	
 						$("#sinTurnos").css("display", "block");
 					}
 				}

@@ -35,6 +35,7 @@
 								<th id="idValorConsulta" style="display: none;">idValorConsulta</th>
 								<th>Tipo de Consulta</th>
 								<th>Valor</th>
+								<th>Seña</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -52,7 +53,7 @@
 		$(document).ready(function () {
 			debugger;
 
-			var idProfesional = sessionStorage.getItem("idProfesional");
+			var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
 
 			buscarValoresDeConsultas(idProfesional);
 			debugger;

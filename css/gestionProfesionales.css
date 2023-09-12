@@ -1,0 +1,22 @@
+#tProfesionales {
+  overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+
+#tabProfesionales {
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+  border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+#tabProfesionales th,
+#tabProfesionales td {
+  padding: 8px;
+}
+
+/* Cambiar el tamaño de fuente y reducir el relleno en pantallas pequeñas */
+@media (max-width: 768px) {
+  #tabProfesionales th,
+  #tabProfesionales td {
+    font-size: 14px;
+    padding: 6px;
+  }
+}

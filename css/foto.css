@@ -1,0 +1,24 @@
+#btnGuardar {
+    width: 200px;
+    margin-top: 5px;
+    background-color: #31572C;
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+
+#btnGuardar:hover {
+  background-color: #90A955; /* Cambia este color al color que desees al pasar el mouse */
+}
+
+
+#btnCancelar {
+    width: 200px;
+    margin-top: 5px;
+    background-color: white;
+    border-color: #90A955;
+    color: black; /* Cambia el color del texto si es necesario */
+  }
+
+#btnCancelar:hover {
+  background-color: #90A955;  /* Cambia este color al color que desees al pasar el mouse */
+  color: white;
+}

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html style="height: 90%;">
+<html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/profesionales.js"></script>
@@ -9,7 +10,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/navbar.css">
+	<link rel="stylesheet" type="text/css" href="css/navbar.css">
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -24,46 +25,33 @@
           	&nbsp;
         	</i><img alt="Brand" src="imagenes/logo NUTRIPEDIA.jpeg" style="width: 150px;"></a> -->
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+        <nav id="idNavBar" class="navbar navbar-expand-sm navbar-light bg-light">
+		    <button id="menuToggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
 		      <span class="navbar-toggler-icon"></span>
 		    </button>
-		    
-		    <!-- logo -->
-		    <a class="navbar-brand" href="#">
-		      <img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png" width="30" height="30" alt=""; style="width: 100%; height: 80%;">
-		    </a>
-
-		 <!--  <a id="idPerfil" class="nav-link" onclick="perfil()" style="margin-top: 100px; cursor: pointer; color: #31572C;">Perfil</a>
-		  <a id="idAgenda" class="nav-link" onclick="agenda()" style="margin-top: 100px; cursor: pointer; color: #31572C;">Agenda</a>
-		  <a id="idAgenda" class="nav-link" onclick="misHorarios()" style="margin-top: 100px; cursor: pointer; color: #31572C;"> Horarios</a>
-		  <a id="idAgenda" class="nav-link" onclick="precios()" style="margin-top: 100px; cursor: pointer; color: #31572C;">Eventuales</a>
-		  <a id="idAgenda" class="nav-link" onclick="licencias()" style="margin-top: 100px; cursor: pointer; color: #31572C;">Licencias</a>
-		  <a id="idAgenda" class="nav-link" onclick="misPrecios()" style="margin-top: 100px; cursor: pointer; color: #31572C;">Honorarios</a>
-		  <a id="idSalir" class="nav-link" onclick="inicio()" style="margin-top: 100px; cursor: pointer; color: #31572C;">Salir</a>
- -->
+		
 		<div class="collapse navbar-collapse" id="opciones">   
 	      <ul class="navbar-nav">
 	        <li class="nav-item">
-	          <a id="idPerfil" class="nav-link" onclick="perfil()" style="cursor: pointer; color: #31572C;">Perfil</a>
+	          <a id="itemMenuPerfil" class="nav-link" onclick="perfil()">Perfil</a>
 	        </li>
 	        <li class="nav-item">
-	         <a id="idAgenda" class="nav-link" onclick="agenda()" style="cursor: pointer; color: #31572C;">Agenda</a>
+	         <a id="itemMenuMiAgenda" class="nav-link" onclick="agenda()">Mi agenda</a>
 	        </li>
 	        <li class="nav-item">
-	          <a id="idAgenda" class="nav-link" onclick="misHorarios()" style="cursor: pointer; color: #31572C;"> Horarios</a>
+	           <a id="itemMenuSobreturnos" class="nav-link" onclick="Sobreturnos()">Sobreturnos</a>
 	        </li>
-	        <!-- <li class="nav-item">
-	          <a id="idAgenda" class="nav-link" onclick="eventuales()" style="cursor: pointer; color: #31572C;">Turnos eventuales</a>
-	        </li>  -->
 	        <li class="nav-item">
-	          <a id="idAgenda" class="nav-link" onclick="licencias()" style="cursor: pointer; color: #31572C;">Licencias</a>
-	        </li>  
+	           <a id="itemMenuAgendaGeneral" class="nav-link" onclick="agendaGeneral()">Agenda general</a>
+	        </li>
 	        <li class="nav-item">
-	           <a id="idAgenda" class="nav-link" onclick="misPrecios()" style="cursor: pointer; color: #31572C;">Honorarios</a>
-	        </li>            
-	         <li class="nav-item">
-	           <a id="idSalir" class="nav-link" onclick="salir()" style="cursor: pointer; color: #31572C;">Salir</a>
+	           <a id="itemMenuProfesinales" class="nav-link" onclick="gestionProfesionales()">Profesionales</a>
+	        </li>
+	        <li class="nav-item">
+	           <a id="itemMenuEspecialidades" class="nav-link" onclick="gestionEspecialidades()">Especialidades</a>
+	        </li>
+	        <li class="nav-item">
+	           <a id="itemMenuSalir" class="nav-link" onclick="salir()">Salir</a>
 	        </li>  
 	      </ul>
 	    </div>
@@ -72,12 +60,72 @@
 		</nav>
 	
 
-		<div class="embed-responsive embed-responsive-16by9" style="width:100%; height:90%">
-			<iframe class="embed-responsive-item" type="text/html" id="frameInicio" src="perfilProfesional.html" allowfullscreen>
+		<div id="iframe-container">
+			<iframe type="text/html" id="frameInicio" src="">
   			</iframe>
 		</div>
   		
 
+
+<script>
+    $(document).ready(function() {
+
+    	var usuario = sessionStorage.getItem("usuario");
+    	const iframe = document.getElementById('frameInicio');
+
+
+    		if (usuario === 'admin') {
+            iframe.src = 'agendaGeneral.html';
+        } else {
+            iframe.src = 'perfilProfesional.html';
+        }
+
+        // Comparar el valor del usuario
+        if ( usuario === "debo" || usuario === "Lujan.megy" || usuario === "IreneFrago"  || usuario === "lean") {
+            $("#itemMenuAgendaGeneral").show();
+            $("#itemMenuProfesinales").show();
+            $("#idEspecialidades").show();
+            $("#itemMenuSobreturnos").show();
+        } else {
+            $("#itemMenuAgendaGeneral").hide();
+            $("#itemMenuProfesinales").hide();
+            $("#itemMenuEspecialidades").hide();
+            $("#itemMenuSobreturnos").hide();
+
+            if(usuario === "admin"){
+            	$("#itemMenuAgendaGeneral").show();
+            	$("#itemMenuPerfil").hide();
+            	$("#itemMenuSobreturnos").hide();
+            	$("#itemMenuMiAgenda").hide();
+            	itemMenuMiAgenda
+            }
+        }
+    });
+    
+</script>
+<script>
+  $(document).ready(function() {
+    var $menuToggler = $("#idNavBar");
+    var $opciones = $("#opciones");
+
+    $menuToggler.on("click", function() {
+      // Toggle de la clase "menu-button" al botón
+      $menuToggler.toggleClass("menu-button");
+
+      // Si la clase "menu-button" está presente, establece un z-index alto; de lo contrario, quita el z-index
+      if ($menuToggler.hasClass("menu-button")) {
+        $menuToggler.css("z-index", "9999");
+      } else {
+        $menuToggler.css("z-index", "");
+      }
+
+      // Cierra el menú si está abierto
+      if ($opciones.hasClass("show")) {
+        $opciones.collapse("hide");
+      }
+    });
+  });
+</script>
 
 </body>
 

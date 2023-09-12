@@ -133,7 +133,7 @@ function buscarFoto(){
 		{
 			debugger;
 
-			//var foto="imagenes/"+response;
+			//var foto="http://localhost:8080/TurneraFront/imagenes/"+response;
             //cambiar con barra para subir a prod
             var foto="/imagenes/"+response;
 			

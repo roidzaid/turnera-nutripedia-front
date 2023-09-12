@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espacio Nutripedia</title>
 	<script src="js/variablesGlobales.js"></script>
 	<script src="js/login.js"></script>
@@ -9,44 +10,46 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 
 </head>
-<body class="m-0 vh-100 row justify-content-center align-items-center">
+<body>
 
-	<div class="col-auto p-5 text-center" style="text-align: center; margin: 0; padding: 0">
 		
-		<div class="alert alert-danger" role="alert" id="usuYPassNoExiste" align="center" style="display:none;">
-	    	<h4 class="alert-heading">Error!</h4>
-	     	<p>Usuario y clave no existen, Por favor vuelva a intentarlo</p>
-	    </div>
 
-		<img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png">
-		
-		<div>
-		   	<div class="col-sm-12">
+	<div id="idContainerLogin">
+		<div id="idLoginForm">
+			
+			<div class="alert alert-danger" role="alert" id="usuYPassNoExiste" align="center" style="display:none;">
+		    	<h4 class="alert-heading">Error!</h4>
+		     	<p>Usuario y clave no existen, Por favor vuelva a intentarlo</p>
+		    </div>
+
+			
+			<img src="imagenes/logo NUTRIPEDIA RECORTADO v2.png" class="img-fluid" alt="Logo Nutripedia">
+			
+			<div>
 		      	<input type="text" class="form-control" id="usuario" placeholder="Usuario">
-		    </div>
-		</div>
+			</div>
 
-		<div style="margin-top: 10px">
-		    <div class="col-sm-12">
-		      <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
-		    </div>
-		</div>
+			<div style="margin-top: 10px">
+			    <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
+			</div>
+				
+
+			<div>
 			
+					<input name="ingresar" id="btnIngresar" type="button" class="btn btn-secondary" value="Ingresar" onclick="ingresar()">
 
-		<div style="text-align: center; margin-top: 30px;">
-		
-				<input name="ingresar" id="btnIngresar" type="button" class="btn btn-secondary" value="Ingresar" onclick="ingresar()" style="width: 200px; background-color: #31572C; margin: 10px;">
+					<input name="registrarse" id="btnRegistrarse" type="button" class="btn btn-secondary" value="Registrarse" onclick="registrarse()">
+				
+			</div>
 
-				<input name="registrarse" id="btnRegistrarse" type="button" class="btn btn-secondary" value="Registrarse" onclick="registrarse()" style="width: 200px; background-color: white; border-color: #90A955; color: black; margin: 10px;">
-			
-		</div>
-
-		<a href="recuperarContraseña.html" class="forgot-password-link">¿Olvidaste la contraseña?</a>
+			<a href="recuperarContraseña.html" class="forgot-password-link">¿Olvidaste la contraseña?</a>
 
 
- 	</div>
+	 	</div>
+	</div>
 
 
 </body>

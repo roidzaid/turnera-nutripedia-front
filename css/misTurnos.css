@@ -1,0 +1,71 @@
+ #buscarPaciente,
+ #btnConfirmarTurno {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    background-color: #31572C;
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+
+
+#buscarPaciente:hover,
+#btnConfirmarTurno:hover{
+  background-color: #90A955; /* Cambia este color al color que desees al pasar el mouse */
+}
+
+#btnCancelar,
+#btnOk {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    background-color: white;
+    border-color: #90A955;
+    color: black; /* Cambia el color del texto si es necesario */
+  }
+
+#btnCancelar:hover,
+#btnOk:hover {
+  background-color: #90A955;  /* Cambia este color al color que desees al pasar el mouse */
+  color: white;
+}
+
+body {
+    background: #b9cbb8;
+}
+
+#misTurnos{
+    margin: 10px;
+    text-align: center; /* Centrar horizontalmente */
+    display: flex;
+    flex-direction: column; /* Alinear verticalmente */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar verticalmente */
+    display: none;
+}
+
+
+#tMisTurnos{
+    background: #74a5743b;
+    border-radius: 16px;
+    overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+#tabMisTurnos{
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+ }
+
+
+#tabMisTurnos th,
+#tabMisTurnos td{
+  padding: 8px;
+}
+
+
+@media (max-width: 768px) {
+
+  #tabMisTurnos th,
+  #tabMisTurnos td {
+    font-size: 14px;
+    padding: 6px;
+  }
+}

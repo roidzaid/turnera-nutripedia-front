@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html style="width:100%;">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Espacio Nutripedia</title>
+	<script src="js/variablesGlobales.js"></script>
+	<script src="js/especialidades.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/especialidades.css">
+</head>
+<body>
+
+	<div class="alert alert-success" role="alert" id="avisoOk" align="center" style="display:none;">
+    	<h4 class="alert-heading">Bien!</h4>
+     	<p>Especialidad registrada</p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="avisoError" align="center" style="display:none;">
+    	<h4 class="alert-heading">Error!</h4>
+     	<p>Debe ingresar todos los datos para poder registrar una nueva especialidad</p>
+    </div>
+	
+	<h1 style="text-align: center; margin-top: 20px; color: #31572C">NUEVA ESPECIALIDAD</h1>
+	
+	<hr />
+
+	<div style="text-align: center;">
+
+		<div style="width: 50%; margin-left: 25%;">
+
+			  <div class="form-group row" style="margin-bottom: 5px; display: none;">
+			    <label for="idEspecialidad" class="col-sm-3 col-form-label">idEspecialidad</label>
+			    <div class="col-sm-3">
+			      <input type="text" class="form-control" id="idEspecialidad">
+			    </div>
+			  </div>
+
+			  <div class="form-group row" style="margin-bottom: 5px;">
+			    <label for="especialidad" class="col-sm-3 col-form-label">Especialidad</label>
+			    <div class="col-sm-8">
+			      <input type="text" class="form-control" id="especialidad" placeholder="Especialidad">
+			    </div>
+			  </div>
+
+		</div>
+
+		<div style="margin-top: 2%;">
+				<input name="guardarLicencia" id="btnGuardarEspecialidad" type="button" class="btn btn-secondary" value="Guardar" onclick="guardarEspecialidad()">
+
+				<!-- <input name="modifLicencia" id="btnModifEspecialidad" type="button" class="btn btn-secondary" value="Modificar" onclick="modifEspecialidad()"> -->
+
+				<input name="cancelar" id="btnCancelar" type="button" class="btn btn-secondary" value="Cancelar" onclick="cancelarEspecialidad()">
+		</div>
+	</div>
+
+	
+</body>
+
+</html>
