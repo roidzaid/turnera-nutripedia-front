@@ -28,7 +28,7 @@
 	 		  <h3 style="color: #31572C;display: inline-block">Agenda general de todos los profesionales</h3>
 
 	 		  <div id="filtro">
-			      <input id="idFiltroFecha"type="date" class="form-control" placeholder="Fecha"; onchange="buscarPorFechaAgenda();">
+			      <input id="idFiltroFecha"type="date" class="form-control" placeholder="Fecha"; onchange="buscarPorFechaAgendaGeneral();">
 			  </div>
 			</div>
 
@@ -141,8 +141,14 @@
 		
 		$(document).ready(function () {
 
+			debugger;
+
 			if (sessionStorage.getItem("token") == null){
-				salir();
+				//salir();
+				 debugger;
+    			//sessionStorage.removeItem('token');
+    			//sessionStorage.removeItem('usuario');
+    			//window.location = "login.html";
 			}
 
 			debugger;

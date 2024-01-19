@@ -14,7 +14,6 @@ function ingresar(){
 
 	debugger;
 
-	var url = host + 'usuarios/login';
 	var credentials = $("#usuario").val() + ":" + $("#contraseña").val();
     var auth = "Basic " + btoa(credentials);
 

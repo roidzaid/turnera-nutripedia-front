@@ -4,6 +4,7 @@
     margin-top: 10px;
     background-color: #31572C;
     color: white; /* Cambia el color del texto si es necesario */
+    margin-block: 1px;
   }
 
 
@@ -18,6 +19,7 @@
     background-color: white;
     border-color: #90A955;
     color: black; /* Cambia el color del texto si es necesario */
+    margin-block: 1px;
   }
 
 #btnCancelar:hover {

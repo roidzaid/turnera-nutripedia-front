@@ -123,6 +123,12 @@
 			      <input type="text" id="aliasMP" placeholder="Alias Mercado Pago"; disabled>
 			    </div>
 			  </div>
+			  <div id="idCamposDatos">
+			    <label id="idLabelDatos" for="diasAgenda">Apertura agenda</label>
+			    <div id="idInputDatos">
+			      <input type="text" id="diasAgenda" placeholder="Numero de dias"; disabled>
+			    </div>
+			  </div>
 			</div>
 		</div>
 
@@ -298,6 +304,7 @@
 					$("#valorConsulta").val(response.valorConsulta);
 					$("#instagram").val(response.instagram);
 					$("#aliasMP").val(response.aliasMP);
+					$("#diasAgenda").val(response.diasAbrirAgenda);
 
 					//buscarHorarios(idProfesional);
 					debugger;

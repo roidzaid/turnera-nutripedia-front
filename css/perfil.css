@@ -96,7 +96,8 @@ i:hover {
 #telefono,
 #mail,
 #instagram,
-#aliasMP{
+#aliasMP,
+#diasAgenda{
     width: 80%;
     height: 35px;
     border: 1px;

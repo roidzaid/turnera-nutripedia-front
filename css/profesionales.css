@@ -3,6 +3,7 @@
     margin-top: 5px;
     background-color: #31572C;
     color: white; /* Cambia el color del texto si es necesario */
+    margin-block: 1px;
   }
 
 #btnGuardarProfesional:hover {
@@ -14,6 +15,7 @@
     margin-top: 5px;
     background-color: #31572C;
     color: white; /* Cambia el color del texto si es necesario */
+    margin-block: 1px;
   }
 
 #btnModifProfesional:hover {

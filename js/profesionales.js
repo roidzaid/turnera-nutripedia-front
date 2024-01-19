@@ -164,7 +164,9 @@ function guardarProfesional(){
 			mail:$("#mail").val().toUpperCase(),
 			instagram:$("#instagram").val(),
 			usuario:sessionStorage.getItem("usuario"),
-			aliasMP:$("#aliasMP").val()
+			aliasMP:$("#aliasMP").val(),
+			aliasMP:$("#aliasMP").val(),
+			diasAbrirAgenda:$("#diasAgenda").val()
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 
@@ -398,7 +400,8 @@ function modifProfesional(){
 			telefono:$("#telefono").val().toUpperCase(),
 			mail:$("#mail").val().toUpperCase(),
 			instagram:$("#instagram").val(),
-			aliasMP:$("#aliasMP").val()
+			aliasMP:$("#aliasMP").val(),
+			diasAbrirAgenda:$("#diasAgenda").val()
 			/*valorConsulta:$("#valorConsulta").val().toUpperCase()*/
 		}
 

@@ -31,6 +31,14 @@ function buscarMisTurnos(){
 
 }
 
+
+function salir() {
+    debugger;
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
+    window.location = "login.html";
+}
+
 /*function registrarse(){
 
 	window.location = "altaProfesional.html";
@@ -684,12 +692,27 @@ function pagarSeña(){
 		success: function(response)
 		{
 
-			debugger;
+			/*// Obtener el valor del parámetro "source" de la URL
+			const urlParams = new URLSearchParams(window.location.search);
+			const source = urlParams.get('source');
 
+			// Validar la fuente y tomar acciones en consecuencia
+			if (source === 'app') {
+			    // La respuesta proviene de la aplicación de Mercado Pago
+			    // Realiza acciones específicas para la aplicación
+			    debugger;
+				window.location = "PagoAceptado.html";
+			} else if (source === 'web') {
+			    // La respuesta proviene de la web
+			    // Realiza acciones específicas para la web
+			    debugger;
+				window.location = response.initPoint;
+			}*/
+
+			debugger;
 			window.location = response.initPoint;
 
-			//confirmarTurno()
-
+			
 		},
 
 		dataType: "json",
@@ -1274,7 +1297,7 @@ function buscarPorFechaAgenda(){
 	
 	debugger;
 
-	if($("#filtroFecha").val()=="" || $("#filtroFecha").val()==null){
+	if($("#idFiltroFecha").val()=="" || $("#idFiltroFecha").val()==null){
 		location.reload();
 	}else{
 
@@ -1284,7 +1307,7 @@ function buscarPorFechaAgenda(){
 
 		$.ajax({
 			type: "GET",
-			url: host + "turnos/agenda/"+idProfesional+"/"+$("#filtroFecha").val(),
+			url: host + "turnos/agenda/"+idProfesional+"/"+$("#idFiltroFecha").val(),
 			headers: {
 				//"Authorization": token,
 				"Content-Type":"application/json"
@@ -1335,4 +1358,69 @@ function buscarPorFechaAgenda(){
 		});
 	}
 
+}
+
+function buscarPorFechaAgendaGeneral(){
+	debugger;
+
+	if($("#idFiltroFecha").val()=="" || $("#idFiltroFecha").val()==null){
+		location.reload();
+	}else{
+
+		var idProfesional = sessionStorage.getItem("sessionStorage_idProfesional");
+
+		debugger;
+
+		$.ajax({
+			type: "GET",
+			url: host + "turnos/agendaGeneral/"+$("#idFiltroFecha").val(),
+			headers: {
+				//"Authorization": token,
+				"Content-Type":"application/json"
+			},
+			success: function(response)
+			{
+				var list = response;  
+
+				debugger;
+
+				if (list.length > 0){
+
+					$("#tbodyAgenda").empty();
+
+					for (var i = 0; i < list.length; i++) {
+
+							debugger;
+							var idTurnoAsignado = list[i].idTurnoAsignado;
+							var idPaciente = list[i].idPaciente;
+							var idProfesional = list[i].idProfesional;
+							var profesional = list[i].apellidoProfesional + ", " + list[i].nombreProfesional;
+							var especialidad = list[i].especialidad
+							var fecha = list[i].fecha;
+							var hora = list[i].hora;
+							var paciente = list[i].apellidoPaciente+ ", " + list[i].nombrePaciente;
+							var dni = list[i].dniPaciente;
+							var tipoConsulta = list[i].tipoConsulta;
+							var motivo = list[i].motivoConsulta;
+							var estadoPago = list[i].estadoPago;
+
+							debugger;
+
+							if (estadoPago == "APROBADO"){
+
+								$("#tbodyAgenda").append('<tr style="background: #b0e8bb"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td style="display: none;">'+idProfesional+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+profesional+'</td><td>'+especialidad+'</td><td>'+paciente+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><td>'+estadoPago+'</td></tr>');
+
+							}else{
+
+								$("#tbodyAgenda").append('<tr style="background: #ffe083a3"><td style="display: none;">'+idTurnoAsignado+'</td><td style="display: none;">'+idPaciente+'</td><td style="display: none;">'+idProfesional+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+profesional+'</td><td>'+especialidad+'</td><td>'+paciente+'</td><td>'+dni+'</td><td>'+tipoConsulta+'</td><td>'+motivo+'</td><<td colspan="2"><div align="center"><i onclick="verDatosPaciente(\'' + dni + '\')"class="material-icons button person" style="margin-right:3px; cursor: pointer;" title="Ver datos del paciente">person</i><td>'+estadoPago+'</td></tr>');
+							}
+
+
+					}
+				}else{
+					$("#tbodyAgenda").empty();
+				}
+			}
+		});
+	}
 }
